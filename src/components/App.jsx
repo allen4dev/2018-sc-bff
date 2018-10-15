@@ -1,18 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+import { ThemeProvider } from 'styled-components';
+
+import theme from 'theme';
 
 import Dummie from './nested/structure/Dummie';
 
-const Title = styled.h1`
-  color: orange;
-`;
-
 const App = () => (
-  <div>
-    <Title>Soundcloud</Title>
-    <p>Here: we go</p>
+  <ThemeProvider theme={theme}>
     <Dummie />
-  </div>
+  </ThemeProvider>
 );
 
 export default App;
