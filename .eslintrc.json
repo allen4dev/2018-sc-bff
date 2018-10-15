@@ -14,5 +14,12 @@
     "browser": true,
     "node": true,
     "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }
