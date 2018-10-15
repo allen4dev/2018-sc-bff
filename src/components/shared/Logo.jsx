@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  border: 4px solid red;
   text-align: center;
   padding: 0.5rem;
 `;

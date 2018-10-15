@@ -5,10 +5,9 @@ import Logo from './Logo';
 import Navigation from './Navigation';
 
 const Wrapper = styled.header`
-  background-color: green;
   height: ${({ theme }) => theme.sizes.header};
   display: grid;
-  grid-template-columns: 2fr 5fr 2fr;
+  grid-template-columns: 3fr 6fr 3fr;
   align-content: center;
   position: fixed;
   top: 0;
