@@ -3,11 +3,11 @@ import { ThemeProvider } from 'styled-components';
 
 import theme from 'theme';
 
-import Dummie from './nested/structure/Dummie';
+import Pages from './pages';
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <Dummie />
+    <Pages />
   </ThemeProvider>
 );
 
