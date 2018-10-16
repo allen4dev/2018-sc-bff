@@ -8,11 +8,7 @@ import Download from './components/Download';
 import About from './components/About';
 import Join from './components/Join';
 
-const Wrapper = styled.section`
-  & > * {
-    border: 4px solid blue;
-  }
-`;
+const Wrapper = styled.section``;
 
 const Home = () => (
   <Wrapper>

@@ -14,8 +14,8 @@ const trackIds = new Array(12).fill({});
 
 const TrackCardList = ({ className }) => (
   <Wrapper className={className}>
-    {trackIds.map(id => (
-      <TrackCard id={id} />
+    {trackIds.map((id, index) => (
+      <TrackCard key={index} id={id} /> // eslint-disable-line
     ))}
   </Wrapper>
 );
