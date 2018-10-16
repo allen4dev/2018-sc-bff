@@ -27,7 +27,7 @@ const Hero = () => (
   <Wrapper>
     <Content>
       <Heading>
-        <Title size="rem">Conectar en SoundCloud</Title>
+        <Title size="1.5rem">Conectar en SoundCloud</Title>
       </Heading>
       <StyledText color="white" size="1.2rem">
         Descubre, escucha y comparte un catalogo de musica que no deja de crecer
