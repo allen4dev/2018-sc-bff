@@ -10,13 +10,13 @@ const Details = styled.section`
 `;
 
 const Title = styled.h4`
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: normal;
-  margin-bottom: 0.3rem;
 `;
 
 const Artist = styled.span`
   color: ${({ theme }) => theme.colors.darkgray};
+  font-size: 0.8rem;
 `;
 
 const TrackCard = () => (

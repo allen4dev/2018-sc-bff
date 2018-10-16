@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { string } from 'prop-types';
 
 export const Title = styled.h1`
-  color: ${({ color }) => color};
+  color: ${({ color, theme }) => theme.colors[color] || color};
   font-size: ${({ size }) => size};
   font-weight: normal;
 `;
@@ -18,7 +18,7 @@ Title.propTypes = {
 };
 
 export const Text = styled.p`
-  color: ${({ color }) => color};
+  color: ${({ color, theme }) => theme.colors[color] || color};
   font-size: ${({ size }) => size};
   line-height: 1.5rem;
 `;
