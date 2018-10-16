@@ -44,6 +44,7 @@ const TrackList = styled(TrackCardList)`
 
 const Footer = styled.footer`
   grid-area: footer;
+  text-align: center;
 `;
 
 const Content = () => (
