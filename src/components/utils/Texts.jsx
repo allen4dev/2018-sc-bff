@@ -21,6 +21,7 @@ export const Text = styled.p`
   color: ${({ color, theme }) => theme.colors[color] || color};
   font-size: ${({ size }) => size};
   line-height: 1.5rem;
+  text-align: justify;
 `;
 
 Text.defaultProps = {

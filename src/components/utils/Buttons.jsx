@@ -9,8 +9,9 @@ export const Button = styled.button`
   box-shadow: ${({ bgColor, theme }) =>
     `inset 0 0 0 1px ${theme.colors[bgColor] || bgColor}`};
   border: none;
+  cursor: pointer;
   font-size: 1rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   text-align: center;
 `;
 
