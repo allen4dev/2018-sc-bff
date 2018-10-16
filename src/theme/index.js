@@ -37,7 +37,7 @@ const colors = {
 };
 
 const sizes = {
-  header: '3rem',
+  header: '4rem',
 };
 
 export default {

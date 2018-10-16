@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { string } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { Button, FlatButton } from 'components/utils/Buttons';
 
@@ -27,9 +28,11 @@ const Navigation = ({ className }) => (
       </Item>
 
       <Item>
-        <Button flexible color="white" bgColor="orange">
-          Crea tu cuenta
-        </Button>
+        <Link to="/signup">
+          <Button flexible color="white" bgColor="orange">
+            Crea tu cuenta
+          </Button>
+        </Link>
       </Item>
     </List>
   </Wrapper>
