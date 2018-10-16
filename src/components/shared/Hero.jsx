@@ -7,6 +7,8 @@ import { Title, Text } from 'components/utils/Texts';
 const Wrapper = styled.section`
   height: 50vh;
   background-image: url('images/banner.jpg');
+  background-size: cover;
+  background-position: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +27,7 @@ const Hero = () => (
   <Wrapper>
     <Content>
       <Heading>
-        <Title size="2rem">Conectar en SoundCloud</Title>
+        <Title size="rem">Conectar en SoundCloud</Title>
       </Heading>
       <StyledText color="white" size="1.2rem">
         Descubre, escucha y comparte un catalogo de musica que no deja de crecer
