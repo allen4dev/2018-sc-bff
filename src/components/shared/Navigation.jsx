@@ -35,12 +35,8 @@ const Navigation = ({ className }) => (
   </Wrapper>
 );
 
-Navigation.defaultProps = {
-  className: '',
-};
-
 Navigation.propTypes = {
-  className: string,
+  className: string.isRequired,
 };
 
 export default Navigation;
