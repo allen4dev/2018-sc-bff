@@ -46,6 +46,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     hot: true,
+    historyApiFallback: true,
   },
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
