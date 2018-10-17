@@ -12,6 +12,8 @@ import TrackPlayer from './TrackPlayer';
 
 const Wrapper = styled.section`
   border: 4px solid hotpink;
+  background-image: linear-gradient(to left, gray, lightgray);
+  padding: 1rem;
   display: grid;
   grid-template-columns: 10fr 2fr;
   grid-template-rows: 1fr 1fr;
@@ -20,30 +22,32 @@ const Wrapper = styled.section`
     'player photo';
 `;
 
-const Heading = styled.header`
-  grid-area: heading;
-  border: 4px solid blue;
-`;
-
 const Details = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const Heading = styled.header`
+  grid-area: heading;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 const TagSection = styled.div``;
 
 const TrackName = styled(Tag)`
   display: block;
+  margin-top: 0.5rem;
 `;
 
 const Player = styled(TrackPlayer)`
   grid-area: player;
-  border: 4px solid blue;
 `;
 
 const TrackPhoto = styled(Photo)`
   grid-area: photo;
-  width: 300px;
+  margin-left: 1rem;
 `;
 
 const Track = () => (
@@ -54,7 +58,7 @@ const Track = () => (
           <FaPlay />
         </Button>
         <TagSection>
-          <Tag bgColor="dark" size=".8rem">
+          <Tag bgColor="dark" size=".7rem">
             Fate UBW
           </Tag>
           <TrackName bgColor="dark">Emiya</TrackName>

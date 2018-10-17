@@ -13,6 +13,8 @@ export const Button = styled.button`
   font-size: 1rem;
   padding: 0.5rem 1rem;
   text-align: center;
+  min-width: 48px;
+  height: 48px;
 `;
 
 Button.defaultProps = {
