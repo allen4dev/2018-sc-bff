@@ -17,6 +17,22 @@ Title.propTypes = {
   size: string,
 };
 
+export const Subtitle = styled.h2`
+  color: ${({ color, theme }) => theme.colors[color] || color};
+  font-size: ${({ size }) => size};
+  font-weight: normal;
+`;
+
+Subtitle.defaultProps = {
+  color: 'white',
+  size: '1.5rem',
+};
+
+Subtitle.propTypes = {
+  color: string,
+  size: string,
+};
+
 export const Text = styled.p`
   color: ${({ color, theme }) => theme.colors[color] || color};
   font-size: ${({ size }) => size};
