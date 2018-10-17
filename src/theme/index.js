@@ -1,9 +1,10 @@
 import { injectGlobal } from 'styled-components';
-
-// ${styledNormalize}
+import styledNormalize from 'styled-normalize';
 
 /* eslint-disable */
 injectGlobal`
+  ${styledNormalize}
+
   *, *::before, &::after {
     box-sizing: border-box;
   }

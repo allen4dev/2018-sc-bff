@@ -33,3 +33,22 @@ Text.propTypes = {
   color: string,
   size: string,
 };
+
+export const Tag = styled.span`
+  background-color: ${({ bgColor, theme }) => theme.colors[bgColor] || bgColor};
+  color: ${({ color, theme }) => theme.colors[color] || color};
+  font-size: ${({ size }) => size};
+  padding: 0.3rem;
+`;
+
+Tag.defaultProps = {
+  color: 'white',
+  bgColor: 'transparent',
+  size: '1rem',
+};
+
+Tag.propTypes = {
+  color: string,
+  bgColor: string,
+  size: string,
+};

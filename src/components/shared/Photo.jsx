@@ -8,8 +8,8 @@ const Wrapper = styled.figure`
   width: ${({ size }) => size};
 `;
 
-const Photo = ({ size, src }) => (
-  <Wrapper width={size}>
+const Photo = ({ size, src, className }) => (
+  <Wrapper width={size} className={className}>
     <Image src={src} />
   </Wrapper>
 );
@@ -19,6 +19,7 @@ Photo.defaultProps = {
 };
 
 Photo.propTypes = {
+  className: string.isRequired,
   src: string.isRequired,
   size: string,
 };
