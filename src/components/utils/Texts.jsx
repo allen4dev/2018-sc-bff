@@ -25,7 +25,7 @@ export const Subtitle = styled.h2`
 
 Subtitle.defaultProps = {
   color: 'white',
-  size: '1.5rem',
+  size: '1.2rem',
 };
 
 Subtitle.propTypes = {

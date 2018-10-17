@@ -6,9 +6,18 @@ import { Subtitle } from 'components/utils/Texts';
 
 import Reply from './Reply';
 
-const Wrapper = styled.section``;
-const Heading = styled.header``;
-const List = styled.ul``;
+const Wrapper = styled.section`
+  padding: 1rem;
+`;
+
+const Heading = styled.header`
+  padding: 1.5rem 0;
+`;
+
+const List = styled.ul`
+  display: grid;
+  grid-gap: 2rem;
+`;
 
 const replies = new Array(10).fill({});
 

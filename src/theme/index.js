@@ -10,6 +10,7 @@ injectGlobal`
   }
 
   html {
+    font-size: 16px;
     font-family: Arial;
   }
 
