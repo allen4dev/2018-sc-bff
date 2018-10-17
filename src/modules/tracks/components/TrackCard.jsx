@@ -1,15 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Photo from 'components/shared/Photo';
 
 const Wrapper = styled.article``;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const Details = styled.section`
   padding: 0.5rem 0;
 `;
 
 const Title = styled.h4`
+  color: ${({ theme: { colors } }) => colors.dark};
   font-size: 1rem;
   font-weight: normal;
 `;
@@ -21,10 +27,16 @@ const Artist = styled.span`
 
 const TrackCard = () => (
   <Wrapper>
-    <Photo src="images/track_card.png" />
+    <StyledLink to="/tracks/1">
+      <Photo src="images/track_card.png" />
+    </StyledLink>
     <Details>
-      <Title>Emiya</Title>
-      <Artist>Fate UBW</Artist>
+      <StyledLink to="/tracks/1">
+        <Title>Emiya</Title>
+      </StyledLink>
+      <StyledLink to="/artists/1">
+        <Artist>Fate UBW</Artist>
+      </StyledLink>
     </Details>
   </Wrapper>
 );

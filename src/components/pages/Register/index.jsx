@@ -6,7 +6,6 @@ import { Button } from 'components/utils/Buttons';
 import { Text } from 'components/utils/Texts';
 
 const Wrapper = styled.section`
-  height: ${({ theme: { sizes } }) => `calc(100vh - ${sizes.header})`};
   display: flex;
   justify-content: center;
   align-items: center;

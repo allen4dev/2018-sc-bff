@@ -5,6 +5,7 @@ import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
 
 import Home from './Home';
+import TrackDetail from './TrackDetail';
 import Register from './Register';
 
 const Error404 = () => <h1>404 page not found</h1>;
@@ -15,6 +16,7 @@ const Pages = () => (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/signup" component={Register} />
+      <Route path="/tracks/:id" component={TrackDetail} />
       <Route component={Error404} />
     </Switch>
     <Footer />
