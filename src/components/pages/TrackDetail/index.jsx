@@ -8,7 +8,6 @@ import Recommendations from 'components/shared/Recommendations';
 
 const Wrapper = styled.section`
   margin-top: ${({ theme: { sizes } }) => sizes.header};
-  height: ${({ theme: { sizes } }) => `calc(100vh - ${sizes.header})`};
 `;
 
 const Content = styled.section`

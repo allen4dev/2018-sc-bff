@@ -34,6 +34,8 @@ Button.propTypes = {
 
 export const FlatButton = styled(Button)`
   background-color: transparent;
-  box-shadow: ${({ color, shadow, theme }) =>
-    `inset 0 0 0 1px ${theme.colors[shadow] || theme.colors[color] || color}`};
+  box-shadow: ${({ color, shadow, theme: { colors } }) =>
+    `inset 0 0 0 1px ${
+      shadow ? colors[shadow] || shadow : colors[color] || color
+    }`};
 `;

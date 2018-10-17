@@ -7,6 +7,7 @@ import Image from 'components/utils/Image';
 const Wrapper = styled.figure`
   border-radius: ${({ square }) => (square ? '0' : '50%')};
   width: ${({ size }) => size};
+  box-shadow: 0 0 1px gray;
   min-width: 48px;
   overflow: hidden;
 `;
