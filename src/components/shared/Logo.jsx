@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Wrapper = styled(Link)`
-  padding: 0.5rem;
   text-align: center;
   text-decoration: none;
 `;

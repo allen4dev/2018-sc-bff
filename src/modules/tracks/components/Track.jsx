@@ -11,11 +11,10 @@ import { Button } from 'components/utils/Buttons';
 import TrackPlayer from './TrackPlayer';
 
 const Wrapper = styled.section`
-  border: 4px solid hotpink;
-  background-image: linear-gradient(to left, gray, lightgray);
+  background-image: linear-gradient(to left, #a7927d, #bfb7ad);
   padding: 1rem;
   display: grid;
-  grid-template-columns: 10fr 2fr;
+  grid-template-columns: 9fr 3fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
     'heading photo'
@@ -34,7 +33,9 @@ const Heading = styled.header`
   align-items: flex-start;
 `;
 
-const TagSection = styled.div``;
+const TagSection = styled.div`
+  margin-left: 0.5rem;
+`;
 
 const TrackName = styled(Tag)`
   display: block;

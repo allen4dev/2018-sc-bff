@@ -6,9 +6,10 @@ import Navigation from './Navigation';
 
 const Wrapper = styled.header`
   height: ${({ theme }) => theme.sizes.header};
+  background-color: ${({ theme: { colors } }) => colors.dark};
   display: grid;
   grid-template-columns: 3fr 6fr 3fr;
-  align-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
