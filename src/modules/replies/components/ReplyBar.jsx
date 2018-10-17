@@ -5,9 +5,7 @@ import ResourceActions from 'components/shared/ResourceActions';
 
 import ReplyForm from './ReplyForm';
 
-const Wrapper = styled.div`
-  border: 4px solid hotpink;
-`;
+const Wrapper = styled.div``;
 
 const ReplyBar = () => (
   <Wrapper>

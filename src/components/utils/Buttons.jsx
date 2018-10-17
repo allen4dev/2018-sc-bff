@@ -8,25 +8,32 @@ export const Button = styled.button`
   width: ${({ flexible }) => flexible && '100%'};
   box-shadow: ${({ bgColor, theme }) =>
     `inset 0 0 0 1px ${theme.colors[bgColor] || bgColor}`};
+  font-size: ${({ size }) => size};
+  min-height: 48px;
+  min-height: ${({ noHeight }) => noHeight && 'auto'};
   border: none;
   cursor: pointer;
-  font-size: 1rem;
   padding: 0.5rem 1rem;
   text-align: center;
   min-width: 48px;
-  height: 48px;
+
+  & > svg {
+    font-size: ${({ icon }) => icon && '.8rem'};
+  }
 `;
 
 Button.defaultProps = {
   bgColor: 'white',
+  size: '1rem',
 };
 
 Button.propTypes = {
   bgColor: string,
+  size: string,
 };
 
 export const FlatButton = styled(Button)`
   background-color: transparent;
-  box-shadow: ${({ color, theme }) =>
-    `inset 0 0 0 1px ${theme.colors[color] || color}`};
+  box-shadow: ${({ color, shadow, theme }) =>
+    `inset 0 0 0 1px ${theme.colors[shadow] || theme.colors[color] || color}`};
 `;
