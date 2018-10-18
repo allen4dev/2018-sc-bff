@@ -6,6 +6,7 @@ import Footer from 'components/shared/Footer';
 
 import Home from './Home';
 import TrackDetail from './TrackDetail';
+import PlaylistDetail from './PlaylistDetail';
 import Register from './Register';
 
 const Error404 = () => <h1>404 page not found</h1>;
@@ -17,6 +18,7 @@ const Pages = () => (
       <Route exact path="/" component={Home} />
       <Route path="/signup" component={Register} />
       <Route path="/tracks/:id" component={TrackDetail} />
+      <Route path="/playlists/:id" component={PlaylistDetail} />
       <Route component={Error404} />
     </Switch>
     <Footer />

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Avatar from 'components/shared/Avatar';
 
@@ -27,12 +28,18 @@ const Date = styled.span`
   font-size: 0.8rem;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const Reply = () => (
   <Wrapper>
     <Avatar src="/images/avatar.jpg" size="8%" />
     <Content>
       <Heading>
-        <Artist>Archer</Artist>
+        <StyledLink to="/artists/1">
+          <Artist>Archer</Artist>
+        </StyledLink>
       </Heading>
       <Text color="dark" size="1rem">
         Some random and large comment who probably will be ignored
