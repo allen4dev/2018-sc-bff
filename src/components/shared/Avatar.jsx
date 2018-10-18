@@ -22,13 +22,14 @@ const Avatar = ({ src, square, size, className }) => (
 Avatar.defaultProps = {
   square: false,
   size: '100%',
+  className: '',
 };
 
 Avatar.propTypes = {
   square: bool,
   size: string,
   src: string.isRequired,
-  className: string.isRequired,
+  className: string,
 };
 
 export default Avatar;

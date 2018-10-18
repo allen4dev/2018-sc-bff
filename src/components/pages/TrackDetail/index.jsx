@@ -21,7 +21,7 @@ const TrackDetail = () => (
     <Track />
     <Content>
       <ReplySection />
-      <Recommendations />
+      <Recommendations recommend />
     </Content>
   </Wrapper>
 );
