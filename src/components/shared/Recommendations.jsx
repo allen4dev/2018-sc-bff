@@ -8,9 +8,7 @@ import PlaylistItem from 'modules/playlists/components/PlaylistItem';
 import RowList from 'components/shared/RowList';
 import AvatarList from 'components/shared/AvatarList';
 
-const Wrapper = styled.section`
-  border: 4px solid hotpink;
-`;
+const Wrapper = styled.section``;
 
 const Tracks = styled(RowList)``;
 const Playlists = styled(RowList)``;
@@ -19,6 +17,8 @@ const Shared = styled(AvatarList)``;
 
 const trackIds = new Array(3).fill('');
 const playlistIds = new Array(3).fill('');
+const favArtists = new Array(9).fill({});
+const sharedArtists = new Array(9).fill({});
 
 function renderRecommendations(recommend) {
   return recommend ? (
@@ -36,8 +36,8 @@ function renderRecommendations(recommend) {
 const Recommendations = ({ recommend }) => (
   <Wrapper>
     {renderRecommendations(recommend)}
-    <Favorites />
-    <Shared />
+    <Favorites title="Me gusta" artists={favArtists} />
+    <Shared title="Reposts" artists={sharedArtists} />
   </Wrapper>
 );
 

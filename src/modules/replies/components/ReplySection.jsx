@@ -6,16 +6,12 @@ import ReplyBar from './ReplyBar';
 import ReplyList from './ReplyList';
 
 const Wrapper = styled.section`
-  border: 4px solid blue;
+  padding: 1rem;
   display: grid;
   grid-template-columns: 2fr 10fr;
   grid-template-areas:
     'heading heading'
     'card replies';
-
-  & > * {
-    border: 4px solid red;
-  }
 `;
 
 const Heading = styled.header`

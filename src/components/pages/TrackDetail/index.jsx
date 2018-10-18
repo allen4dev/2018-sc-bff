@@ -11,6 +11,7 @@ const Wrapper = styled.section`
 `;
 
 const Content = styled.section`
+  padding: 1rem;
   display: grid;
   grid-template-columns: 8fr 4fr;
 `;

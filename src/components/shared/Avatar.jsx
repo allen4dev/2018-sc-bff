@@ -8,7 +8,7 @@ const Wrapper = styled.figure`
   border-radius: ${({ square }) => (square ? '0' : '50%')};
   width: ${({ size }) => size};
   box-shadow: 0 0 1px gray;
-  min-width: 48px;
+  min-width: 40px;
   max-width: 200px;
   overflow: hidden;
 `;
