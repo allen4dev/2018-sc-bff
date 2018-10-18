@@ -17,10 +17,11 @@ const Photo = ({ size, src, className }) => (
 
 Photo.defaultProps = {
   size: '100%',
+  className: '',
 };
 
 Photo.propTypes = {
-  className: string.isRequired,
+  className: string,
   src: string.isRequired,
   size: string,
 };

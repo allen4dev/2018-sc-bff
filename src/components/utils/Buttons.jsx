@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { string } from 'prop-types';
+import { string, bool } from 'prop-types';
 
 export const Button = styled.button`
   color: ${({ color, theme }) => color || theme.colors.black};
@@ -25,11 +25,13 @@ export const Button = styled.button`
 Button.defaultProps = {
   bgColor: 'white',
   size: '1rem',
+  icon: false,
 };
 
 Button.propTypes = {
   bgColor: string,
   size: string,
+  icon: bool,
 };
 
 export const FlatButton = styled(Button)`

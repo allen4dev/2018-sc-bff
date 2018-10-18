@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { string, arrayOf, element } from 'prop-types';
+import { string, arrayOf, func } from 'prop-types';
 
 import { Subtitle } from 'components/utils/Texts';
 
@@ -17,12 +17,18 @@ const List = styled.ul`
   grid-gap: ${({ gap }) => gap};
 `;
 
+const Item = styled.li``;
+
 const RowList = ({ title, ids, gap, children }) => (
   <Wrapper>
     <Heading>
       <Subtitle color="dark">{title}</Subtitle>
     </Heading>
-    <List gap={gap}>{ids.map((id, index) => children(index))}</List>
+    <List gap={gap}>
+      {ids.map((id, index) => (
+        <Item key={index}>{children(id)}</Item> // eslint-disable-line
+      ))}
+    </List>
   </Wrapper>
 );
 
@@ -34,7 +40,7 @@ RowList.propTypes = {
   ids: arrayOf(string).isRequired,
   gap: string,
   title: string.isRequired,
-  children: element.isRequired,
+  children: func.isRequired,
 };
 
 export default RowList;

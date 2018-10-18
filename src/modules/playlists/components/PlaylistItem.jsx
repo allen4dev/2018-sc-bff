@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaPlay, FaHeart, FaShare, FaComment } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa';
 
 import Photo from 'components/shared/Photo';
 
@@ -10,8 +10,8 @@ const Wrapper = styled.article`
 `;
 
 const Content = styled.section`
-  flex: 1;
   padding: 0 1rem;
+  flex: 1;
 `;
 
 const Artist = styled.h3`
@@ -24,13 +24,7 @@ const Name = styled.h3`
   padding: 0.3rem 0;
 `;
 
-const Details = styled.ul`
-  display: flex;
-
-  & > :not(:last-child) {
-    margin-right: 1rem;
-  }
-`;
+const Details = styled.ul``;
 
 const Item = styled.li`
   color: ${({ theme: { colors } }) => colors.gray};
@@ -44,31 +38,19 @@ const Item = styled.li`
   }
 `;
 
-const TrackItem = () => (
+const PlaylistItem = () => (
   <Wrapper>
-    <Photo src="/images/avatar.jpg" size="20%" />
+    <Photo src="/images/default_image.png" size="20%" />
     <Content>
-      <Artist>Fate UBW</Artist>
-      <Name>Emiya (Archer Theme)</Name>
+      <Artist>Archer</Artist>
+      <Name>Fate collection</Name>
       <Details>
         <Item>
-          <FaPlay /> 48.7k
-        </Item>
-
-        <Item>
-          <FaHeart /> 433
-        </Item>
-
-        <Item>
-          <FaShare /> 18
-        </Item>
-
-        <Item>
-          <FaComment /> 9
+          <FaHeart /> 623
         </Item>
       </Details>
     </Content>
   </Wrapper>
 );
 
-export default TrackItem;
+export default PlaylistItem;
