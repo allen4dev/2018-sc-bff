@@ -5,11 +5,12 @@ import { string } from 'prop-types';
 import Image from 'components/utils/Image';
 
 const Wrapper = styled.figure`
-  width: ${({ size }) => size};
+  width: ${({ width }) => width};
+  min-width: 50px;
 `;
 
 const Photo = ({ size, src, className }) => (
-  <Wrapper width={size} className={className}>
+  <Wrapper className={className} width={size}>
     <Image src={src} />
   </Wrapper>
 );

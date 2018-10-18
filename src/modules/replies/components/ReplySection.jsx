@@ -8,7 +8,7 @@ import ReplyList from './ReplyList';
 const Wrapper = styled.section`
   border: 4px solid blue;
   display: grid;
-  grid-template-columns: 3fr 9fr;
+  grid-template-columns: 2fr 10fr;
   grid-template-areas:
     'heading heading'
     'card replies';

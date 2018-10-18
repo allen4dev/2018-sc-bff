@@ -9,7 +9,7 @@ const Wrapper = styled.figure`
   width: ${({ size }) => size};
   box-shadow: 0 0 1px gray;
   min-width: 48px;
-  max-width: 300px;
+  max-width: 200px;
   overflow: hidden;
 `;
 

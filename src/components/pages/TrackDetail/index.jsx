@@ -11,9 +11,8 @@ const Wrapper = styled.section`
 `;
 
 const Content = styled.section`
-  border: 4px solid #bada55;
   display: grid;
-  grid-template-columns: 9fr 3fr;
+  grid-template-columns: 8fr 4fr;
 `;
 
 const TrackDetail = () => (

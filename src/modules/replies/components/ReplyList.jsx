@@ -7,7 +7,7 @@ import { Subtitle } from 'components/utils/Texts';
 import Reply from './Reply';
 
 const Wrapper = styled.section`
-  padding: 1rem;
+  padding: 0.5rem;
 `;
 
 const Heading = styled.header`

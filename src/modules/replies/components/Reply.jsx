@@ -12,7 +12,7 @@ const Wrapper = styled.li`
 
 const Content = styled.section`
   flex: 1;
-  margin: 0 2rem;
+  margin: 0 1rem;
 `;
 
 const Heading = styled.header``;
@@ -29,12 +29,12 @@ const Date = styled.span`
 
 const Reply = () => (
   <Wrapper>
-    <Avatar src="/images/avatar.jpg" size="12%" />
+    <Avatar src="/images/avatar.jpg" size="8%" />
     <Content>
       <Heading>
         <Artist>Archer</Artist>
       </Heading>
-      <Text color="dark">
+      <Text color="dark" size="1rem">
         Some random and large comment who probably will be ignored
       </Text>
     </Content>

@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { bool } from 'prop-types';
 
+import TrackItem from 'modules/tracks/components/TrackItem';
+
 import RowList from 'components/shared/RowList';
 import AvatarList from 'components/shared/AvatarList';
 
@@ -20,7 +22,9 @@ const playlistIds = new Array(3).fill({});
 function renderRecommendations(recommend) {
   return recommend ? (
     <Fragment>
-      <Tracks ids={trackIds}>{id => <span>Track id: {id}</span>}</Tracks>
+      <Tracks title="Pistas similares" ids={trackIds} gap="1rem">
+        {(id, index) => <TrackItem key={index} id={id} />}
+      </Tracks>
       <Playlists ids={playlistIds}>
         {id => <span>Playlist id: {id}</span>}
       </Playlists>
