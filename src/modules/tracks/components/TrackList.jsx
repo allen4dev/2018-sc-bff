@@ -2,12 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { arrayOf, string } from 'prop-types';
 
-const Wrapper = styled.ul``;
+import TrackListItem from './TrackListItem';
+
+const Wrapper = styled.ul`
+  padding: 0.5rem 2rem;
+`;
 
 const TrackList = ({ ids }) => (
   <Wrapper>
     {ids.map((id, index) => (
-      <p key={index}>Track here</p> // eslint-disable-line
+      // eslint-disable-next-line
+      <TrackListItem key={index}>Track here</TrackListItem>
     ))}
   </Wrapper>
 );
