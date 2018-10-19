@@ -22,6 +22,7 @@ const Heading = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  padding-right: 1rem;
 `;
 
 const Details = styled.section`
