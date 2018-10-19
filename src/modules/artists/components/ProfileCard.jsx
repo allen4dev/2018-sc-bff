@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { FaUsers, FaMusic } from 'react-icons/fa';
 
 import Avatar from 'components/shared/Avatar';
@@ -13,6 +14,10 @@ const Details = styled.section``;
 
 const Heading = styled.header`
   margin-top: 0.5rem;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
 
 const Name = styled.h3`
@@ -52,7 +57,9 @@ const ProfileCard = () => (
 
     <Details>
       <Heading>
-        <Name>Allen</Name>
+        <StyledLink to="/artists/1">
+          <Name>Allen</Name>
+        </StyledLink>
       </Heading>
 
       <Information>
