@@ -10,7 +10,10 @@ const Wrapper = styled.section`
   margin-top: ${({ theme: { sizes } }) => sizes.header};
 `;
 
-const Content = styled.section``;
+const Content = styled.section`
+  display: grid;
+  grid-template-columns: 8fr 4fr;
+`;
 
 const PlaylistDetail = () => (
   <Wrapper>
