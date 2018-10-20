@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import TrackRowList from 'modules/tracks/components/TrackRowList';
+
 import Tabs from 'components/shared/Tabs';
 
 const Wrapper = styled.section``;
+
+const trackIds = new Array(10).fill({});
 
 const MainContent = () => (
   <Wrapper>
@@ -16,7 +20,7 @@ const MainContent = () => (
       </Tabs.Menu>
       <Tabs.Panels>
         <Tabs.Panel>
-          <div>Artist Tracks comes here</div>
+          <TrackRowList ids={trackIds} />
         </Tabs.Panel>
         <Tabs.Panel>
           <div>Artist Albums comes here</div>
