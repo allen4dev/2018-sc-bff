@@ -7,6 +7,7 @@ import { Text } from 'components/utils/Texts';
 
 const Wrapper = styled.li`
   box-shadow: inset 0 -1px 1px ${({ theme: { colors } }) => colors.lightgray};
+  min-width: 500px;
   display: flex;
   justify-content: space-between;
   align-items: center;

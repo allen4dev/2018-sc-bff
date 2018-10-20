@@ -2,12 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 import TrackRowList from 'modules/tracks/components/TrackRowList';
+import Playlists from 'modules/playlists/components/Playlists';
 
 import Tabs from 'components/shared/Tabs';
 
 const Wrapper = styled.section``;
 
 const trackIds = new Array(10).fill('');
+const playlistIds = new Array(10).fill('');
 
 const MainContent = () => (
   <Wrapper>
@@ -26,7 +28,7 @@ const MainContent = () => (
           <div>Artist Albums comes here</div>
         </Tabs.Panel>
         <Tabs.Panel>
-          <div>Artist Playlists comes here</div>
+          <Playlists ids={playlistIds} />
         </Tabs.Panel>
         <Tabs.Panel>
           <div>Artist Shared actions comes here</div>

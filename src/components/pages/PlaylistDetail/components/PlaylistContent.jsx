@@ -36,7 +36,7 @@ const PlaylistContent = () => (
       <Actions />
     </Heading>
     <Card />
-    <Tracks ids={trackIds} />
+    <Tracks space ids={trackIds} />
   </Wrapper>
 );
 

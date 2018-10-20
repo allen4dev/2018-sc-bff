@@ -21,7 +21,7 @@ const Avatar = ({ src, square, size, className }) => (
 
 Avatar.defaultProps = {
   square: false,
-  size: '100%',
+  size: 'auto',
   className: '',
 };
 
