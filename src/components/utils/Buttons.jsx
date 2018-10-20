@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { string, bool } from 'prop-types';
+import { string } from 'prop-types';
 
 export const Button = styled.button`
   color: ${({ color, theme }) => color || theme.colors.black};
@@ -18,20 +18,18 @@ export const Button = styled.button`
   min-width: 48px;
 
   & > svg {
-    font-size: ${({ icon }) => icon && '.8rem'};
+    font-size: 0.8rem;
   }
 `;
 
 Button.defaultProps = {
   bgColor: 'white',
   size: '1rem',
-  icon: false,
 };
 
 Button.propTypes = {
   bgColor: string,
   size: string,
-  icon: bool,
 };
 
 export const FlatButton = styled(Button)`

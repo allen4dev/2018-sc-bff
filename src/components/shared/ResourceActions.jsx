@@ -42,10 +42,10 @@ const Value = styled.span`
 const ResourceActions = () => (
   <Wrapper>
     <Actions>
-      <FlatButton icon noHeight color="black" shadow="lightgray" radius="2px">
+      <FlatButton noHeight color="black" shadow="lightgray" radius="2px">
         <FaPlay /> Te gusta
       </FlatButton>
-      <FlatButton icon noHeight color="black" shadow="lightgray" radius="2px">
+      <FlatButton noHeight color="black" shadow="lightgray" radius="2px">
         <FaShare /> Compartir
       </FlatButton>
     </Actions>
