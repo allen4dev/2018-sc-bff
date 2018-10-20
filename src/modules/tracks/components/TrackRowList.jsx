@@ -4,7 +4,10 @@ import { arrayOf, string } from 'prop-types';
 
 import TrackRowItem from './TrackRowItem';
 
-const Wrapper = styled.ul``;
+const Wrapper = styled.ul`
+  display: grid;
+  grid-gap: 1rem;
+`;
 
 const TrackRowList = ({ ids }) => (
   <Wrapper>

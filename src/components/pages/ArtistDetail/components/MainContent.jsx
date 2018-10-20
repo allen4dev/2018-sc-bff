@@ -7,7 +7,7 @@ import Tabs from 'components/shared/Tabs';
 
 const Wrapper = styled.section``;
 
-const trackIds = new Array(10).fill({});
+const trackIds = new Array(10).fill('');
 
 const MainContent = () => (
   <Wrapper>
