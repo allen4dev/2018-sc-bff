@@ -1,10 +1,6 @@
-/* eslint-disable */
-
 import React from 'react';
 import styled from 'styled-components';
-import { FaPlay } from 'react-icons/fa';
 
-import { Button } from 'components/utils/Buttons';
 import ResourceActions from 'components/shared/ResourceActions';
 
 import TrackList from 'modules/tracks/components/TrackList';

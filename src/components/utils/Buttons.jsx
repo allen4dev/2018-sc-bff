@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { string } from 'prop-types';
 
 export const Button = styled.button`
-  color: ${({ color, theme }) => color || theme.colors.black};
+  color: ${({ color, theme }) => theme.colors[color] || color};
   background-color: ${({ bgColor, theme }) => theme.colors[bgColor] || bgColor};
   border-radius: ${({ radius }) => radius && radius};
   width: ${({ flexible }) => flexible && '100%'};
@@ -23,11 +23,13 @@ export const Button = styled.button`
 `;
 
 Button.defaultProps = {
+  color: 'dark',
   bgColor: 'white',
   size: '1rem',
 };
 
 Button.propTypes = {
+  color: string,
   bgColor: string,
   size: string,
 };

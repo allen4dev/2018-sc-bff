@@ -25,7 +25,9 @@ const Item = styled.li`
   margin-right: -8px;
 `;
 
-const StyledAvatar = styled(Avatar)``;
+const StyledAvatar = styled(Avatar)`
+  box-shadow: 0 0 0 3px white;
+`;
 
 const AvatarList = ({ title, artists }) => (
   <Wrapper>
