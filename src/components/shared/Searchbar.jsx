@@ -14,10 +14,14 @@ const Input = styled.input`
 
 class Searchbar extends Component {
   static propTypes = {
-    className: string.isRequired,
+    className: string,
     history: shape({
       push: func.isRequired,
     }).isRequired,
+  };
+
+  static defaultProps = {
+    className: '',
   };
 
   state = {
