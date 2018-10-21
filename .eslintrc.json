@@ -21,5 +21,9 @@
         "paths": ["src"]
       }
     }
+  },
+  "rules": {
+    "react/destructuring-assignment": 1,
+    "no-debugger": 1
   }
 }
