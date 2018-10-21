@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import { string, func } from 'prop-types';
+import { string, shape, func } from 'prop-types';
 
 const Wrapper = styled.form``;
 const Input = styled.input`
@@ -15,7 +15,9 @@ const Input = styled.input`
 class Searchbar extends Component {
   static propTypes = {
     className: string.isRequired,
-    history: func.isRequired,
+    history: shape({
+      push: func.isRequired,
+    }).isRequired,
   };
 
   state = {

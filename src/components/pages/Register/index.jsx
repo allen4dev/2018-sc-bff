@@ -6,16 +6,20 @@ import { Button } from 'components/utils/Buttons';
 import { Text } from 'components/utils/Texts';
 
 const Wrapper = styled.section`
+  height: ${({ theme: { sizes } }) => `calc(100vh - ${sizes.total})`};
+  margin-top: ${({ theme: { sizes } }) => sizes.header};
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 const Content = styled.section`
+  height: 80%;
   box-shadow: 0 0 3px ${({ theme: { colors } }) => colors.gray};
   padding: 2rem;
   width: 40%;
   display: grid;
   grid-gap: 1rem;
+  align-items: center;
 `;
 
 const SocialLogin = styled.div`

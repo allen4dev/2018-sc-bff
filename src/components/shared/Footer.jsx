@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.footer`
+  height: ${({ theme: { sizes } }) => sizes.footer};
   padding: 1rem 2rem;
 `;
 

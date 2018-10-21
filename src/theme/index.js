@@ -40,6 +40,8 @@ const colors = {
 
 const sizes = {
   header: '4rem',
+  footer: '2rem',
+  total: '6rem',
 };
 
 export default {
