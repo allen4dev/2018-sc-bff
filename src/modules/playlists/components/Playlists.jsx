@@ -5,7 +5,6 @@ import { arrayOf, string } from 'prop-types';
 import Playlist from './Playlist';
 
 const Wrapper = styled.section`
-  padding: 2rem 0;
   display: grid;
   grid-gap: 2rem;
 `;

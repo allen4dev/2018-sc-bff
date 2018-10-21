@@ -1,9 +1,11 @@
 import React, { Component, createContext } from 'react';
 import styled from 'styled-components';
-import { element, arrayOf } from 'prop-types';
+import { element, arrayOf, string } from 'prop-types';
 
 const Wrapper = styled.section`
   padding: 1rem;
+  display: flex;
+  flex-direction: ${({ type }) => type};
 `;
 
 const List = styled.ul`
@@ -25,7 +27,7 @@ const Button = styled.button`
 `;
 
 const Content = styled.section`
-  padding: 1rem;
+  padding: 1rem 0;
 `;
 
 const TabsContext = createContext({
@@ -78,10 +80,10 @@ class Tabs extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { type, children } = this.props;
 
     return (
-      <Wrapper>
+      <Wrapper type={type}>
         <TabsContext.Provider value={this.state}>
           {children}
         </TabsContext.Provider>
@@ -90,7 +92,12 @@ class Tabs extends Component {
   }
 }
 
+Tabs.defaultProps = {
+  type: string,
+};
+
 Tabs.propTypes = {
+  type: string,
   children: arrayOf(element).isRequired,
 };
 

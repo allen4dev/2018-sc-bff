@@ -13,7 +13,7 @@ const playlistIds = new Array(10).fill('');
 
 const MainContent = () => (
   <Wrapper>
-    <Tabs>
+    <Tabs type="column">
       <Tabs.Menu>
         <Tabs.Tab>Pistas</Tabs.Tab>
         <Tabs.Tab>Albumes</Tabs.Tab>
