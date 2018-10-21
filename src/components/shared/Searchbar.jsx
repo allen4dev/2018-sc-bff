@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import { string } from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { string, func } from 'prop-types';
 
 const Wrapper = styled.form``;
 const Input = styled.input`
@@ -11,14 +12,45 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const Searchbar = ({ className }) => (
-  <Wrapper className={className}>
-    <Input placeholder="Buscar artistas, grupos, pistas y podcasts" />
-  </Wrapper>
-);
+class Searchbar extends Component {
+  static propTypes = {
+    className: string.isRequired,
+    history: func.isRequired,
+  };
 
-Searchbar.propTypes = {
-  className: string.isRequired,
-};
+  state = {
+    search: '',
+  };
 
-export default Searchbar;
+  handleChange = e => {
+    const search = e.target.value;
+
+    this.setState({ search });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const { history } = this.props;
+    const { search } = this.state;
+
+    history.push(`/search?all=${search}`);
+  };
+
+  render() {
+    const { className } = this.props;
+    const { search } = this.state;
+
+    return (
+      <Wrapper className={className} onSubmit={this.handleSubmit}>
+        <Input
+          placeholder="Buscar artistas, grupos, pistas y podcasts"
+          value={search}
+          onChange={this.handleChange}
+        />
+      </Wrapper>
+    );
+  }
+}
+
+export default withRouter(Searchbar);
