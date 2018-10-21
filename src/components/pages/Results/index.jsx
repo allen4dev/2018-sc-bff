@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaSearch, FaMusic, FaUser, FaListUl, FaImages } from 'react-icons/fa';
 
+import TrackRowList from 'modules/tracks/components/TrackRowList';
+import ArtistList from 'modules/artists/components/ArtistList';
+import Playlists from 'modules/playlists/components/Playlists';
+
 import Tabs from 'components/shared/Tabs';
 import { Title } from 'components/utils/Texts';
 
@@ -11,7 +15,13 @@ const Wrapper = styled.section`
   margin-top: ${({ theme: { sizes } }) => sizes.header};
 `;
 
-const Heading = styled.header``;
+const Heading = styled.header`
+  padding: 1rem;
+`;
+
+const trackIds = new Array(10).fill('');
+const artistIds = new Array(10).fill('');
+const playlistIds = new Array(10).fill('');
 
 const Results = () => (
   <Wrapper>
@@ -43,16 +53,16 @@ const Results = () => (
           <Overview />
         </Tabs.Panel>
         <Tabs.Panel>
-          <div>Track results here</div>
+          <TrackRowList ids={trackIds} />
         </Tabs.Panel>
         <Tabs.Panel>
-          <div>Artists results here</div>
+          <ArtistList ids={artistIds} />
         </Tabs.Panel>
         <Tabs.Panel>
           <div>Albums results here</div>
         </Tabs.Panel>
         <Tabs.Panel>
-          <div>Playlists results here</div>
+          <Playlists ids={playlistIds} />
         </Tabs.Panel>
       </Tabs.Panels>
     </Tabs>

@@ -8,7 +8,6 @@ import TrackRowDetails from 'modules/tracks/components/TrackRowDetails';
 import PlaylistCard from './PlaylistCard';
 
 const Wrapper = styled.article`
-  padding: 1rem 0;
   display: flex;
   align-items: flex-start;
 `;
