@@ -1,7 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Header from 'components/shared/Header';
+import Unauthorized from 'components/shared/header/Unauthorized';
+import Authorized from 'components/shared/header/Authorized';
 import Footer from 'components/shared/Footer';
 
 import Home from './Home';
@@ -13,9 +14,17 @@ import Results from './Results';
 
 const Error404 = () => <h1>404 page not found</h1>;
 
+const isAuth = true;
+
+function renderHeader() {
+  if (!isAuth) return <Unauthorized />;
+
+  return <Authorized />;
+}
+
 const Pages = () => (
   <div>
-    <Header />
+    {renderHeader()}
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/signup" component={Register} />
