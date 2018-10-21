@@ -43,7 +43,6 @@ const Button = styled.button`
 
 const Content = styled.section`
   border: 4px solid hotpink;
-  padding: 1rem 0;
   flex: 1;
 `;
 

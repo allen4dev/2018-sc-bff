@@ -5,6 +5,8 @@ import { FaSearch, FaMusic, FaUser, FaListUl, FaImages } from 'react-icons/fa';
 import Tabs from 'components/shared/Tabs';
 import { Title } from 'components/utils/Texts';
 
+import Overview from './components/Overview';
+
 const Wrapper = styled.section`
   margin-top: ${({ theme: { sizes } }) => sizes.header};
 `;
@@ -38,7 +40,7 @@ const Results = () => (
 
       <Tabs.Panels>
         <Tabs.Panel>
-          <div>All results here</div>
+          <Overview />
         </Tabs.Panel>
         <Tabs.Panel>
           <div>Track results here</div>
