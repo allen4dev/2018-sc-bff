@@ -17,23 +17,23 @@ const Wrapper = styled.section``;
 
 const Overview = () => (
   <Wrapper>
-    <ColumnList title="Me gusta" ids={likeIds}>
+    <ColumnList title="Me gusta" gap="1rem" ids={likeIds}>
       {({ id }) => <TrackCard id={id} />}
     </ColumnList>
 
-    <ColumnList title="Listas" ids={playlistIds}>
+    <ColumnList title="Listas" gap="1rem" ids={playlistIds}>
       {({ id }) => <PlaylistCard id={id} details />}
     </ColumnList>
 
-    <ColumnList title="Albumes" ids={albumIds}>
+    <ColumnList title="Albumes" gap="1rem" ids={albumIds}>
       {({ id }) => <div>Albumes {id} </div>}
     </ColumnList>
 
-    <ColumnList title="Siguiendo" ids={followingIds}>
+    <ColumnList title="Siguiendo" gap="1rem" ids={followingIds}>
       {({ id }) => <ArtistCard id={id} />}
     </ColumnList>
 
-    <ColumnList title="Seguidores" ids={followersIds}>
+    <ColumnList title="Seguidores" gap="1rem" ids={followersIds}>
       {({ id }) => <ArtistCard id={id} />}
     </ColumnList>
   </Wrapper>

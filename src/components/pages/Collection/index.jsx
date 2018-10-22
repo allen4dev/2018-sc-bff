@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Tabs from 'components/shared/Tabs';
 
 import Overview from './components/Overview';
+import LikedTab from './components/LikedTab';
 
 const Wrapper = styled.section``;
 
@@ -25,7 +26,7 @@ const Collection = () => (
           <Overview />
         </Tabs.Panel>
         <Tabs.Panel>
-          <div>Likes content</div>
+          <LikedTab />
         </Tabs.Panel>
         <Tabs.Panel>
           <div>Playlists content</div>

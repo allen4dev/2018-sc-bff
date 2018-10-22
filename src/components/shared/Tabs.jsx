@@ -109,7 +109,7 @@ class Tabs extends Component {
   };
 
   state = {
-    activeTab: 0, // eslint-disable-line
+    activeTab: 1, // eslint-disable-line
     onSelectTab: this.onSelectTab, // eslint-disable-line
     type: this.props.type, // eslint-disable-line
   };

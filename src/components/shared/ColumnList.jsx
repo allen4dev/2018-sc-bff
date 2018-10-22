@@ -13,10 +13,9 @@ const Heading = styled.header`
 `;
 
 const List = styled.ul`
-  border: 4px solid hotpink;
+  grid-gap: ${({ gap }) => gap};
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 1rem;
 `;
 
 const Item = styled.li``;
