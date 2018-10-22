@@ -59,7 +59,7 @@ const TrackCount = styled.div`
   justify-content: center;
 `;
 
-const PlaylistPhoto = styled(Photo)`
+const SetPhoto = styled(Photo)`
   grid-area: photo;
 `;
 
@@ -79,7 +79,7 @@ const Total = styled.span`
   color: ${({ theme: { colors } }) => colors.gray};
 `;
 
-const PlaylistHeader = () => (
+const SetHeader = () => (
   <Wrapper>
     <Heading>
       <Details>
@@ -106,8 +106,8 @@ const PlaylistHeader = () => (
       </TrackCount>
     </Footer>
 
-    <PlaylistPhoto src="/images/default_image.png" />
+    <SetPhoto src="/images/default_image.png" />
   </Wrapper>
 );
 
-export default PlaylistHeader;
+export default SetHeader;

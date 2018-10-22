@@ -1,11 +1,11 @@
 import React from 'react';
 
 import TrackCard from 'modules/tracks/components/TrackCard';
-import PlaylistCard from 'modules/playlists/components/PlaylistCard';
+import SetCard from 'modules/playlists/components/SetCard';
 
 const components = {
   tracks: TrackCard,
-  playlists: PlaylistCard,
+  playlists: SetCard,
 };
 
 function renderCard(id, type) {

@@ -4,7 +4,7 @@ import { FaSearch, FaMusic, FaUser, FaListUl, FaImages } from 'react-icons/fa';
 
 import TrackRowList from 'modules/tracks/components/TrackRowList';
 import ArtistList from 'modules/artists/components/ArtistList';
-import Playlists from 'modules/playlists/components/Playlists';
+import Sets from 'modules/playlists/components/Sets';
 
 import Tabs from 'components/shared/Tabs';
 import { Title } from 'components/utils/Texts';
@@ -60,7 +60,7 @@ const Results = () => (
           <div>Albums results here</div>
         </Tabs.Panel>
         <Tabs.Panel>
-          <Playlists ids={playlistIds} />
+          <Sets ids={playlistIds} />
         </Tabs.Panel>
       </Tabs.Panels>
     </Tabs>

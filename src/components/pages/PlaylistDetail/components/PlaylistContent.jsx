@@ -30,7 +30,7 @@ const Tracks = styled(TrackList)`
 
 const trackIds = new Array(10).fill('');
 
-const PlaylistContent = () => (
+const SetContent = () => (
   <Wrapper>
     <Heading>
       <Actions />
@@ -40,4 +40,4 @@ const PlaylistContent = () => (
   </Wrapper>
 );
 
-export default PlaylistContent;
+export default SetContent;

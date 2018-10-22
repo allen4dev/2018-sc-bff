@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import ColumnList from 'components/shared/ColumnList';
 
-import PlaylistCard from 'modules/playlists/components/PlaylistCard';
+import SetCard from 'modules/playlists/components/SetCard';
 import TrackCard from 'modules/tracks/components/TrackCard';
 import ArtistCard from 'modules/artists/components/ArtistCard';
 
@@ -22,7 +22,7 @@ const Overview = () => (
     </ColumnList>
 
     <ColumnList title="Listas" gap="1rem" ids={playlistIds}>
-      {({ id }) => <PlaylistCard id={id} details />}
+      {({ id }) => <SetCard id={id} details />}
     </ColumnList>
 
     <ColumnList title="Albumes" gap="1rem" ids={albumIds}>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Recommendations from 'components/shared/Recommendations';
 
-import PlaylistHeader from 'modules/playlists/components/PlaylistHeader';
+import SetHeader from 'modules/playlists/components/SetHeader';
 import PlaylistContent from './components/PlaylistContent';
 
 const Wrapper = styled.section``;
@@ -13,9 +13,9 @@ const Content = styled.section`
   grid-template-columns: 8fr 4fr;
 `;
 
-const PlaylistDetail = () => (
+const SetDetail = () => (
   <Wrapper>
-    <PlaylistHeader />
+    <SetHeader />
     <Content>
       <PlaylistContent />
       <Recommendations />
@@ -23,4 +23,4 @@ const PlaylistDetail = () => (
   </Wrapper>
 );
 
-export default PlaylistDetail;
+export default SetDetail;

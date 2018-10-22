@@ -2,24 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import { arrayOf, string } from 'prop-types';
 
-import Playlist from './Playlist';
+import Set from './Set';
 
 const Wrapper = styled.section`
   display: grid;
   grid-gap: 2rem;
 `;
 
-const Playlists = ({ ids }) => (
+const Sets = ({ ids }) => (
   <Wrapper>
     {ids.map((id, index) => (
       // eslint-disable-next-line
-      <Playlist key={index} />
+      <Set key={index} />
     ))}
   </Wrapper>
 );
 
-Playlists.propTypes = {
+Sets.propTypes = {
   ids: arrayOf(string).isRequired,
 };
 
-export default Playlists;
+export default Sets;

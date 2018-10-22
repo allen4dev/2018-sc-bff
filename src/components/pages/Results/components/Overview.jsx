@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import ArtistList from 'modules/artists/components/ArtistList';
 import TrackRowList from 'modules/tracks/components/TrackRowList';
-import Playlists from 'modules/playlists/components/Playlists';
+import Sets from 'modules/playlists/components/Sets';
 
 const artistIds = new Array(5).fill('');
 const trackIds = new Array(5).fill('');
@@ -17,7 +17,7 @@ const Overview = () => (
   <Wrapper>
     <ArtistList ids={artistIds} />
     <TrackRowList ids={trackIds} />
-    <Playlists ids={playlistIds} />
+    <Sets ids={playlistIds} />
   </Wrapper>
 );
 

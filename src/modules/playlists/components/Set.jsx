@@ -5,7 +5,7 @@ import ResourceActions from 'components/shared/ResourceActions';
 
 import TrackList from 'modules/tracks/components/TrackList';
 import TrackRowDetails from 'modules/tracks/components/TrackRowDetails';
-import PlaylistCard from './PlaylistCard';
+import SetCard from './SetCard';
 
 const Wrapper = styled.article`
   display: flex;
@@ -21,9 +21,9 @@ const Footer = styled.footer``;
 
 const trackIds = new Array(5).fill('');
 
-const Playlist = () => (
+const Set = () => (
   <Wrapper>
-    <PlaylistCard />
+    <SetCard />
     <Content>
       <TrackRowDetails />
       <TrackList ids={trackIds} />
@@ -34,4 +34,4 @@ const Playlist = () => (
   </Wrapper>
 );
 
-export default Playlist;
+export default Set;

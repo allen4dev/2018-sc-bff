@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { bool } from 'prop-types';
 
 import TrackItem from 'modules/tracks/components/TrackItem';
-import PlaylistItem from 'modules/playlists/components/PlaylistItem';
+import SetItem from 'modules/playlists/components/SetItem';
 
 import RowList from 'components/shared/RowList';
 import AvatarList from 'components/shared/AvatarList';
@@ -11,7 +11,7 @@ import AvatarList from 'components/shared/AvatarList';
 const Wrapper = styled.section``;
 
 const Tracks = styled(RowList)``;
-const Playlists = styled(RowList)``;
+const Sets = styled(RowList)``;
 const Favorites = styled(AvatarList)``;
 const Shared = styled(AvatarList)``;
 
@@ -26,9 +26,9 @@ function renderRecommendations(recommend) {
       <Tracks title="Pistas similares" ids={trackIds} gap="1rem">
         {id => <TrackItem id={id} />}
       </Tracks>
-      <Playlists title="En listas" ids={playlistIds} gap="1rem">
-        {id => <PlaylistItem id={id} />}
-      </Playlists>
+      <Sets title="En listas" ids={playlistIds} gap="1rem">
+        {id => <SetItem id={id} />}
+      </Sets>
     </Fragment>
   ) : null;
 }

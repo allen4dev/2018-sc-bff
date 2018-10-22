@@ -38,7 +38,7 @@ const Item = styled.li`
   }
 `;
 
-const PlaylistItem = () => (
+const SetItem = () => (
   <Wrapper>
     <Photo src="/images/default_image.png" size="20%" />
     <Content>
@@ -53,4 +53,4 @@ const PlaylistItem = () => (
   </Wrapper>
 );
 
-export default PlaylistItem;
+export default SetItem;

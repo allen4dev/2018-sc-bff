@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import TrackRowList from 'modules/tracks/components/TrackRowList';
-import Playlists from 'modules/playlists/components/Playlists';
+import Sets from 'modules/playlists/components/Sets';
 
 import Tabs from 'components/shared/Tabs';
 
@@ -28,7 +28,7 @@ const MainContent = () => (
           <div>Artist Albums comes here</div>
         </Tabs.Panel>
         <Tabs.Panel>
-          <Playlists ids={playlistIds} />
+          <Sets ids={playlistIds} />
         </Tabs.Panel>
         <Tabs.Panel>
           <div>Artist Shared actions comes here</div>

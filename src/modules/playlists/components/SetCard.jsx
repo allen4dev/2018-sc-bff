@@ -54,7 +54,7 @@ function renderFooter(details) {
   );
 }
 
-const PlaylistCard = ({ details }) => (
+const SetCard = ({ details }) => (
   <Wrapper>
     <Photo>
       <Avatar src="/images/avatar.jpg" square />
@@ -67,12 +67,12 @@ const PlaylistCard = ({ details }) => (
   </Wrapper>
 );
 
-PlaylistCard.defaultProps = {
+SetCard.defaultProps = {
   details: false,
 };
 
-PlaylistCard.propTypes = {
+SetCard.propTypes = {
   details: bool,
 };
 
-export default PlaylistCard;
+export default SetCard;
