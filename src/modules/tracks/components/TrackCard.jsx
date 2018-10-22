@@ -28,7 +28,7 @@ const Artist = styled.span`
 const TrackCard = () => (
   <Wrapper>
     <StyledLink to="/tracks/1">
-      <Photo src="images/track_card.png" />
+      <Photo src="/images/track_card.png" />
     </StyledLink>
     <Details>
       <StyledLink to="/tracks/1">
