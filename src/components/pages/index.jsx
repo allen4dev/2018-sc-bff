@@ -24,12 +24,20 @@ function renderHeader() {
   return <Authorized />;
 }
 
+const Wrapper = styled.section`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 const Content = styled.section`
+  flex: 1;
   margin-top: ${({ theme: { sizes } }) => sizes.header};
 `;
 
 const Pages = () => (
-  <div>
+  <Wrapper>
     {renderHeader()}
     <Content>
       <Switch>
@@ -44,7 +52,7 @@ const Pages = () => (
       </Switch>
     </Content>
     <Footer />
-  </div>
+  </Wrapper>
 );
 
 export default Pages;
