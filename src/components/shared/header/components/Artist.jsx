@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Menu from 'components/shared/Menu';
 import { FlatButton } from 'components/utils/Buttons';
 
+import Menu from './Menu';
 import Feed from './Feed';
 
 const Wrapper = styled.section`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const Actions = styled.div``;
@@ -16,14 +17,11 @@ const Actions = styled.div``;
 const Artist = () => (
   <Wrapper>
     <Actions>
-      <FlatButton noHeight color="white">
+      <FlatButton noHeight color="gray" shadow="transparent">
         Subir
       </FlatButton>
     </Actions>
-    <Menu>
-      <Menu.Item>Item 1</Menu.Item>
-      <Menu.Item>Item 2</Menu.Item>
-    </Menu>
+    <Menu />
     <Feed />
   </Wrapper>
 );

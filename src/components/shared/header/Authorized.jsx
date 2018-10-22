@@ -8,12 +8,14 @@ import Artist from './components/Artist';
 import Navigation from './components/Navigation';
 
 const Wrapper = styled.header`
+  padding: 0 2rem;
   height: ${({ theme }) => theme.sizes.header};
   background-color: ${({ theme: { colors } }) => colors.dark};
 
   display: grid;
-  grid-template-columns: 1fr 2fr 5fr 3fr;
+  grid-template-columns: 1fr 3fr 5fr 2fr;
   align-items: center;
+  grid-gap: 1rem;
 
   position: fixed;
   top: 0;
