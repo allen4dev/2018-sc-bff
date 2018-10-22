@@ -11,9 +11,7 @@ import { Title } from 'components/utils/Texts';
 
 import Overview from './components/Overview';
 
-const Wrapper = styled.section`
-  margin-top: ${({ theme: { sizes } }) => sizes.header};
-`;
+const Wrapper = styled.section``;
 
 const Heading = styled.header`
   padding: 1rem;

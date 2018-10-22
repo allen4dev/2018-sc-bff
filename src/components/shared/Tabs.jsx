@@ -128,7 +128,7 @@ class Tabs extends Component {
 }
 
 Tabs.defaultProps = {
-  type: string,
+  type: 'column',
 };
 
 Tabs.propTypes = {

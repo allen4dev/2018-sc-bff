@@ -6,9 +6,7 @@ import ReplySection from 'modules/replies/components/ReplySection';
 
 import Recommendations from 'components/shared/Recommendations';
 
-const Wrapper = styled.section`
-  margin-top: ${({ theme: { sizes } }) => sizes.header};
-`;
+const Wrapper = styled.section``;
 
 const Content = styled.section`
   padding: 1rem;

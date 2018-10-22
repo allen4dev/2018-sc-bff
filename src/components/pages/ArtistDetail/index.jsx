@@ -6,9 +6,7 @@ import ArtistInformation from 'modules/artists/components/ArtistInformation';
 import MainContent from './components/MainContent';
 import Heading from './components/Heading';
 
-const Wrapper = styled.section`
-  margin-top: ${({ theme: { sizes } }) => sizes.header};
-`;
+const Wrapper = styled.section``;
 
 const Content = styled.section`
   padding: 1rem 2rem;

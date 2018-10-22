@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { bool } from 'prop-types';
 
 import Avatar from 'components/shared/Avatar';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div``;
+
+const Photo = styled.section`
   position: relative;
 `;
 
@@ -28,14 +31,48 @@ const Total = styled.span`
 
 const Text = styled.span``;
 
-const PlaylistCard = () => (
+const Details = styled.footer`
+  padding: 0.5rem 0;
+`;
+const Name = styled.span`
+  color: ${({ theme: { colors } }) => colors.dark};
+  display: block;
+  font-weight: bold;
+`;
+const Artist = styled.span`
+  color: ${({ theme: { colors } }) => colors.darkgray};
+`;
+
+function renderFooter(details) {
+  if (!details) return null;
+
+  return (
+    <Details>
+      <Name>Fate collection</Name>
+      <Artist>Fate</Artist>
+    </Details>
+  );
+}
+
+const PlaylistCard = ({ details }) => (
   <Wrapper>
-    <Avatar src="/images/avatar.jpg" square />
-    <TrackCount>
-      <Total>35</Total>
-      <Text>Pistas</Text>
-    </TrackCount>
+    <Photo>
+      <Avatar src="/images/avatar.jpg" square />
+      <TrackCount>
+        <Total>35</Total>
+        <Text>Pistas</Text>
+      </TrackCount>
+    </Photo>
+    {renderFooter(details)}
   </Wrapper>
 );
+
+PlaylistCard.defaultProps = {
+  details: false,
+};
+
+PlaylistCard.propTypes = {
+  details: bool,
+};
 
 export default PlaylistCard;

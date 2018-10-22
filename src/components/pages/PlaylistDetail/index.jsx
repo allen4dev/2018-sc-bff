@@ -6,9 +6,7 @@ import Recommendations from 'components/shared/Recommendations';
 import PlaylistHeader from 'modules/playlists/components/PlaylistHeader';
 import PlaylistContent from './components/PlaylistContent';
 
-const Wrapper = styled.section`
-  margin-top: ${({ theme: { sizes } }) => sizes.header};
-`;
+const Wrapper = styled.section``;
 
 const Content = styled.section`
   display: grid;

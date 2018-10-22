@@ -7,7 +7,6 @@ import { Text } from 'components/utils/Texts';
 
 const Wrapper = styled.section`
   height: ${({ theme: { sizes } }) => `calc(100vh - ${sizes.total})`};
-  margin-top: ${({ theme: { sizes } }) => sizes.header};
   display: flex;
   justify-content: center;
   align-items: center;
