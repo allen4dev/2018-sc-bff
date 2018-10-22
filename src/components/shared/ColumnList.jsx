@@ -9,7 +9,7 @@ const Wrapper = styled.section`
 `;
 
 const Heading = styled.header`
-  padding: 0.5rem 0 1rem;
+  padding: 1rem 0 2rem;
 `;
 
 const List = styled.ul`

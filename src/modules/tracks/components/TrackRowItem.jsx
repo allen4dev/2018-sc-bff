@@ -15,11 +15,15 @@ const Content = styled.section`
   padding: 0 1rem;
 `;
 
+const StyledAvatar = styled(Avatar)`
+  max-width: 200px;
+`;
+
 const Footer = styled.footer``;
 
 const TrackRowItem = () => (
   <Wrapper>
-    <Avatar src="/images/avatar.jpg" size="25%" square />
+    <StyledAvatar src="/images/avatar.jpg" size="25%" square />
     <Content>
       <TrackRowDetails />
       <Footer>

@@ -6,6 +6,9 @@ import Tabs from 'components/shared/Tabs';
 import Overview from './components/Overview';
 import LikedTab from './components/LikedTab';
 import Playlists from './components/Playlists';
+import Following from './components/Following';
+import Followers from './components/Followers';
+import History from './components/History';
 
 const Wrapper = styled.section``;
 
@@ -36,13 +39,13 @@ const Collection = () => (
           <div>Albums content</div>
         </Tabs.Panel>
         <Tabs.Panel>
-          <div>Following content</div>
+          <Following />
         </Tabs.Panel>
         <Tabs.Panel>
-          <div>Followers content</div>
+          <Followers />
         </Tabs.Panel>
         <Tabs.Panel>
-          <div>History content</div>
+          <History />
         </Tabs.Panel>
       </Tabs.Panels>
     </Tabs>
