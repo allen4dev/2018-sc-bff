@@ -13,6 +13,7 @@ import PlaylistDetail from './PlaylistDetail';
 import Register from './Register';
 import Results from './Results';
 import TrackDetail from './TrackDetail';
+import Upload from './Upload';
 
 const Error404 = () => <h1>404 page not found</h1>;
 
@@ -44,6 +45,7 @@ const Pages = () => (
         <Route exact path="/" component={Home} />
         <Route path="/signup" component={Register} />
         <Route path="/search" component={Results} />
+        <Route path="/upload" component={Upload} />
         <Route path="/me/collection" component={Collection} />
         <Route path="/artists/:id" component={ArtistDetail} />
         <Route path="/playlists/:id" component={PlaylistDetail} />
