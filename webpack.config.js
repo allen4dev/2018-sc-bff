@@ -17,7 +17,7 @@ module.exports = {
         enforce: 'pre',
         test: /\.jsx?$/,
         loader: 'eslint-loader',
-        exclude: /node_modules/,
+        include: /src/,
       },
       {
         test: /\.jsx?$/,
@@ -53,4 +53,5 @@ module.exports = {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.js', '.jsx', '.json'],
   },
+  // externals: ['tls', 'net', 'fs', 'console'],
 };

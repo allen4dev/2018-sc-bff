@@ -17,14 +17,6 @@ import Upload from './Upload';
 
 const Error404 = () => <h1>404 page not found</h1>;
 
-const isAuth = true;
-
-function renderHeader() {
-  if (!isAuth) return <Unauthorized />;
-
-  return <Authorized />;
-}
-
 const Wrapper = styled.section`
   height: 100vh;
   display: flex;
@@ -36,6 +28,14 @@ const Content = styled.section`
   flex: 1;
   margin-top: ${({ theme: { sizes } }) => sizes.header};
 `;
+
+const isAuth = false;
+
+function renderHeader() {
+  if (!isAuth) return <Unauthorized />;
+
+  return <Authorized />;
+}
 
 const Pages = () => (
   <Wrapper>
