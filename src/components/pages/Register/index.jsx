@@ -14,6 +14,7 @@ class Register extends Component {
     username: '',
     email: '',
     password: '',
+    signin: false,
   };
 
   handleChange = e => {
@@ -22,20 +23,106 @@ class Register extends Component {
     this.setState(() => ({ [name]: value }));
   };
 
-  handleSubmit = e => {
+  handleSignup = async e => {
     e.preventDefault();
-    console.log(this.props);
     const { register, history } = this.props;
     const { username, email, password } = this.state;
 
-    register({ username, email, password });
+    await register({ username, email, password });
 
     history.push('/');
   };
 
-  render() {
+  handleSignin = async e => {
+    e.preventDefault();
+
+    const { login, history } = this.props;
+    const { email, password } = this.state;
+
+    await login({ email, password });
+
+    history.push('/');
+  };
+
+  renderForm = () => {
+    const { signin } = this.state;
+
+    if (signin) return this.renderSignin();
+
+    return this.renderSignup();
+  };
+
+  flipForm = () => {
+    this.setState(prevState => ({
+      signin: !prevState.signin,
+    }));
+  };
+
+  renderSignin() {
+    const { email, password } = this.state;
+
+    return (
+      <Signup onSubmit={this.handleSignin}>
+        <Input
+          type="email"
+          placeholder="Tu direccion de email"
+          name="email"
+          value={email}
+          onChange={this.handleChange}
+        />
+
+        <Input
+          type="password"
+          placeholder="Tu contraseña"
+          name="password"
+          value={password}
+          onChange={this.handleChange}
+        />
+
+        <Button bgColor="orange" color="white" radius="3px">
+          Continuar
+        </Button>
+      </Signup>
+    );
+  }
+
+  renderSignup() {
     const { username, email, password } = this.state;
 
+    return (
+      <Signin onSubmit={this.handleSignup}>
+        <Input
+          type="text"
+          placeholder="Tu nombre de usuario"
+          name="username"
+          value={username}
+          onChange={this.handleChange}
+        />
+
+        <Input
+          type="email"
+          placeholder="Tu direccion de email"
+          name="email"
+          value={email}
+          onChange={this.handleChange}
+        />
+
+        <Input
+          type="password"
+          placeholder="Tu contraseña"
+          name="password"
+          value={password}
+          onChange={this.handleChange}
+        />
+
+        <Button bgColor="orange" color="white" radius="3px">
+          Continuar
+        </Button>
+      </Signin>
+    );
+  }
+
+  render() {
     return (
       <Wrapper>
         <Content>
@@ -47,37 +134,19 @@ class Register extends Component {
             <Button bgColor="google" color="white" radius="3px">
               Continuar con Google
             </Button>
+
+            <Button
+              bgColor="white"
+              color="dark"
+              radius="3px"
+              onClick={this.flipForm}>
+              Continuar con Email y Password
+            </Button>
           </SocialLogin>
 
           <Separator />
 
-          <Signin onSubmit={this.handleSubmit}>
-            <Input
-              type="text"
-              placeholder="Tu nombre de usuario"
-              name="username"
-              value={username}
-              onChange={this.handleChange}
-            />
-            <Input
-              type="email"
-              placeholder="Tu direccion de email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-            <Input
-              type="password"
-              placeholder="Tu contraseña"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            />
-
-            <Button bgColor="orange" color="white" radius="3px">
-              Continuar
-            </Button>
-          </Signin>
+          {this.renderForm()}
 
           <Footer>
             <Text color="darkgray">
@@ -99,7 +168,7 @@ class Register extends Component {
 }
 
 const Wrapper = styled.section`
-  height: ${({ theme: { sizes } }) => `calc(100vh - ${sizes.total})`};
+  margin-top: ${({ theme: { sizes } }) => sizes.header};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,6 +205,15 @@ const Signin = styled.form`
   }
 `;
 
+const Signup = styled.form`
+  display: flex;
+  flex-direction: column;
+
+  & > input {
+    margin-bottom: 1rem;
+  }
+`;
+
 const Input = styled.input`
   padding: 0.5rem;
   font-size: 1rem;
@@ -162,12 +240,15 @@ Register.propTypes = {
   history: shape({
     push: func.isRequired,
   }).isRequired,
+
   register: func.isRequired,
+  login: func.isRequired,
 };
 
 export default connect(
   null,
   {
     register: authModule.actions.register,
+    login: authModule.actions.login,
   },
 )(Register);
