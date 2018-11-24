@@ -4,7 +4,7 @@ import * as actionTypes from '../actionTypes';
 import { INITIAL_STATE } from '../model';
 
 const currentReducer = handleAction(
-  actionTypes.SET_CURRENT_USER,
+  actionTypes.SET_AUTHENTICATED_USER,
   (state, action) => action.payload.id,
   INITIAL_STATE.current,
 );

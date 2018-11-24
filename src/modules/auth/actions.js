@@ -2,11 +2,8 @@ import { createAction } from 'redux-actions';
 
 import * as actionTypes from './actionTypes';
 
-export const setCurrentUser = createAction(
-  actionTypes.SET_CURRENT_USER,
-  id => ({ id }),
+// eslint-disable-next-line
+export const setAuthenticatedUser = createAction(
+  actionTypes.SET_AUTHENTICATED_USER,
+  (id, token) => ({ id, token }),
 );
-
-export const setToken = createAction(actionTypes.SET_TOKEN, token => ({
-  token,
-}));

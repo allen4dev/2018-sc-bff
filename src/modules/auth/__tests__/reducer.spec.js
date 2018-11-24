@@ -12,25 +12,28 @@ test('@INIT', () => {
 describe('current', () => {
   const CURRENT_STATE = INITIAL_STATE.current;
 
-  it('should handle SET_CURRENT_USER action', () => {
-    const uid = '1';
+  it('should handle SET_AUTHENTICATED_USER action', () => {
+    const id = '1';
 
     const nextState = currentReducer(
       CURRENT_STATE,
-      actions.setCurrentUser(uid),
+      actions.setAuthenticatedUser(id, 'xxx.xxx.xxx'),
     );
 
-    expect(nextState).toEqual(uid);
+    expect(nextState).toEqual(id);
   });
 });
 
 describe('token', () => {
   const TOKEN_STATE = INITIAL_STATE.token;
 
-  it('should handle SET_TOKEN action', () => {
+  it('should handle SET_AUTHENTICATED_USER action', () => {
     const token = 'xxx.xxx.xxx';
 
-    const nextState = tokenReducer(TOKEN_STATE, actions.setToken(token));
+    const nextState = tokenReducer(
+      TOKEN_STATE,
+      actions.setAuthenticatedUser('1', token),
+    );
 
     expect(nextState).toEqual(token);
   });
