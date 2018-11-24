@@ -5,15 +5,24 @@ import * as actions from '../actions';
 
 describe('auth action creators', () => {
   it('should create an action to set the current authenticated user', () => {
-    const id = '1';
-    const token = 'xxx.xxx.xxx';
+    const response = {
+      data: {
+        attributes: {
+          id: '1',
+          token: 'xxx.xxx.xxx',
+        },
+      },
+    };
 
     const expectedAction = {
       type: actionTypes.SET_AUTHENTICATED_USER,
-      payload: { id, token },
+      payload: {
+        id: response.data.attributes.id,
+        token: response.data.attributes.token,
+      },
     };
 
-    expect(actions.setAuthenticatedUser(id, token)).toEqual(expectedAction);
+    expect(actions.setAuthenticatedUser(response)).toEqual(expectedAction);
   });
 
   it('should create an api/API_REQUEST action to register a new user', () => {

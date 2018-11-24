@@ -1,5 +1,5 @@
 // eslint-disable-next-line
 export const INITIAL_STATE = {
-  current: '',
-  token: '',
+  current: null,
+  token: null,
 };

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { func, shape } from 'prop-types';
 
 import { Button } from 'components/utils/Buttons';
 import { Text } from 'components/utils/Texts';
+
+import authModule from 'modules/auth';
 
 class Register extends Component {
   state = {
@@ -20,8 +24,13 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.props);
+    const { register, history } = this.props;
+    const { username, email, password } = this.state;
 
-    console.log('Handle Login here');
+    register({ username, email, password });
+
+    history.push('/');
   };
 
   render() {
@@ -149,4 +158,16 @@ const Conditions = styled.section`
   }
 `;
 
-export default Register;
+Register.propTypes = {
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
+  register: func.isRequired,
+};
+
+export default connect(
+  null,
+  {
+    register: authModule.actions.register,
+  },
+)(Register);

@@ -6,7 +6,9 @@ import * as actionTypes from './actionTypes';
 
 export const setAuthenticatedUser = createAction(
   actionTypes.SET_AUTHENTICATED_USER,
-  (id, token) => ({ id, token }),
+  ({ data: { attributes } }) => {
+    return { id: attributes.id, token: attributes.token };
+  },
 );
 
 export const register = createAction(
