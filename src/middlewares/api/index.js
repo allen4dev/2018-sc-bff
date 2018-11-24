@@ -4,9 +4,9 @@ const apiMiddleware = ({ dispatch }) => next => async action => {
   if (action.type !== actionTypes.API_REQUEST) return next(action);
 
   const { success } = action.payload;
-  const { clientMethod } = action.meta;
+  const { clientMethod, details = {} } = action.meta;
 
-  const response = await clientMethod();
+  const response = await clientMethod(details);
 
   dispatch(success(response));
 };
