@@ -3,6 +3,7 @@ import * as actions from '../actions';
 import { INITIAL_STATE } from '../model';
 
 import currentReducer from '../reducer/current';
+import tokenReducer from '../reducer/token';
 
 test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
@@ -20,5 +21,17 @@ describe('current', () => {
     );
 
     expect(nextState).toEqual(uid);
+  });
+});
+
+describe('token', () => {
+  const TOKEN_STATE = INITIAL_STATE.token;
+
+  it('should handle SET_TOKEN action', () => {
+    const token = 'xxx.xxx.xxx';
+
+    const nextState = tokenReducer(TOKEN_STATE, actions.setToken(token));
+
+    expect(nextState).toEqual(token);
   });
 });
