@@ -17,3 +17,12 @@ export const register = createAction(
     clientMethod: 'register',
   }),
 );
+
+export const login = createAction(
+  API_REQUEST,
+  () => ({ success: setAuthenticatedUser }),
+  credentials => ({
+    details: credentials,
+    clientMethod: 'login',
+  }),
+);

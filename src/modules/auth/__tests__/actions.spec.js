@@ -36,4 +36,19 @@ describe('auth action creators', () => {
 
     expect(actions.register(details)).toEqual(expectedAction);
   });
+
+  it('should create an api/API_REQUEST action to login a user with his credentials', () => {
+    const credentials = {
+      email: 'allen@example.test',
+      password: 'secret',
+    };
+
+    const expectedAction = {
+      type: API_REQUEST,
+      payload: { success: actions.setAuthenticatedUser },
+      meta: { details: credentials, clientMethod: 'login' },
+    };
+
+    expect(actions.login(credentials)).toEqual(expectedAction);
+  });
 });

@@ -10,7 +10,6 @@ const apiMiddleware = ({ dispatch }) => next => async action => {
   const { clientMethod, details = {} } = action.meta;
 
   const response = await client[clientMethod](details);
-  debugger;
 
   dispatch(success(response));
 };
