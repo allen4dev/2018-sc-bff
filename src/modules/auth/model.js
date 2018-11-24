@@ -1,2 +1,4 @@
 // eslint-disable-next-line
-export const INITIAL_STATE = {};
+export const INITIAL_STATE = {
+  current: '',
+};
