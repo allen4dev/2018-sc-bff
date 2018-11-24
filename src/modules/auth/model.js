@@ -1,4 +1,2 @@
 // eslint-disable-next-line
-export const INITIAL_STATE = {
-  dummie: '',
-};
+export const INITIAL_STATE = {};

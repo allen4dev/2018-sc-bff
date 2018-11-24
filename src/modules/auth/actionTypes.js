@@ -1,4 +1,4 @@
 import { NAME } from './constants';
 
 export const DUMMIE = `${NAME}/DUMMIE`;
-export const A = `${NAME}/A`;
+export const SET_CURRENT_USER = `${NAME}/SET_CURRENT_USER`;
