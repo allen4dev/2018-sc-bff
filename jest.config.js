@@ -4,4 +4,5 @@ module.exports = {
     '^middlewares[/](.+)': '<rootDir>/src/middlewares/$1',
     '^modules[/](.+)': '<rootDir>/src/modules/$1',
   },
+  testPathIgnorePatterns: ['/node_modules/', '/fixtures/'],
 };

@@ -6,12 +6,13 @@ import * as actionTypes from './actionTypes';
 
 export const addTrack = createAction(
   actionTypes.ADD_TRACK,
-  ({ data: { id, attributes } }) => ({
+  ({ data: { id, attributes, relationships } }) => ({
     id,
     track: {
       ...attributes,
       id,
     },
+    userId: relationships.user.data.id,
   }),
 );
 

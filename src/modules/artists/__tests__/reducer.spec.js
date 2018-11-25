@@ -1,5 +1,7 @@
 import tracksModule from 'modules/tracks';
 
+import tracksFixtures from 'modules/tracks/__tests__/fixtures';
+
 import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
 
@@ -13,18 +15,11 @@ describe('users - tracks', () => {
   const TRACKS_STATE = INITIAL_STATE.tracks;
 
   it('should handle tracks/ADD_TRACK action', () => {
-    const track = {
-      id: '1',
-      title: 'Track name',
-    };
+    const track = tracksFixtures.getTrack();
 
-    const response = {
-      data: {
-        type: 'tracks',
-        id: track.id,
-        attributes: { title: track.title },
-      },
-    };
+    const response = tracksFixtures.getTrackResponse(track);
+
+    const { user } = response.data.relationships;
 
     const newState = tracksReducer(
       TRACKS_STATE,
@@ -33,21 +28,12 @@ describe('users - tracks', () => {
 
     expect(newState).toEqual({
       ...TRACKS_STATE,
-      [track.id]: track,
+      [user.data.id]: [track.id],
     });
 
-    const otherTrack = {
-      id: '2',
-      title: 'other track title',
-    };
+    const otherTrack = tracksFixtures.getTrack();
 
-    const newResponse = {
-      data: {
-        type: 'tracks',
-        id: otherTrack.id,
-        attributes: { title: otherTrack.title },
-      },
-    };
+    const newResponse = tracksFixtures.getTrackResponse(otherTrack, user);
 
     const nextState = tracksReducer(
       newState,
@@ -56,7 +42,7 @@ describe('users - tracks', () => {
 
     expect(nextState).toEqual({
       ...newState,
-      [otherTrack.id]: otherTrack,
+      [user.data.id]: [track.id, otherTrack.id],
     });
   });
 });

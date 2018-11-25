@@ -6,10 +6,14 @@ import { INITIAL_STATE } from '../model';
 
 const tracksReducer = handleAction(
   tracksModule.actionTypes.ADD_TRACK,
-  (state, { payload }) => ({
-    ...state,
-    [payload.id]: payload.track,
-  }),
+  (state, response) => {
+    const { payload } = response;
+
+    return {
+      ...state,
+      [payload.userId]: [...(state[payload.userId] || []), payload.id],
+    };
+  },
   INITIAL_STATE.tracks,
 );
 

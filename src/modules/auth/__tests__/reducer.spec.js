@@ -5,6 +5,8 @@ import { INITIAL_STATE } from '../model';
 import currentReducer from '../reducer/current';
 import tokenReducer from '../reducer/token';
 
+import fixtures from './fixtures';
+
 test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
 });
@@ -30,11 +32,9 @@ describe('token', () => {
   const TOKEN_STATE = INITIAL_STATE.token;
 
   it('should handle SET_AUTHENTICATED_USER action', () => {
-    const token = 'xxx.xxx.xxx';
+    const token = fixtures.getToken();
 
-    const response = {
-      data: { attributes: { id: '1', token } },
-    };
+    const response = fixtures.getTokenResponse(token);
 
     const nextState = tokenReducer(
       TOKEN_STATE,

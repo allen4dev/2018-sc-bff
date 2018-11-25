@@ -4,6 +4,8 @@ import { INITIAL_STATE } from '../model';
 
 import entitiesReducer from '../reducer/entities';
 
+import fixtures from './fixtures';
+
 test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
 });
@@ -12,15 +14,9 @@ describe('entities', () => {
   const ENTITIES_STATE = INITIAL_STATE.entities;
 
   it('should handlean ADD_TRACK action', () => {
-    const response = {
-      data: {
-        type: 'tracks',
-        id: '1',
-        attributes: {
-          title: 'Some track name',
-        },
-      },
-    };
+    const track = fixtures.getTrack();
+
+    const response = fixtures.getTrackResponse(track);
 
     const nextState = entitiesReducer(
       ENTITIES_STATE,
@@ -29,27 +25,18 @@ describe('entities', () => {
 
     expect(nextState).toEqual({
       ...ENTITIES_STATE,
-      [response.data.id]: { ...response.data.attributes, id: response.data.id },
+      [response.data.id]: track,
     });
 
-    const newResponse = {
-      data: {
-        type: 'tracks',
-        id: '2',
-        attributes: {
-          title: 'Some track name 2',
-        },
-      },
-    };
+    const otherTrack = fixtures.getTrack();
+
+    const newResponse = fixtures.getTrackResponse(otherTrack);
 
     const newState = entitiesReducer(nextState, actions.addTrack(newResponse));
 
     expect(newState).toEqual({
       ...nextState,
-      [newResponse.data.id]: {
-        ...newResponse.data.attributes,
-        id: newResponse.data.id,
-      },
+      [newResponse.data.id]: otherTrack,
     });
   });
 });

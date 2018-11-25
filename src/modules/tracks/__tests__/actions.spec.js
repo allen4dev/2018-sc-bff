@@ -3,28 +3,27 @@ import { API_REQUEST } from 'middlewares/api/actionTypes';
 import * as actionTypes from '../actionTypes';
 import * as actions from '../actions';
 
+import fixtures from './fixtures';
+
 describe('tracks action creators', () => {
   it('should create an action to add a track', () => {
-    const response = {
-      data: {
-        type: 'tracks',
-        id: '1',
-        attributes: {
-          title: 'Some track name',
-        },
-      },
-    };
+    const track = fixtures.getTrack();
 
-    const { data } = response;
+    const response = fixtures.getTrackResponse(track);
+
+    const {
+      data: { id, attributes, relationships },
+    } = response;
 
     const expectedAction = {
       type: actionTypes.ADD_TRACK,
       payload: {
-        id: data.id,
+        id,
         track: {
-          id: data.id,
-          ...data.attributes,
+          id,
+          ...attributes,
         },
+        userId: relationships.user.data.id,
       },
     };
 
