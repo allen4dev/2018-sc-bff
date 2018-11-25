@@ -1,5 +1,7 @@
 import { createAction } from 'redux-actions';
 
+import { API_REQUEST } from 'middlewares/api/actionTypes';
+
 import * as actionTypes from './actionTypes';
 
 export const addTrack = createAction(
@@ -13,4 +15,11 @@ export const addTrack = createAction(
   }),
 );
 
-export const aasd = 1;
+export const createTrack = createAction(
+  API_REQUEST,
+  () => ({ success: addTrack }),
+  details => ({
+    details,
+    clientMethod: 'createTrack',
+  }),
+);

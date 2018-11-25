@@ -1,6 +1,5 @@
 import * as actions from '../actions';
 import reducer from '../reducer';
-// import * as actions from '../actions';
 import { INITIAL_STATE } from '../model';
 
 import entitiesReducer from '../reducer/entities';
