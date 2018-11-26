@@ -5,7 +5,7 @@ import { Title, Text } from 'components/utils/Texts';
 import { Button } from 'components/utils/Buttons';
 
 const Wrapper = styled.section`
-  height: 100vh;
+  height: ${({ theme: { sizes } }) => `calc(100vh - ${sizes.total})`};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,22 +18,40 @@ const Content = styled.form`
 
 const Heading = styled.header``;
 
+const Subtitle = styled.h4`
+  color: ${({ theme: { colors } }) => colors.dark};
+  margin: 1rem 0;
+`;
+
 const Body = styled.div`
   margin: 1rem 0;
-  text-align: center;
 `;
 
 const FormGroup = styled.div`
-  margin: 1rem;
   display: flex;
   align-items: center;
+`;
 
-  & > input[type='radio'],
-  & > input[type='checkbox'] {
+const RadioForm = styled.div`
+  margin: 0.5rem;
+`;
+
+const FormSection = styled.section`
+  margin: 1rem 0;
+`;
+
+const CheckboxGroup = styled.div``;
+
+const Input = styled.input`
+  &[type='radio'],
+  &[type='checkbox'] {
     margin-right: 0.5rem;
   }
+
+  &[type='text'] {
+    width: 100%;
+  }
 `;
-const Input = styled.input``;
 
 const Label = styled.label``;
 
@@ -50,37 +68,62 @@ const Upload = () => (
     <Content>
       <Heading>
         <Title color="dark" size="2rem">
-          Arrastra y suelta pistas y albumes aqui
+          Crea una nueva pista
         </Title>
       </Heading>
 
       <Body>
-        <Button flexible bgColor="orange" color="white">
-          o selecciona los archivos que quieras subir
-        </Button>
+        <FormSection>
+          <Subtitle>Titulo de la pista</Subtitle>
+          <FormGroup>
+            <Input type="text" />
+          </FormGroup>
+        </FormSection>
 
-        <FormGroup>
-          <Input type="checkbox" />
+        <FormSection>
+          <Subtitle color="dark">Tags</Subtitle>
+          <CheckboxGroup>
+            <FormGroup>
+              <Input type="checkbox" name="tags[]" />
+              <Label>J-Pop</Label>
+            </FormGroup>
 
-          <Label>
-            Crear una lista cuando hay varios archivos seleccionados
-          </Label>
-        </FormGroup>
+            <FormGroup>
+              <Input type="checkbox" name="tags[]" />
+              <Label>K-Pop</Label>
+            </FormGroup>
+          </CheckboxGroup>
+        </FormSection>
+
+        <FormSection>
+          <Button flexible bgColor="orange" color="white">
+            selecciona los archivos que quieras subir
+          </Button>
+        </FormSection>
+
+        <FormSection>
+          <FormGroup>
+            <Input type="checkbox" />
+            <Label>
+              Crear una lista cuando hay varios archivos seleccionados
+            </Label>
+          </FormGroup>
+        </FormSection>
       </Body>
 
       <Footer>
         <Sharing>
           <Text>Disponibilidad</Text>
 
-          <FormGroup>
-            <Input type="radio" checked />
+          <RadioForm>
+            <Input type="radio" />
             <Label>Publico</Label>
-          </FormGroup>
+          </RadioForm>
 
-          <FormGroup>
+          <RadioForm>
             <Input type="radio" />
             <Label>Privada</Label>
-          </FormGroup>
+          </RadioForm>
         </Sharing>
       </Footer>
     </Content>
