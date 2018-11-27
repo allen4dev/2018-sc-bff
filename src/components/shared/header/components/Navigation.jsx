@@ -22,9 +22,11 @@ const Navigation = ({ className }) => (
   <Wrapper className={className}>
     <List>
       <Item>
-        <FlatButton flexible color="white">
-          Inicia sesion
-        </FlatButton>
+        <Link to="/upload">
+          <FlatButton flexible color="white">
+            Subir una pista
+          </FlatButton>
+        </Link>
       </Item>
 
       <Item>

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { Title, Text } from 'components/utils/Texts';
 import { Button } from 'components/utils/Buttons';
+
+import tracksModule from 'modules/tracks';
 
 const apiTags = [{ id: '1', name: 'JPop' }, { id: '2', name: 'Kpop' }];
 
@@ -16,6 +19,7 @@ class Upload extends Component {
     };
 
     this.photo = React.createRef();
+    this.src = React.createRef();
   }
 
   handleChange = e => {
@@ -24,31 +28,48 @@ class Upload extends Component {
     this.setState(() => ({ [name]: value }));
   };
 
-  handleTagChange = name => {
+  handleTagChange = tag => {
     const { tags } = this.state;
 
     let newTags = [...tags];
 
-    const tagName = name.toLowerCase();
+    const tagId = +tag;
 
-    if (tags.find(tag => tag === tagName)) {
-      newTags = tags.filter(tag => tag !== tagName);
+    if (tags.find(id => id === tagId)) {
+      newTags = tags.filter(id => id !== tagId);
     } else {
-      newTags = tags.concat(tagName);
+      newTags = tags.concat(tagId);
     }
 
     this.setState({ tags: newTags });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
 
-    console.log(this.photo);
+    const { history, createTrack } = this.props;
 
     const { title, tags } = this.state;
-    console.log(this.photo.current.files[0].name);
-    console.log(title);
-    console.log(tags);
+    const photo = this.photo.current.files[0];
+    const src = this.src.current.files[0];
+
+    const details = new FormData();
+
+    details.append('title', title);
+    details.append('tags', tags);
+    details.append('photo', photo);
+    details.append('src', src);
+
+    await createTrack(details);
+
+    // await createTrack({
+    //   title,
+    //   tags,
+    //   photo,
+    //   src,
+    // });
+
+    history.push('/');
   };
 
   render() {
@@ -86,7 +107,7 @@ class Upload extends Component {
                     <Input
                       type="checkbox"
                       name="tags[]"
-                      onChange={() => this.handleTagChange(tag.name)}
+                      onChange={() => this.handleTagChange(tag.id)}
                     />
                     <Label>{tag.name.toLowerCase()}</Label>
                   </FormGroup>
@@ -98,7 +119,7 @@ class Upload extends Component {
               <Subtitle>Imagen de la pista</Subtitle>
 
               <FormGroup>
-                <input type="file" ref={this.photo} />
+                <input name="photo" type="file" ref={this.photo} />
               </FormGroup>
             </FormSection>
 
@@ -109,7 +130,7 @@ class Upload extends Component {
               <Subtitle>Archivo de sonido de la pista</Subtitle>
 
               <FormGroup>
-                <Input type="file" />
+                <input name="src" type="file" ref={this.src} />
               </FormGroup>
             </FormSection>
 
@@ -209,4 +230,9 @@ const Sharing = styled.div`
 
 const Footer = styled.footer``;
 
-export default Upload;
+export default connect(
+  null,
+  {
+    createTrack: tracksModule.actions.createTrack,
+  },
+)(Upload);
