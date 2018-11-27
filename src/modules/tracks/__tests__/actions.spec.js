@@ -51,4 +51,21 @@ describe('tracks action creators', () => {
 
     expect(actions.createTrack(details)).toEqual(expectedAction);
   });
+
+  it('should create an api/API_REQUEST action to fetch track', () => {
+    const track = fixtures.getTrack();
+
+    const expectedAction = {
+      type: API_REQUEST,
+      payload: {
+        success: actions.addTrack,
+      },
+      meta: {
+        details: track.id,
+        clientMethod: 'getTrack',
+      },
+    };
+
+    expect(actions.fetchTrack(track.id)).toEqual(expectedAction);
+  });
 });

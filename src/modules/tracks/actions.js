@@ -24,3 +24,12 @@ export const createTrack = createAction(
     clientMethod: 'createTrack',
   }),
 );
+
+export const fetchTrack = createAction(
+  API_REQUEST,
+  () => ({ success: addTrack }),
+  id => ({
+    details: id,
+    clientMethod: 'getTrack',
+  }),
+);
