@@ -62,13 +62,6 @@ class Upload extends Component {
 
     await createTrack(details);
 
-    // await createTrack({
-    //   title,
-    //   tags,
-    //   photo,
-    //   src,
-    // });
-
     history.push('/');
   };
 

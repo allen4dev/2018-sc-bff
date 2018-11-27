@@ -16,6 +16,14 @@ export const addTrack = createAction(
   }),
 );
 
+export const actualizeTrack = createAction(
+  actionTypes.ACTUALIZE_TRACK,
+  (id, details) => ({
+    id,
+    details,
+  }),
+);
+
 export const createTrack = createAction(
   API_REQUEST,
   () => ({ success: addTrack }),
