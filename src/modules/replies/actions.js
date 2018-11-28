@@ -1,5 +1,7 @@
 import { createAction } from 'redux-actions';
 
+import { API_REQUEST } from 'middlewares/api/actionTypes';
+
 import * as actionTypes from './actionTypes';
 
 export const addReply = createAction(
@@ -14,4 +16,11 @@ export const addReply = createAction(
   }),
 );
 
-export const DUMMIE = 'dumie';
+export const replyTrack = createAction(
+  API_REQUEST,
+  () => ({ success: addReply }),
+  (id, body) => ({
+    details: { id, input: { body } },
+    clientMethod: 'replyTrack',
+  }),
+);
