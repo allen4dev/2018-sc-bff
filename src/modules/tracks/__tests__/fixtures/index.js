@@ -2,7 +2,7 @@ import uuid from 'uuid';
 
 export default {
   getTrack() {
-    return { id: uuid(), title: 'Track name' };
+    return { id: uuid(), title: 'Track name', published: false };
   },
 
   getTrackResponse(track, user = null) {
@@ -10,7 +10,7 @@ export default {
       data: {
         type: 'tracks',
         id: track.id,
-        attributes: { title: track.title },
+        attributes: { title: track.title, published: track.published },
         relationships: {
           user: {
             data: {

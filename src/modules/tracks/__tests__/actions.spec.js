@@ -5,7 +5,7 @@ import * as actions from '../actions';
 
 import fixtures from './fixtures';
 
-describe.only('tracks action creators', () => {
+describe('tracks action creators', () => {
   it('should create an action to add a track', () => {
     const track = fixtures.getTrack();
 
@@ -117,5 +117,22 @@ describe.only('tracks action creators', () => {
     expect(actions.updateTrack(track.id, updatedFields)).toEqual(
       expectedAction,
     );
+  });
+
+  it('should create an api/API_REQUEST action to publish a track', () => {
+    const track = fixtures.getTrack();
+
+    const expectedAction = {
+      type: API_REQUEST,
+      payload: {
+        success: actions.actualizeTrack,
+      },
+      meta: {
+        details: { id: track.id },
+        clientMethod: 'publishTrack',
+      },
+    };
+
+    expect(actions.publishTrack(track.id)).toEqual(expectedAction);
   });
 });

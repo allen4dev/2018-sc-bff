@@ -15,7 +15,6 @@ const entitiesReducer = handleActions(
 
     [actionTypes.ACTUALIZE_TRACK]: (state, { payload }) => ({
       ...state,
-
       [payload.id]: {
         ...payload.updated,
       },

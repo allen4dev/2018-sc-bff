@@ -55,3 +55,12 @@ export const updateTrack = createAction(
     clientMethod: 'updateTrack',
   }),
 );
+
+export const publishTrack = createAction(
+  API_REQUEST,
+  () => ({ success: actualizeTrack }),
+  id => ({
+    details: { id },
+    clientMethod: 'publishTrack',
+  }),
+);
