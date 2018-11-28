@@ -41,4 +41,27 @@ describe('replies - reducer - entities', () => {
       [newReply.id]: newReply,
     });
   });
+
+  it('should handle ADD_REPLIES action', () => {
+    const response = fixtures.getRepliesResponse();
+
+    const newState = entitiesReducer(
+      ENTITIES_STATE,
+      actions.addReplies(response),
+    );
+
+    expect(newState).toEqual({
+      ...ENTITIES_STATE,
+      ...response.data,
+    });
+
+    const nextResponse = fixtures.getRepliesResponse();
+
+    const nextState = entitiesReducer(
+      newState,
+      actions.addReplies(nextResponse),
+    );
+
+    expect(nextState).toEqual({ ...newState, ...nextResponse.data });
+  });
 });

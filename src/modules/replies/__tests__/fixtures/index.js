@@ -28,4 +28,16 @@ export default {
       },
     };
   },
+
+  getRepliesResponse() {
+    const reply1 = this.getReply();
+    const reply2 = this.getReply();
+
+    return {
+      data: [
+        { type: 'replies', id: reply1.id, attributes: { body: reply1.body } },
+        { type: 'replies', id: reply2.id, attributes: { body: reply2.body } },
+      ],
+    };
+  },
 };

@@ -9,6 +9,13 @@ const entitiesReducer = handleActions(
       ...state,
       [payload.id]: payload.reply,
     }),
+
+    [actionTypes.ADD_REPLIES]: (state, { payload }) => {
+      return {
+        ...state,
+        ...payload.replies,
+      };
+    },
   },
   INITIAL_STATE.entities,
 );
