@@ -16,6 +16,11 @@ export const addReply = createAction(
   }),
 );
 
+export const addReplies = createAction(actionTypes.ADD_REPLIES, ({ data }) => ({
+  trackId: '1', // modify the api to return the related track id
+  replies: data,
+}));
+
 export const replyTrack = createAction(
   API_REQUEST,
   () => ({ success: addReply }),
