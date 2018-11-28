@@ -1,9 +1,16 @@
-// import { handleAction } from 'redux-actions'
+import { handleActions } from 'redux-actions';
 
-// const entitiesReducer = handleAction(actionTypes.DUMMIE)
+import * as actionTypes from '../actionTypes';
+import { INITIAL_STATE } from '../model';
 
-function entitiesReducer() {
-  return {};
-}
+const entitiesReducer = handleActions(
+  {
+    [actionTypes.ADD_REPLY]: (state, { payload }) => ({
+      ...state,
+      [payload.id]: payload.reply,
+    }),
+  },
+  INITIAL_STATE.entities,
+);
 
 export default entitiesReducer;
