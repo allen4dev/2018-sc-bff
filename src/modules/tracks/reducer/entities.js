@@ -18,7 +18,7 @@ const entitiesReducer = handleActions(
 
       [payload.id]: {
         ...state[payload.id],
-        ...payload.details,
+        ...payload.updatedFields,
       },
     }),
   },

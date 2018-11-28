@@ -18,9 +18,9 @@ export const addTrack = createAction(
 
 export const actualizeTrack = createAction(
   actionTypes.ACTUALIZE_TRACK,
-  (id, details) => ({
+  (id, updatedFields) => ({
     id,
-    details,
+    updatedFields,
   }),
 );
 
@@ -37,7 +37,7 @@ export const fetchTrack = createAction(
   API_REQUEST,
   () => ({ success: addTrack }),
   id => ({
-    details: id,
+    details: { id },
     clientMethod: 'getTrack',
   }),
 );

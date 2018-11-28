@@ -30,6 +30,26 @@ describe('tracks action creators', () => {
     expect(actions.addTrack(response)).toEqual(expectedAction);
   });
 
+  it('should create an action to actualize a track', () => {
+    const track = fixtures.getTrack();
+
+    const updatedFields = {
+      title: 'new title',
+    };
+
+    const expectedAction = {
+      type: actionTypes.ACTUALIZE_TRACK,
+      payload: {
+        updatedFields,
+        id: track.id,
+      },
+    };
+
+    expect(actions.actualizeTrack(track.id, updatedFields)).toEqual(
+      expectedAction,
+    );
+  });
+
   it('should create an api/API_REQUEST action to create a new track', () => {
     const details = {
       title: 'My new Track',
@@ -61,7 +81,7 @@ describe('tracks action creators', () => {
         success: actions.addTrack,
       },
       meta: {
-        details: track.id,
+        details: { id: track.id },
         clientMethod: 'getTrack',
       },
     };
