@@ -5,7 +5,7 @@ import * as actions from '../actions';
 
 import fixtures from './fixtures';
 
-describe('tracks action creators', () => {
+describe.only('tracks action creators', () => {
   it('should create an action to add a track', () => {
     const track = fixtures.getTrack();
 
@@ -37,17 +37,24 @@ describe('tracks action creators', () => {
       title: 'new title',
     };
 
+    const updatedTrack = {
+      ...track,
+      ...updatedFields,
+    };
+
+    const response = fixtures.getTrackResponse(updatedTrack);
+
     const expectedAction = {
       type: actionTypes.ACTUALIZE_TRACK,
       payload: {
-        updatedFields,
         id: track.id,
+        updated: {
+          ...updatedTrack,
+        },
       },
     };
 
-    expect(actions.actualizeTrack(track.id, updatedFields)).toEqual(
-      expectedAction,
-    );
+    expect(actions.actualizeTrack(response)).toEqual(expectedAction);
   });
 
   it('should create an api/API_REQUEST action to create a new track', () => {
@@ -87,5 +94,28 @@ describe('tracks action creators', () => {
     };
 
     expect(actions.fetchTrack(track.id)).toEqual(expectedAction);
+  });
+
+  it('should create an api/API_REQUEST action to update a track', () => {
+    const track = fixtures.getTrack();
+
+    const updatedFields = {
+      title: 'Updated title',
+    };
+
+    const expectedAction = {
+      type: API_REQUEST,
+      payload: {
+        success: actions.actualizeTrack,
+      },
+      meta: {
+        details: { id: track.id, updatedFields },
+        clientMethod: 'updateTrack',
+      },
+    };
+
+    expect(actions.updateTrack(track.id, updatedFields)).toEqual(
+      expectedAction,
+    );
   });
 });

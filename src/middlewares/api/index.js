@@ -11,7 +11,7 @@ const apiMiddleware = ({ getState, dispatch }) => next => async action => {
 
   const token = getState().auth.token || null;
 
-  const response = await client[clientMethod](details, token);
+  const response = await client[clientMethod](...details, token);
 
   dispatch(success(response));
 };

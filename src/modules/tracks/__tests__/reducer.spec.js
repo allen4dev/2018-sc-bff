@@ -47,14 +47,16 @@ describe('entities', () => {
       title: 'Updated track title',
     };
 
+    const response = fixtures.getTrackResponse({
+      ...track,
+      ...details,
+    });
+
     const STATE = {
       [track.id]: { ...track },
     };
 
-    const nextState = entitiesReducer(
-      STATE,
-      actions.actualizeTrack(track.id, details),
-    );
+    const nextState = entitiesReducer(STATE, actions.actualizeTrack(response));
 
     expect(nextState).toEqual({
       ...STATE,
