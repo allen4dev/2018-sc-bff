@@ -16,6 +16,7 @@ describe('replies - action creators', () => {
           id: reply.id,
           ...reply,
         },
+        trackId: response.data.relationships.track.data.id,
       },
     };
 

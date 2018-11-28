@@ -5,7 +5,7 @@ export default {
     return { id: uuid(), body: 'Reply body' };
   },
 
-  getReplyResponse(reply, user = null) {
+  getReplyResponse(reply, user = null, track = null) {
     return {
       data: {
         type: 'replies',
@@ -16,6 +16,12 @@ export default {
             data: {
               type: 'users',
               id: user ? user.data.id : uuid(),
+            },
+          },
+          track: {
+            data: {
+              type: 'tracks',
+              id: track ? track.data.id : uuid(),
             },
           },
         },

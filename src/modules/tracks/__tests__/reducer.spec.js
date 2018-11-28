@@ -1,8 +1,12 @@
+import repliesFixtures from 'modules/replies/__tests__/fixtures';
+import repliesModule from 'modules/replies';
+
 import * as actions from '../actions';
 import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
 
 import entitiesReducer from '../reducer/entities';
+import repliesReducer from '../reducer/replies';
 
 import fixtures from './fixtures';
 
@@ -10,7 +14,7 @@ test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
 });
 
-describe('entities', () => {
+describe('tracks - reducer - entities', () => {
   const ENTITIES_STATE = INITIAL_STATE.entities;
 
   it('should handle an ADD_TRACK action', () => {
@@ -64,6 +68,46 @@ describe('entities', () => {
         ...track,
         title: details.title,
       },
+    });
+  });
+});
+
+describe('tracks - reducer - replies', () => {
+  const REPLIES_STATE = INITIAL_STATE.replies;
+
+  it('should handle replies/ADD_REPLY action', () => {
+    const reply = repliesFixtures.getReply();
+
+    const response = repliesFixtures.getReplyResponse(reply);
+
+    const { track } = response.data.relationships;
+
+    const newState = repliesReducer(
+      REPLIES_STATE,
+      repliesModule.actions.addReply(response),
+    );
+
+    expect(newState).toEqual({
+      ...REPLIES_STATE,
+      [track.data.id]: [reply.id],
+    });
+
+    const newReply = repliesFixtures.getReply();
+
+    const nextResponse = repliesFixtures.getReplyResponse(
+      newReply,
+      null,
+      track,
+    );
+
+    const nextState = repliesReducer(
+      newState,
+      repliesModule.actions.addReply(nextResponse),
+    );
+
+    expect(nextState).toEqual({
+      ...newState,
+      [track.data.id]: [reply.id, newReply.id],
     });
   });
 });
