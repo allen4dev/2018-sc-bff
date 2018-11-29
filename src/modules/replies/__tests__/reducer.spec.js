@@ -1,3 +1,5 @@
+import tracksFixtures from 'modules/tracks/__tests__/fixtures';
+
 import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
 
@@ -43,11 +45,16 @@ describe('replies - reducer - entities', () => {
   });
 
   it('should handle ADD_REPLIES action', () => {
+    const track = tracksFixtures.getTrack();
+
     const response = fixtures.getRepliesResponse();
+    const details = {
+      id: track.id,
+    };
 
     const newState = entitiesReducer(
       ENTITIES_STATE,
-      actions.addReplies(response),
+      actions.addReplies(response, details),
     );
 
     expect(newState).toEqual({
@@ -59,7 +66,7 @@ describe('replies - reducer - entities', () => {
 
     const nextState = entitiesReducer(
       newState,
-      actions.addReplies(nextResponse),
+      actions.addReplies(nextResponse, details),
     );
 
     expect(nextState).toEqual({ ...newState, ...nextResponse.data });

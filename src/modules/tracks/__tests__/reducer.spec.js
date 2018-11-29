@@ -9,6 +9,7 @@ import entitiesReducer from '../reducer/entities';
 import repliesReducer from '../reducer/replies';
 
 import fixtures from './fixtures';
+import tracksReducer from '../reducer';
 
 test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
@@ -111,15 +112,35 @@ describe('replies', () => {
     });
   });
 
-  // it('should handle replies/ADD_REPLIES action', () => {
-  //   const newState = repliesReducer(
-  //     REPLIES_STATE,
-  //     repliesModule.actions.addReplies(response),
-  //   );
+  it('should handle replies/ADD_REPLIES action', () => {
+    const track = fixtures.getTrack();
 
-  //   expect(newState).toEqual({
-  //     ...REPLIES_STATE,
-  //     [track],
-  //   })
-  // });
+    const response = repliesFixtures.getRepliesResponse();
+    const details = { id: track.id };
+
+    const newState = repliesReducer(
+      REPLIES_STATE,
+      repliesModule.actions.addReplies(response, details),
+    );
+
+    expect(newState).toEqual({
+      ...REPLIES_STATE,
+      [track.id]: response.data.map(reply => reply.id),
+    });
+
+    const nextResponse = repliesFixtures.getRepliesResponse();
+
+    const nextState = repliesReducer(
+      newState,
+      repliesModule.actions.addReplies(nextResponse, details),
+    );
+
+    expect(nextState).toEqual({
+      ...newState,
+      [track.id]: [
+        ...newState[track.id],
+        ...nextResponse.data.map(reply => reply.id),
+      ],
+    });
+  });
 });

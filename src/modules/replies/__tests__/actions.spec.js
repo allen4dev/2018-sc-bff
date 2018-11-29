@@ -1,3 +1,4 @@
+import tracksFixtures from 'modules/tracks/__tests__/fixtures';
 import { API_REQUEST } from 'middlewares/api/actionTypes';
 
 import * as actionTypes from '../actionTypes';
@@ -27,27 +28,21 @@ describe('replies - action', () => {
     });
 
     it('should create an action to add a list of replies', () => {
-      const trackId = '1';
+      const track = tracksFixtures.getTrack();
 
-      const reply1 = fixtures.getReply();
-      const reply2 = fixtures.getReply();
+      const details = { id: track.id };
 
-      const response = {
-        data: [
-          { type: 'replies', id: reply1.id, attributes: { body: reply1.body } },
-          { type: 'replies', id: reply2.id, attributes: { body: reply2.body } },
-        ],
-      };
+      const response = fixtures.getRepliesResponse();
 
       const expectedAction = {
         type: actionTypes.ADD_REPLIES,
         payload: {
-          trackId,
+          trackId: track.id,
           replies: response.data,
         },
       };
 
-      expect(actions.addReplies(response)).toEqual(expectedAction);
+      expect(actions.addReplies(response, details)).toEqual(expectedAction);
     });
   });
 

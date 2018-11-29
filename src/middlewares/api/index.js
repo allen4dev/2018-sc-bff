@@ -13,7 +13,7 @@ const apiMiddleware = ({ getState, dispatch }) => next => async action => {
 
   const response = await client[clientMethod](...details, token);
 
-  dispatch(success(response));
+  dispatch(success(response, details));
 };
 
 export default apiMiddleware;
