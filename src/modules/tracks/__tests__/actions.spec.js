@@ -60,17 +60,19 @@ describe('tracks action creators', () => {
 
     it('should create an action to remove a track', () => {
       const track = fixtures.getTrack();
+      const playlists = ['1', '2'];
 
-      const response = fixtures.getTrackResponse(track);
+      const details = {
+        playlists,
+        id: track.id,
+      };
 
       const expectedAction = {
         type: actionTypes.REMOVE_TRACK,
-        payload: {
-          id: track.id,
-        },
+        payload: details,
       };
 
-      expect(actions.removeTrack(response)).toEqual(expectedAction);
+      expect(actions.removeTrack(undefined, details)).toEqual(expectedAction);
     });
   });
 
@@ -152,6 +154,23 @@ describe('tracks action creators', () => {
       };
 
       expect(actions.publishTrack(track.id)).toEqual(expectedAction);
+    });
+
+    it('should create an api/API_REQUEST action to delete a track', () => {
+      const track = fixtures.getTrack();
+
+      const playlists = ['1', '2'];
+
+      const expectedAction = {
+        type: API_REQUEST,
+        payload: { success: actions.removeTrack },
+        meta: {
+          details: { id: track.id, playlists },
+          clientMethod: 'deleteTrack',
+        },
+      };
+
+      expect(actions.deleteTrack(track.id, playlists)).toEqual(expectedAction);
     });
   });
 });

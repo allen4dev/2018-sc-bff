@@ -30,7 +30,7 @@ export const actualizeTrack = createAction(
 
 export const removeTrack = createAction(
   actionTypes.REMOVE_TRACK,
-  ({ data: { id } }) => ({ id }),
+  (_, { id, playlists }) => ({ id, playlists }),
 );
 
 // API_REQUEST actions
@@ -67,5 +67,14 @@ export const publishTrack = createAction(
   id => ({
     details: { id },
     clientMethod: 'publishTrack',
+  }),
+);
+
+export const deleteTrack = createAction(
+  API_REQUEST,
+  () => ({ success: removeTrack }),
+  (id, playlists) => ({
+    details: { id, playlists },
+    clientMethod: 'deleteTrack',
   }),
 );
