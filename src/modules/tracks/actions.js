@@ -4,6 +4,7 @@ import { API_REQUEST } from 'middlewares/api/actionTypes';
 
 import * as actionTypes from './actionTypes';
 
+// action creators
 export const addTrack = createAction(
   actionTypes.ADD_TRACK,
   ({ data: { id, attributes, relationships } }) => ({
@@ -18,17 +19,21 @@ export const addTrack = createAction(
 
 export const actualizeTrack = createAction(
   actionTypes.ACTUALIZE_TRACK,
-  ({ data: { id, attributes } }) => {
-    return {
+  ({ data: { id, attributes } }) => ({
+    id,
+    updated: {
       id,
-      updated: {
-        id,
-        ...attributes,
-      },
-    };
-  },
+      ...attributes,
+    },
+  }),
 );
 
+export const removeTrack = createAction(
+  actionTypes.REMOVE_TRACK,
+  ({ data: { id } }) => ({ id }),
+);
+
+// API_REQUEST actions
 export const createTrack = createAction(
   API_REQUEST,
   () => ({ success: addTrack }),
