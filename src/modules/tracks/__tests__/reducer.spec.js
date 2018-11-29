@@ -14,7 +14,7 @@ test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
 });
 
-describe('tracks - reducer - entities', () => {
+describe('entities', () => {
   const ENTITIES_STATE = INITIAL_STATE.entities;
 
   it('should handle an ADD_TRACK action', () => {
@@ -72,7 +72,7 @@ describe('tracks - reducer - entities', () => {
   });
 });
 
-describe('tracks - reducer - replies', () => {
+describe('replies', () => {
   const REPLIES_STATE = INITIAL_STATE.replies;
 
   it('should handle replies/ADD_REPLY action', () => {
@@ -110,4 +110,16 @@ describe('tracks - reducer - replies', () => {
       [track.data.id]: [reply.id, newReply.id],
     });
   });
+
+  // it('should handle replies/ADD_REPLIES action', () => {
+  //   const newState = repliesReducer(
+  //     REPLIES_STATE,
+  //     repliesModule.actions.addReplies(response),
+  //   );
+
+  //   expect(newState).toEqual({
+  //     ...REPLIES_STATE,
+  //     [track],
+  //   })
+  // });
 });
