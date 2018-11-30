@@ -6,10 +6,10 @@ import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
 
 import entitiesReducer from '../reducer/entities';
+import byIdReducer from '../reducer/byId';
 import repliesReducer from '../reducer/replies';
 
 import fixtures from './fixtures';
-import tracksReducer from '../reducer';
 
 test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
@@ -90,6 +90,28 @@ describe('entities', () => {
     expect(newState).toEqual({
       [track2.id]: { ...track2, id: track2.id },
     });
+  });
+});
+
+describe('byId', () => {
+  const BY_ID_STATE = INITIAL_STATE.byId;
+
+  it('should handle ADD_TRACK action', () => {
+    const track = fixtures.getTrack();
+
+    const response = fixtures.getTrackResponse(track);
+
+    const newState = byIdReducer(BY_ID_STATE, actions.addTrack(response));
+
+    expect(newState).toEqual([...BY_ID_STATE, track.id]);
+
+    const track2 = fixtures.getTrack();
+
+    const nextResponse = fixtures.getTrackResponse(track2);
+
+    const nextState = byIdReducer(newState, actions.addTrack(nextResponse));
+
+    expect(nextState).toEqual([...newState, track2.id]);
   });
 });
 
