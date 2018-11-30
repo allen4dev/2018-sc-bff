@@ -60,10 +60,8 @@ describe('tracks action creators', () => {
 
     it('should create an action to remove a track', () => {
       const track = fixtures.getTrack();
-      const playlists = ['1', '2'];
 
       const details = {
-        playlists,
         id: track.id,
       };
 
@@ -159,18 +157,16 @@ describe('tracks action creators', () => {
     it('should create an api/API_REQUEST action to delete a track', () => {
       const track = fixtures.getTrack();
 
-      const playlists = ['1', '2'];
-
       const expectedAction = {
         type: API_REQUEST,
         payload: { success: actions.removeTrack },
         meta: {
-          details: { id: track.id, playlists },
+          details: { id: track.id },
           clientMethod: 'deleteTrack',
         },
       };
 
-      expect(actions.deleteTrack(track.id, playlists)).toEqual(expectedAction);
+      expect(actions.deleteTrack(track.id)).toEqual(expectedAction);
     });
   });
 });

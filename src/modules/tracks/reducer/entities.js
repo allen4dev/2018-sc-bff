@@ -19,6 +19,17 @@ const entitiesReducer = handleActions(
         ...payload.updated,
       },
     }),
+
+    [actionTypes.REMOVE_TRACK]: (state, { payload }) => {
+      return Object.keys(state).reduce((initial, current) => {
+        if (current === payload.id) return initial;
+
+        return {
+          ...initial,
+          [current]: state[current],
+        };
+      }, {});
+    },
   },
   ENTITIES_STATE,
 );

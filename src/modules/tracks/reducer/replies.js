@@ -8,18 +8,18 @@ const REPLIES_STATE = INITIAL_STATE.replies;
 
 const repliesReducer = handleActions(
   {
-    [repliesModule.actionTypes.ADD_REPLY]: (state, { payload }) => ({
+    [repliesModule.actionTypes.ADD_REPLY]: (state, { payload }) => [
       ...state,
-      [payload.trackId]: [...(state[payload.trackId] || []), payload.id],
-    }),
+      { id: payload.trackId, replyId: payload.id },
+    ],
 
-    [repliesModule.actionTypes.ADD_REPLIES]: (state, { payload }) => ({
+    [repliesModule.actionTypes.ADD_REPLIES]: (state, { payload }) => [
       ...state,
-      [payload.trackId]: [
-        ...(state[payload.trackId] || []),
-        ...payload.replies.map(reply => reply.id),
-      ],
-    }),
+      ...payload.replies.map(reply => ({
+        id: payload.trackId,
+        replyId: reply.id,
+      })),
+    ],
   },
   REPLIES_STATE,
 );

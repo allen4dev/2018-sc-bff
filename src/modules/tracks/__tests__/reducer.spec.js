@@ -71,6 +71,26 @@ describe('entities', () => {
       },
     });
   });
+
+  it('should handle REMOVE_TRACK action', () => {
+    const track1 = fixtures.getTrack();
+    const track2 = fixtures.getTrack();
+
+    const deletedTrack = { id: track1.id };
+
+    const newState = entitiesReducer(
+      {
+        ...ENTITIES_STATE,
+        [track1.id]: { ...track1, id: track1.id },
+        [track2.id]: { ...track2, id: track2.id },
+      },
+      actions.removeTrack(undefined, deletedTrack),
+    );
+
+    expect(newState).toEqual({
+      [track2.id]: { ...track2, id: track2.id },
+    });
+  });
 });
 
 describe('replies', () => {
@@ -88,10 +108,10 @@ describe('replies', () => {
       repliesModule.actions.addReply(response),
     );
 
-    expect(newState).toEqual({
+    expect(newState).toEqual([
       ...REPLIES_STATE,
-      [track.data.id]: [reply.id],
-    });
+      { id: track.data.id, replyId: reply.id },
+    ]);
 
     const newReply = repliesFixtures.getReply();
 
@@ -106,10 +126,10 @@ describe('replies', () => {
       repliesModule.actions.addReply(nextResponse),
     );
 
-    expect(nextState).toEqual({
+    expect(nextState).toEqual([
       ...newState,
-      [track.data.id]: [reply.id, newReply.id],
-    });
+      { id: track.data.id, replyId: newReply.id },
+    ]);
   });
 
   it('should handle replies/ADD_REPLIES action', () => {
@@ -123,10 +143,10 @@ describe('replies', () => {
       repliesModule.actions.addReplies(response, details),
     );
 
-    expect(newState).toEqual({
+    expect(newState).toEqual([
       ...REPLIES_STATE,
-      [track.id]: response.data.map(reply => reply.id),
-    });
+      ...response.data.map(reply => ({ id: track.id, replyId: reply.id })),
+    ]);
 
     const nextResponse = repliesFixtures.getRepliesResponse();
 
@@ -135,12 +155,9 @@ describe('replies', () => {
       repliesModule.actions.addReplies(nextResponse, details),
     );
 
-    expect(nextState).toEqual({
+    expect(nextState).toEqual([
       ...newState,
-      [track.id]: [
-        ...newState[track.id],
-        ...nextResponse.data.map(reply => reply.id),
-      ],
-    });
+      ...nextResponse.data.map(reply => ({ id: track.id, replyId: reply.id })),
+    ]);
   });
 });

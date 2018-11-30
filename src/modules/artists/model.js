@@ -1,5 +1,5 @@
 export const INITIAL_STATE = {
-  tracks: {},
+  tracks: [],
 };
 
 export const dummie = 'dummie';

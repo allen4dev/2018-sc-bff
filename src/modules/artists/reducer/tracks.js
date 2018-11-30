@@ -1,18 +1,18 @@
-import { handleAction } from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
 import tracksModule from 'modules/tracks';
 
 import { INITIAL_STATE } from '../model';
 
-const tracksReducer = handleAction(
-  tracksModule.actionTypes.ADD_TRACK,
-  (state, response) => {
-    const { payload } = response;
-
-    return {
+const tracksReducer = handleActions(
+  {
+    [tracksModule.actionTypes.ADD_TRACK]: (state, { payload }) => [
       ...state,
-      [payload.userId]: [...(state[payload.userId] || []), payload.id],
-    };
+      { id: payload.userId, trackId: payload.id },
+    ],
+
+    [tracksModule.actionTypes.REMOVE_TRACK]: (state, { payload }) =>
+      state.filter(record => record.trackId !== payload.id),
   },
   INITIAL_STATE.tracks,
 );

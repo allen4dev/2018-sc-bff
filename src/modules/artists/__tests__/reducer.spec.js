@@ -26,10 +26,10 @@ describe('users - tracks', () => {
       tracksModule.actions.addTrack(response),
     );
 
-    expect(newState).toEqual({
+    expect(newState).toEqual([
       ...TRACKS_STATE,
-      [user.data.id]: [track.id],
-    });
+      { id: user.data.id, trackId: track.id },
+    ]);
 
     const otherTrack = tracksFixtures.getTrack();
 
@@ -40,9 +40,37 @@ describe('users - tracks', () => {
       tracksModule.actions.addTrack(newResponse),
     );
 
-    expect(nextState).toEqual({
+    expect(nextState).toEqual([
       ...newState,
-      [user.data.id]: [track.id, otherTrack.id],
-    });
+      { id: user.data.id, trackId: otherTrack.id },
+    ]);
+  });
+
+  it('should handle tracks/REMOVE_TRACK action', () => {
+    const track1 = tracksFixtures.getTrack();
+    const track2 = tracksFixtures.getTrack();
+
+    const user1 = '1';
+    const user2 = '2';
+
+    const STATE = [
+      ...TRACKS_STATE,
+      { id: user1, trackId: track1.id },
+      { id: user2, trackId: track2.id },
+    ];
+
+    const newState = tracksReducer(
+      STATE,
+      tracksModule.actions.removeTrack(undefined, { id: track1.id }),
+    );
+
+    expect(newState).toEqual([{ id: user2, trackId: track2.id }]);
+
+    const nextState = tracksReducer(
+      newState,
+      tracksModule.actions.removeTrack(undefined, { id: track2.id }),
+    );
+
+    expect(nextState).toEqual([]);
   });
 });
