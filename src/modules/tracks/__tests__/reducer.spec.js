@@ -113,6 +113,18 @@ describe('byId', () => {
 
     expect(nextState).toEqual([...newState, track2.id]);
   });
+
+  it('should handle REMOVE_TRACK action', () => {
+    const track1 = fixtures.getTrack();
+    const track2 = fixtures.getTrack();
+
+    const newState = byIdReducer(
+      [...BY_ID_STATE, track1.id, track2.id],
+      actions.removeTrack(undefined, { id: track1.id }),
+    );
+
+    expect(newState).toEqual([track2.id]);
+  });
 });
 
 describe('replies', () => {
