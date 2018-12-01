@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 
-import { API_REQUEST } from 'middlewares/api/actionTypes';
+import client from 'helpers/client';
 
 import * as actionTypes from './actionTypes';
 
@@ -26,11 +26,12 @@ export const addReplies = createAction(
   },
 );
 
-export const replyTrack = createAction(
-  API_REQUEST,
-  () => ({ success: addReply }),
-  (id, body) => ({
-    details: { id, input: { body } },
-    clientMethod: 'replyTrack',
-  }),
-);
+export function replyTrack(id, body) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.replyTrack(id, { body }, token);
+
+    dispatch(addReply(response));
+  };
+}
