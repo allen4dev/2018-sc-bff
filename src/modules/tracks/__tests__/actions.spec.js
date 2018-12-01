@@ -1,5 +1,3 @@
-import { API_REQUEST } from 'middlewares/api/actionTypes';
-
 import * as actionTypes from '../actionTypes';
 import * as actions from '../actions';
 
@@ -71,102 +69,6 @@ describe('tracks action creators', () => {
       };
 
       expect(actions.removeTrack(undefined, details)).toEqual(expectedAction);
-    });
-  });
-
-  describe('api/API_REQUEST action creators', () => {
-    it('should create an api/API_REQUEST action to create a new track', () => {
-      const details = {
-        title: 'My new Track',
-        photo: 'A photo image',
-        src: 'The track source',
-        tags: ['games'],
-      };
-
-      const expectedAction = {
-        type: API_REQUEST,
-        payload: {
-          success: actions.addTrack,
-        },
-        meta: {
-          details,
-          clientMethod: 'createTrack',
-        },
-      };
-
-      expect(actions.createTrack(details)).toEqual(expectedAction);
-    });
-
-    it('should create an api/API_REQUEST action to fetch track', () => {
-      const track = fixtures.getTrack();
-
-      const expectedAction = {
-        type: API_REQUEST,
-        payload: {
-          success: actions.addTrack,
-        },
-        meta: {
-          details: { id: track.id },
-          clientMethod: 'getTrack',
-        },
-      };
-
-      expect(actions.fetchTrack(track.id)).toEqual(expectedAction);
-    });
-
-    it('should create an api/API_REQUEST action to update a track', () => {
-      const track = fixtures.getTrack();
-
-      const updatedFields = {
-        title: 'Updated title',
-      };
-
-      const expectedAction = {
-        type: API_REQUEST,
-        payload: {
-          success: actions.actualizeTrack,
-        },
-        meta: {
-          details: { id: track.id, updatedFields },
-          clientMethod: 'updateTrack',
-        },
-      };
-
-      expect(actions.updateTrack(track.id, updatedFields)).toEqual(
-        expectedAction,
-      );
-    });
-
-    it('should create an api/API_REQUEST action to publish a track', () => {
-      const track = fixtures.getTrack();
-
-      const expectedAction = {
-        type: API_REQUEST,
-        payload: {
-          success: actions.actualizeTrack,
-        },
-        meta: {
-          details: { id: track.id },
-          clientMethod: 'publishTrack',
-        },
-      };
-
-      expect(actions.publishTrack(track.id)).toEqual(expectedAction);
-    });
-
-    it('should create an api/API_REQUEST action to delete a track', () => {
-      const track = fixtures.getTrack();
-
-      const expectedAction = {
-        type: API_REQUEST,
-        payload: { success: actions.removeTrack },
-        meta: {
-          details: { id: track.id },
-          clientMethod: 'deleteTrack',
-        },
-      };
-
-      expect(actions.deleteTrack(track.id)).toEqual(expectedAction);
     });
   });
 });

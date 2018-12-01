@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 
-import { API_REQUEST } from 'middlewares/api/actionTypes';
+import client from 'helpers/client';
 
 import * as actionTypes from './actionTypes';
 
@@ -30,51 +30,54 @@ export const actualizeTrack = createAction(
 
 export const removeTrack = createAction(
   actionTypes.REMOVE_TRACK,
-  (_, details) => details,
+  (_, { id }) => ({ id }),
 );
 
-// API_REQUEST actions
-export const createTrack = createAction(
-  API_REQUEST,
-  () => ({ success: addTrack }),
-  details => ({
-    details,
-    clientMethod: 'createTrack',
-  }),
-);
+// async action creators
+export function createTrack(details) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
 
-export const fetchTrack = createAction(
-  API_REQUEST,
-  () => ({ success: addTrack }),
-  id => ({
-    details: { id },
-    clientMethod: 'getTrack',
-  }),
-);
+    const response = await client.createTrack(details, token);
 
-export const updateTrack = createAction(
-  API_REQUEST,
-  () => ({ success: actualizeTrack }),
-  (id, updatedFields) => ({
-    details: { id, updatedFields },
-    clientMethod: 'updateTrack',
-  }),
-);
+    dispatch(addTrack(response));
+  };
+}
 
-export const publishTrack = createAction(
-  API_REQUEST,
-  () => ({ success: actualizeTrack }),
-  id => ({
-    details: { id },
-    clientMethod: 'publishTrack',
-  }),
-);
+export function fetchTrack(id) {
+  return async dispatch => {
+    const response = await client.getTrack(id);
 
-export const deleteTrack = createAction(
-  API_REQUEST,
-  () => ({ success: removeTrack }),
-  id => ({
-    details: { id },
-    clientMethod: 'deleteTrack',
-  }),
-);
+    dispatch(addTrack(response));
+  };
+}
+
+export function updateTrack(id, newFields) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.updateTrack(id, newFields, token);
+
+    dispatch(actualizeTrack(response));
+  };
+}
+
+export function publishTrack(id) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.publishTrack(id, token);
+
+    dispatch(actualizeTrack(response));
+  };
+}
+
+export function deleteTrack(id) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    await client.deleteTrack(id, token);
+
+    dispatch(removeTrack(null, { id }));
+  };
+}

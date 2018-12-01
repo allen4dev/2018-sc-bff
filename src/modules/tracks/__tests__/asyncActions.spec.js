@@ -11,7 +11,7 @@ import fixtures from './fixtures';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('auth module async actions', () => {
+describe('tracks module async actions', () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -20,10 +20,10 @@ describe('auth module async actions', () => {
     moxios.uninstall();
   });
 
-  it('should create an SET_AUTHENTICATED_USER  action after a user registration', async () => {
-    const token = fixtures.getToken();
+  it('should create an ADD_TRACK action after a user creates a track', async () => {
+    const track = fixtures.getTrack();
 
-    const response = fixtures.getTokenResponse(token);
+    const response = fixtures.getTrackResponse(track);
 
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
@@ -36,23 +36,140 @@ describe('auth module async actions', () => {
 
     const expectedActions = [
       {
-        type: actionTypes.SET_AUTHENTICATED_USER,
+        type: actionTypes.ADD_TRACK,
         payload: {
-          id: response.data.attributes.id,
-          token: response.data.attributes.token,
+          id: track.id,
+          track: { ...track },
+          userId: response.data.relationships.user.data.id,
+        },
+      },
+    ];
+
+    const token = 'xxx.xxx.xxx';
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token },
+    });
+
+    const details = { ...response.data.attributes };
+
+    await store.dispatch(actions.createTrack(details));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create an ADD_TRACK action after a guest fetchs a track', async () => {
+    const track = fixtures.getTrack();
+
+    const response = fixtures.getTrackResponse(track);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_TRACK,
+        payload: {
+          id: track.id,
+          track: { ...track },
+          userId: response.data.relationships.user.data.id,
         },
       },
     ];
 
     const store = mockStore(INITIAL_STATE);
 
-    const details = {
-      username: 'Allen',
-      email: 'allen@example.test',
-      password: 'asdqwe',
+    await store.dispatch(actions.fetchTrack(track.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create an ACTUALIZE_TRACK action after a user updates a track', async () => {
+    const track = fixtures.getTrack();
+
+    const updatedFields = {
+      ...track,
+      title: 'Updated title',
     };
 
-    await store.dispatch(actions.register(details));
+    const response = fixtures.getTrackResponse(updatedFields);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ACTUALIZE_TRACK,
+        payload: {
+          id: track.id,
+          updated: { ...updatedFields },
+        },
+      },
+    ];
+
+    const token = 'xxx.xxx.xxx';
+
+    const store = mockStore({ ...INITIAL_STATE, auth: { token } });
+
+    await store.dispatch(actions.updateTrack(track.id, updatedFields));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create an ACTUALIZE_TRACK action after a user publish his track', async () => {
+    const track = fixtures.getTrack();
+
+    const published = { ...track, published: true };
+
+    const response = fixtures.getTrackResponse(published);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ACTUALIZE_TRACK,
+        payload: { id: track.id, updated: published },
+      },
+    ];
+
+    const token = 'xxx.xxx.xxx';
+
+    const store = mockStore({ ...INITIAL_STATE, auth: { token } });
+
+    await store.dispatch(actions.publishTrack(track.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create a REMOVE_TRACK action after a user delete his track', async () => {
+    const track = fixtures.getTrack();
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 204 });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.REMOVE_TRACK, payload: { id: track.id } },
+    ];
+
+    const token = 'xxx.xxx.xxx';
+
+    const store = mockStore({ ...INITIAL_STATE, auth: { token } });
+
+    await store.dispatch(actions.deleteTrack(track.id));
 
     expect(store.getActions()).toEqual(expectedActions);
   });
