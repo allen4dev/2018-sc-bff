@@ -1,5 +1,8 @@
 export const INITIAL_STATE = {
-  entities: {},
+  all: {
+    entities: {},
+    byId: [],
+  },
 };
 
 export const dummie = 'dummie';
