@@ -1,6 +1,8 @@
 // eslint-disable-next-line
 export const INITIAL_STATE = {
-  entities: {},
-  byId: [],
+  all: {
+    entities: {},
+    byId: [],
+  },
   replies: [],
 };
