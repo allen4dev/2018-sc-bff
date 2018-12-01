@@ -26,6 +26,22 @@ const allReducer = handleActions(
         },
       },
     }),
+
+    [actionTypes.REMOVE_TRACK]: (state, { payload }) => {
+      const ids = state.byId.filter(id => id !== payload.id);
+
+      return {
+        ...state,
+        entities: ids.reduce(
+          (initial, current) => ({
+            ...initial,
+            [current]: state.entities[current],
+          }),
+          {},
+        ),
+        byId: ids,
+      };
+    },
   },
   INITIAL_STATE.all,
 );
