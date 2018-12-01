@@ -1,5 +1,7 @@
 import { createAction } from 'redux-actions';
 
+import client from 'helpers/client';
+
 import { API_REQUEST } from 'middlewares/api/actionTypes';
 
 import * as actionTypes from './actionTypes';
@@ -12,20 +14,18 @@ export const setAuthenticatedUser = createAction(
   }),
 );
 
-export const register = createAction(
-  API_REQUEST,
-  () => ({ success: setAuthenticatedUser }),
-  details => ({
-    details,
-    clientMethod: 'register',
-  }),
-);
+export function register(details) {
+  return async dispatch => {
+    const response = await client.register(details);
 
-export const login = createAction(
-  API_REQUEST,
-  () => ({ success: setAuthenticatedUser }),
-  credentials => ({
-    details: credentials,
-    clientMethod: 'login',
-  }),
-);
+    dispatch(setAuthenticatedUser(response));
+  };
+}
+
+export function login(credentials) {
+  return async dispatch => {
+    const response = await client.login(credentials);
+
+    dispatch(setAuthenticatedUser(response));
+  };
+}

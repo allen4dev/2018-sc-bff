@@ -1,10 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-
-import api from 'middlewares/api';
+import thunk from 'redux-thunk';
 
 import rootReducer from './modules/rootReducer';
 
-const store = createStore(rootReducer, applyMiddleware(api, logger));
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 export default store;
