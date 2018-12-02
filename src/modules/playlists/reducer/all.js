@@ -21,6 +21,22 @@ const allReducer = handleActions(
         [payload.id]: payload.updated,
       },
     }),
+
+    [actionTypes.REMOVE_PLAYLIST]: (state, { payload }) => {
+      const ids = state.byId.filter(id => id !== payload.id);
+
+      return {
+        ...state,
+        entities: ids.reduce(
+          (initial, current) => ({
+            ...initial,
+            [current]: state.entities[current],
+          }),
+          {},
+        ),
+        byId: ids,
+      };
+    },
   },
   INITIAL_STATE.all,
 );

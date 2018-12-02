@@ -68,6 +68,42 @@ describe('all', () => {
       entities: { [playlist.id]: updated },
     });
   });
+
+  it('should handle REMOVE_PLAYLIST action', () => {
+    const playlist1 = fixtures.getPlaylist();
+    const playlist2 = fixtures.getPlaylist();
+
+    const newState = allReducer(
+      {
+        ...ALL_STATE,
+        entities: {
+          [playlist1.id]: { ...playlist1 },
+          [playlist2.id]: { ...playlist2 },
+        },
+        byId: [playlist1.id, playlist2.id],
+      },
+      actions.removePlaylist(playlist1.id),
+    );
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        [playlist2.id]: { ...playlist2 },
+      },
+      byId: [playlist2.id],
+    });
+
+    const nextState = allReducer(
+      newState,
+      actions.removePlaylist(playlist2.id),
+    );
+
+    expect(nextState).toEqual({
+      ...newState,
+      entities: {},
+      byId: [],
+    });
+  });
 });
 
 describe('tracks', () => {
