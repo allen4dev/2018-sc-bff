@@ -29,7 +29,15 @@ export const actualizePlaylist = createAction(
 );
 
 export const addTrack = createAction(
-  actionTypes.ADD_TRACK,
+  actionTypes.ADD_PLAYLIST_TRACK,
+  (response, details) => ({
+    id: details.id,
+    trackId: details.trackId,
+  }),
+);
+
+export const removeTrack = createAction(
+  actionTypes.REMOVE_PLAYLIST_TRACK,
   (response, details) => ({
     id: details.id,
     trackId: details.trackId,

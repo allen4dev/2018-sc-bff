@@ -73,7 +73,7 @@ describe('all', () => {
 describe('tracks', () => {
   const TRACKS_STATE = INITIAL_STATE.tracks;
 
-  it('should handle ADD_TRACK action', () => {
+  it('should handle ADD_PLAYLIST_TRACK action', () => {
     const playlist = fixtures.getPlaylist();
     const track = { id: '123', title: 'Track title' };
 

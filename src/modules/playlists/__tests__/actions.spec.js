@@ -43,7 +43,7 @@ describe('action creators', () => {
     expect(actions.actualizePlaylist(response)).toEqual(expectedAction);
   });
 
-  it('should create an action to add a track to a playlist', () => {
+  it('should create an action to add a playlist track', () => {
     const playlist = fixtures.getPlaylist();
     const track = tracksFixtures.getTrack();
 
@@ -55,10 +55,27 @@ describe('action creators', () => {
     };
 
     const expectedAction = {
-      type: actionTypes.ADD_TRACK,
+      type: actionTypes.ADD_PLAYLIST_TRACK,
       payload: details,
     };
 
     expect(actions.addTrack(response, details)).toEqual(expectedAction);
+  });
+
+  it('should create an action to remove playlist track', () => {
+    const playlist = fixtures.getPlaylist();
+    const track = tracksFixtures.getTrack();
+
+    const details = {
+      id: playlist.id,
+      trackId: track.id,
+    };
+
+    const expectedAction = {
+      type: actionTypes.REMOVE_PLAYLIST_TRACK,
+      payload: details,
+    };
+
+    expect(actions.removeTrack(null, details)).toEqual(expectedAction);
   });
 });

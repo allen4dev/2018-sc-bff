@@ -132,7 +132,7 @@ describe('playlists module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should create an ADD_TRACK action after a user adds a track to his playlist', async () => {
+  it('should create an ADD_PLAYLIST_TRACK action after a user adds a track to his playlist', async () => {
     const playlist = fixtures.getPlaylist();
     const track = tracksFixtures.getTrack();
 
@@ -149,7 +149,7 @@ describe('playlists module async actions', () => {
 
     const expectedActions = [
       {
-        type: actionTypes.ADD_TRACK,
+        type: actionTypes.ADD_PLAYLIST_TRACK,
         payload: {
           id: playlist.id,
           trackId: track.id,

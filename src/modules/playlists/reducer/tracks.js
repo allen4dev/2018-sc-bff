@@ -5,7 +5,7 @@ import * as actionTypes from '../actionTypes';
 
 const tracksReducer = handleActions(
   {
-    [actionTypes.ADD_TRACK]: (state, { payload }) => [
+    [actionTypes.ADD_PLAYLIST_TRACK]: (state, { payload }) => [
       ...state,
       { id: payload.id, trackId: payload.trackId },
     ],
