@@ -12,7 +12,10 @@ const tracksReducer = handleActions(
 
     [actionTypes.REMOVE_PLAYLIST_TRACK]: (state, { payload }) => {
       return state.filter(record => {
-        return Object.keys(payload).every(key => record[key] !== payload[key]);
+        if (record.id === payload.id && record.trackId === payload.trackId)
+          return false;
+
+        return true;
       });
     },
   },
