@@ -4,6 +4,7 @@ import { INITIAL_STATE } from '../model';
 import * as actions from '../actions';
 
 import allReducer from '../reducer/all';
+import tracksReducer from '../reducer/tracks';
 
 import fixtures from './fixtures';
 
@@ -66,5 +67,26 @@ describe('all', () => {
       ...ALL_STATE,
       entities: { [playlist.id]: updated },
     });
+  });
+});
+
+describe('tracks', () => {
+  const TRACKS_STATE = INITIAL_STATE.tracks;
+
+  it('should handle ADD_TRACK action', () => {
+    const playlist = fixtures.getPlaylist();
+    const track = { id: '123', title: 'Track title' };
+
+    const details = { id: playlist.id, trackId: track.id };
+
+    const newState = tracksReducer(
+      TRACKS_STATE,
+      actions.addTrack(null, details),
+    );
+
+    expect(newState).toEqual([
+      ...TRACKS_STATE,
+      { id: playlist.id, trackId: track.id },
+    ]);
   });
 });

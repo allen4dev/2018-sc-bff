@@ -3,6 +3,7 @@ export const INITIAL_STATE = {
     entities: {},
     byId: [],
   },
+  tracks: [],
 };
 
 export const dummie = 'dummie';
