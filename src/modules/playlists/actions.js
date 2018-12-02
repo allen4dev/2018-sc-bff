@@ -46,3 +46,13 @@ export function fetchPlaylist(id) {
     dispatch(addPlaylist(response));
   };
 }
+
+export function updatePlaylist(id, details) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.updatePlaylist(id, details, token);
+
+    await dispatch(actualizePlaylist(response));
+  };
+}

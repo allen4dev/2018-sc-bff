@@ -90,4 +90,42 @@ describe('playlists module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create an ACTUALIZE_PLAYLIST action after a user updates a playlist', async () => {
+    const playlist = fixtures.getPlaylist();
+
+    const updated = { ...playlist, title: 'Updated playlist title' };
+
+    const response = fixtures.getPlaylistResponse(updated);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        status: 200,
+        response,
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ACTUALIZE_PLAYLIST,
+        payload: {
+          updated,
+          id: updated.id,
+        },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token: 'xxx.xxx.xxx' },
+    });
+
+    const details = { title: updated.title };
+
+    await store.dispatch(actions.updatePlaylist(playlist.id, details));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });
