@@ -28,6 +28,14 @@ export const actualizePlaylist = createAction(
   }),
 );
 
+export const addTrack = createAction(
+  actionTypes.ADD_TRACK,
+  (response, details) => ({
+    id: details.id,
+    trackId: details.trackId,
+  }),
+);
+
 // async action creators
 export function createPlaylist(details) {
   return async (dispatch, getState) => {

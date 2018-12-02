@@ -1,6 +1,8 @@
 import * as actionTypes from '../actionTypes';
 import * as actions from '../actions';
 
+import tracksFixtures from 'modules/tracks/__tests__/fixtures';
+
 import fixtures from './fixtures';
 
 describe('action creators', () => {
@@ -39,5 +41,24 @@ describe('action creators', () => {
     };
 
     expect(actions.actualizePlaylist(response)).toEqual(expectedAction);
+  });
+
+  it('should create an action to add a track to a playlist', () => {
+    const playlist = fixtures.getPlaylist();
+    const track = tracksFixtures.getTrack();
+
+    const response = tracksFixtures.getTrackResponse(track);
+
+    const details = {
+      id: playlist.id,
+      trackId: track.id,
+    };
+
+    const expectedAction = {
+      type: actionTypes.ADD_TRACK,
+      payload: details,
+    };
+
+    expect(actions.addTrack(response, details)).toEqual(expectedAction);
   });
 });
