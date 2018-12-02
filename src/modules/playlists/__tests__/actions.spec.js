@@ -76,4 +76,17 @@ describe('action creators', () => {
 
     expect(actions.removeTrack(details)).toEqual(expectedAction);
   });
+
+  it('should create an action to remove a track', () => {
+    const playlist = fixtures.getPlaylist();
+
+    const expectedAction = {
+      type: actionTypes.REMOVE_PLAYLIST,
+      payload: {
+        id: playlist.id,
+      },
+    };
+
+    expect(actions.removePlaylist(playlist.id)).toEqual(expectedAction);
+  });
 });

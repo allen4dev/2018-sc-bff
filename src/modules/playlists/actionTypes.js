@@ -2,6 +2,7 @@ import { NAME } from './constants';
 
 export const ADD_PLAYLIST = `${NAME}/ADD_PLAYLIST`;
 export const ACTUALIZE_PLAYLIST = `${NAME}/ACTUALIZE_PLAYLIST`;
+export const REMOVE_PLAYLIST = `${NAME}/REMOVE_PLAYLIST`;
 
 export const ADD_PLAYLIST_TRACK = `${NAME}/ADD_PLAYLIST_TRACK`;
 export const REMOVE_PLAYLIST_TRACK = `${NAME}/REMOVE_PLAYLIST_TRACK`;

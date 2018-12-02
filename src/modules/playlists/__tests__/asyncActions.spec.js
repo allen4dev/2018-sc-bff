@@ -198,4 +198,34 @@ describe('playlists module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create a REMOVE_PLAYLIST action after a user deletes his playlist', async () => {
+    const playlist = fixtures.getPlaylist();
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        status: 204,
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.REMOVE_PLAYLIST,
+        payload: {
+          id: playlist.id,
+        },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.deletePlaylist(playlist.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });

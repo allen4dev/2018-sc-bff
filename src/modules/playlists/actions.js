@@ -28,6 +28,10 @@ export const actualizePlaylist = createAction(
   }),
 );
 
+export const removePlaylist = createAction(actionTypes.REMOVE_PLAYLIST, id => ({
+  id,
+}));
+
 export const addTrack = createAction(
   actionTypes.ADD_PLAYLIST_TRACK,
   details => ({
@@ -90,5 +94,15 @@ export function removePlaylistTrack(id, trackId) {
     await client.removeTrackFromPlaylist(id, trackId, token);
 
     dispatch(removeTrack({ id, trackId }));
+  };
+}
+
+export function deletePlaylist(id) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    await client.deletePlaylist(id, token);
+
+    dispatch(removePlaylist(id));
   };
 }
