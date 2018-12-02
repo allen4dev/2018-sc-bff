@@ -47,8 +47,6 @@ describe('action creators', () => {
     const playlist = fixtures.getPlaylist();
     const track = tracksFixtures.getTrack();
 
-    const response = tracksFixtures.getTrackResponse(track);
-
     const details = {
       id: playlist.id,
       trackId: track.id,
@@ -59,7 +57,7 @@ describe('action creators', () => {
       payload: details,
     };
 
-    expect(actions.addTrack(response, details)).toEqual(expectedAction);
+    expect(actions.addTrack(details)).toEqual(expectedAction);
   });
 
   it('should create an action to remove playlist track', () => {
@@ -76,6 +74,6 @@ describe('action creators', () => {
       payload: details,
     };
 
-    expect(actions.removeTrack(null, details)).toEqual(expectedAction);
+    expect(actions.removeTrack(details)).toEqual(expectedAction);
   });
 });

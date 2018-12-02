@@ -79,10 +79,7 @@ describe('tracks', () => {
 
     const details = { id: playlist.id, trackId: track.id };
 
-    const newState = tracksReducer(
-      TRACKS_STATE,
-      actions.addTrack(null, details),
-    );
+    const newState = tracksReducer(TRACKS_STATE, actions.addTrack(details));
 
     expect(newState).toEqual([
       ...TRACKS_STATE,

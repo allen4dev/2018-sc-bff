@@ -132,7 +132,7 @@ describe('playlists module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should create an ADD_PLAYLIST_TRACK action after a user adds a track to his playlist', async () => {
+  it('should create an ADD_PLAYLIST_TRACK action after a user adds a track from his playlist', async () => {
     const playlist = fixtures.getPlaylist();
     const track = tracksFixtures.getTrack();
 
@@ -163,6 +163,38 @@ describe('playlists module async actions', () => {
     });
 
     await store.dispatch(actions.addPlaylistTrack(playlist.id, track.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create a REMOVE_PLAYLIST_TRACK action after a user removes a track from his playlist', async () => {
+    const playlist = fixtures.getPlaylist();
+    const track = tracksFixtures.getTrack();
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        status: 204,
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.REMOVE_PLAYLIST_TRACK,
+        payload: {
+          id: playlist.id,
+          trackId: track.id,
+        },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.removePlaylistTrack(playlist.id, track.id));
 
     expect(store.getActions()).toEqual(expectedActions);
   });

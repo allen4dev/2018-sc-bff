@@ -30,7 +30,7 @@ export const actualizePlaylist = createAction(
 
 export const addTrack = createAction(
   actionTypes.ADD_PLAYLIST_TRACK,
-  (response, details) => ({
+  details => ({
     id: details.id,
     trackId: details.trackId,
   }),
@@ -38,7 +38,7 @@ export const addTrack = createAction(
 
 export const removeTrack = createAction(
   actionTypes.REMOVE_PLAYLIST_TRACK,
-  (response, details) => ({
+  details => ({
     id: details.id,
     trackId: details.trackId,
   }),
@@ -77,8 +77,18 @@ export function addPlaylistTrack(id, trackId) {
   return async (dispatch, getState) => {
     const { token } = getState().auth;
 
-    const response = await client.addTrackToPlaylist(id, trackId, token);
+    await client.addTrackToPlaylist(id, trackId, token);
 
-    await dispatch(addTrack(response, { id, trackId }));
+    await dispatch(addTrack({ id, trackId }));
+  };
+}
+
+export function removePlaylistTrack(id, trackId) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    await client.removeTrackFromPlaylist(id, trackId, token);
+
+    dispatch(removeTrack({ id, trackId }));
   };
 }
