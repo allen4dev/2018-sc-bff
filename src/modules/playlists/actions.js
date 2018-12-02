@@ -1,7 +1,10 @@
 import { createAction } from 'redux-actions';
 
+import client from 'helpers/client';
+
 import * as actionTypes from './actionTypes';
 
+// action creators
 export const addPlaylist = createAction(
   actionTypes.ADD_PLAYLIST,
   ({ data: { id, attributes, relationships } }) => ({
@@ -14,4 +17,13 @@ export const addPlaylist = createAction(
   }),
 );
 
-export const DUMMIE = 'DUMMIE';
+// async action creators
+export function createPlaylist(details) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.createPlaylist(details, token);
+
+    await dispatch(addPlaylist(response));
+  };
+}
