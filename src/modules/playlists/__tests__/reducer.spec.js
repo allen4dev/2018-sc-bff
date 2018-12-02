@@ -86,4 +86,22 @@ describe('tracks', () => {
       { id: playlist.id, trackId: track.id },
     ]);
   });
+
+  it('should handle REMOVE_PLAYLIST_TRACK action', () => {
+    const playlist = fixtures.getPlaylist();
+    const track = { id: '123', title: 'Track title' };
+
+    const details = { id: playlist.id, trackId: track.id };
+
+    const newState = tracksReducer(
+      [
+        ...TRACKS_STATE,
+        { id: playlist.id, trackId: track.id },
+        { id: playlist.id, trackId: '999' },
+      ],
+      actions.removeTrack(details),
+    );
+
+    expect(newState).toEqual([{ id: playlist.id, trackId: '999' }]);
+  });
 });
