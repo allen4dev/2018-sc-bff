@@ -5,11 +5,15 @@ import tracksFixtures from 'modules/tracks/__tests__/fixtures';
 import playlistsModule from 'modules/playlists';
 import playlistsFixtures from 'modules/playlists/__tests__/fixtures';
 
+import albumsModule from 'modules/albums';
+import albumsFixtures from 'modules/albums/__tests__/fixtures';
+
 import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
 
 import tracksReducer from '../reducer/tracks';
 import playlistsReducer from '../reducer/playlists';
+import albumsReducer from '../reducer/albums';
 
 test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
@@ -111,6 +115,42 @@ describe('playlists', () => {
     expect(nextState).toEqual([
       ...newState,
       { id: user.data.id, playlistId: playlist2.id },
+    ]);
+  });
+});
+
+describe('albums', () => {
+  const ALBUMS_STATE = INITIAL_STATE.playlists;
+
+  it('should handle albums/ADD_ALBUM', () => {
+    const album = albumsFixtures.getAlbum();
+
+    const response = albumsFixtures.getAlbumResponse(album);
+
+    const { user } = response.data.relationships;
+
+    const newState = albumsReducer(
+      ALBUMS_STATE,
+      albumsModule.actions.addAlbum(response),
+    );
+
+    expect(newState).toEqual([
+      ...ALBUMS_STATE,
+      { id: user.data.id, albumId: album.id },
+    ]);
+
+    const album2 = albumsFixtures.getAlbum();
+
+    const nextResponse = albumsFixtures.getAlbumResponse(album2, user);
+
+    const nextState = albumsReducer(
+      newState,
+      albumsModule.actions.addAlbum(nextResponse),
+    );
+
+    expect(nextState).toEqual([
+      ...newState,
+      { id: user.data.id, albumId: album2.id },
     ]);
   });
 });
