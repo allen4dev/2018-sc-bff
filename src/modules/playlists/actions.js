@@ -27,3 +27,11 @@ export function createPlaylist(details) {
     await dispatch(addPlaylist(response));
   };
 }
+
+export function fetchPlaylist(id) {
+  return async dispatch => {
+    const response = await client.getPlaylist(id);
+
+    dispatch(addPlaylist(response));
+  };
+}
