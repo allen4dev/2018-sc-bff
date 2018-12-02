@@ -17,6 +17,17 @@ export const addPlaylist = createAction(
   }),
 );
 
+export const actualizePlaylist = createAction(
+  actionTypes.ACTUALIZE_PLAYLIST,
+  ({ data: { id, attributes } }) => ({
+    id,
+    updated: {
+      ...attributes,
+      id,
+    },
+  }),
+);
+
 // async action creators
 export function createPlaylist(details) {
   return async (dispatch, getState) => {

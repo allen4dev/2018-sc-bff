@@ -25,4 +25,19 @@ describe('action creators', () => {
 
     expect(actions.addPlaylist(response)).toEqual(expectedAction);
   });
+
+  it('should create an action to actualize a playlist', () => {
+    const playlist = fixtures.getPlaylist();
+    const response = fixtures.getPlaylistResponse(playlist);
+
+    const expectedAction = {
+      type: actionTypes.ACTUALIZE_PLAYLIST,
+      payload: {
+        id: playlist.id,
+        updated: { ...playlist },
+      },
+    };
+
+    expect(actions.actualizePlaylist(response)).toEqual(expectedAction);
+  });
 });
