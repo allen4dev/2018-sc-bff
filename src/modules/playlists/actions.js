@@ -64,3 +64,13 @@ export function updatePlaylist(id, details) {
     await dispatch(actualizePlaylist(response));
   };
 }
+
+export function addPlaylistTrack(id, trackId) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.addTrackToPlaylist(id, trackId, token);
+
+    await dispatch(addTrack(response, { id, trackId }));
+  };
+}

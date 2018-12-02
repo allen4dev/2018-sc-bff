@@ -2,8 +2,11 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 
+import tracksFixtures from 'modules/tracks/__tests__/fixtures';
+
 import * as actionTypes from '../actionTypes';
 import * as actions from '../actions';
+
 import { INITIAL_STATE } from '../model';
 
 import fixtures from './fixtures';
@@ -125,6 +128,41 @@ describe('playlists module async actions', () => {
     const details = { title: updated.title };
 
     await store.dispatch(actions.updatePlaylist(playlist.id, details));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create an ADD_TRACK action after a user adds a track to his playlist', async () => {
+    const playlist = fixtures.getPlaylist();
+    const track = tracksFixtures.getTrack();
+
+    const response = tracksFixtures.getTrackResponse(track);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        status: 200,
+        response,
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_TRACK,
+        payload: {
+          id: playlist.id,
+          trackId: track.id,
+        },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.addPlaylistTrack(playlist.id, track.id));
 
     expect(store.getActions()).toEqual(expectedActions);
   });
