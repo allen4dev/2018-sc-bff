@@ -2,16 +2,20 @@ import tracksModule from 'modules/tracks';
 
 import tracksFixtures from 'modules/tracks/__tests__/fixtures';
 
+import playlistsModule from 'modules/playlists';
+import playlistsFixtures from 'modules/playlists/__tests__/fixtures';
+
 import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
 
 import tracksReducer from '../reducer/tracks';
+import playlistsReducer from '../reducer/playlists';
 
 test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
 });
 
-describe('users - tracks', () => {
+describe('tracks', () => {
   const TRACKS_STATE = INITIAL_STATE.tracks;
 
   it('should handle tracks/ADD_TRACK action', () => {
@@ -72,5 +76,41 @@ describe('users - tracks', () => {
     );
 
     expect(nextState).toEqual([]);
+  });
+});
+
+describe('playlists', () => {
+  const PLAYLISTS_STATE = INITIAL_STATE.playlists;
+
+  it('should handle playlists/ADD_PLAYLIST', () => {
+    const playlist = playlistsFixtures.getPlaylist();
+
+    const response = playlistsFixtures.getPlaylistResponse(playlist);
+
+    const { user } = response.data.relationships;
+
+    const newState = playlistsReducer(
+      PLAYLISTS_STATE,
+      playlistsModule.actions.addPlaylist(response),
+    );
+
+    expect(newState).toEqual([
+      ...PLAYLISTS_STATE,
+      { id: user.data.id, playlistId: playlist.id },
+    ]);
+
+    const playlist2 = playlistsFixtures.getPlaylist();
+
+    const nextResponse = playlistsFixtures.getPlaylistResponse(playlist2, user);
+
+    const nextState = playlistsReducer(
+      newState,
+      playlistsModule.actions.addPlaylist(nextResponse),
+    );
+
+    expect(nextState).toEqual([
+      ...newState,
+      { id: user.data.id, playlistId: playlist2.id },
+    ]);
   });
 });
