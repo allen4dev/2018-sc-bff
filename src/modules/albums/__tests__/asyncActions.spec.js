@@ -150,7 +150,7 @@ describe('playlists module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should create an REMOVE_ALBUM action after a user removes his album', async () => {
+  it('should create an REMOVE_ALBUM action after a user deletes his album', async () => {
     const album = fixtures.getAlbum();
 
     moxios.wait(() => {
