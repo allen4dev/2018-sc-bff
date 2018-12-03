@@ -54,4 +54,33 @@ describe('playlists module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create an ADD_ALBUM action after a user fetchs an album', async () => {
+    const album = fixtures.getAlbum();
+
+    const response = fixtures.getAlbumResponse(album);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_ALBUM,
+        payload: {
+          id: album.id,
+          album: { ...album },
+          userId: response.data.relationships.user.data.id,
+        },
+      },
+    ];
+
+    const store = mockStore(INITIAL_STATE);
+
+    await store.dispatch(actions.fetchAlbum(album.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });

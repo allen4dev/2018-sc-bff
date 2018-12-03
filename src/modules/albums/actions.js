@@ -27,3 +27,11 @@ export function createAlbum(details) {
     dispatch(addAlbum(response));
   };
 }
+
+export function fetchAlbum(id) {
+  return async dispatch => {
+    const response = await client.getAlbum(id);
+
+    dispatch(addAlbum(response));
+  };
+}
