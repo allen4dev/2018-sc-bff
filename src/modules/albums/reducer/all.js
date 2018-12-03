@@ -14,6 +14,14 @@ const allReducer = handleActions(
       },
       byId: [...state.byId, payload.id],
     }),
+
+    [actionTypes.ACTUALIZE_ALBUM]: (state, { payload }) => ({
+      ...state,
+      entities: {
+        ...state.entities,
+        [payload.id]: { ...payload.updated },
+      },
+    }),
   },
   INITIAL_STATE.all,
 );

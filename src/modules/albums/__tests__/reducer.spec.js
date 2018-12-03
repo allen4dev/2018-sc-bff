@@ -29,4 +29,30 @@ describe('all', () => {
       byId: [album.id],
     });
   });
+
+  it('should handle ACTUALIZE_ALBUM action', () => {
+    const album = fixtures.getAlbum();
+    const details = { title: 'A new album title' };
+
+    const updated = { ...album, ...details };
+
+    const response = fixtures.getAlbumResponse(updated);
+
+    const newState = allReducer(
+      {
+        ...ALL_STATE,
+        entities: {
+          [album.id]: { ...album },
+        },
+      },
+      actions.actualizeAlbum(response),
+    );
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        [updated.id]: updated,
+      },
+    });
+  });
 });
