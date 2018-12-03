@@ -21,7 +21,31 @@ describe('playlists module async actions', () => {
     moxios.uninstall();
   });
 
-  test('pass', () => {
-    expect(true).toBeTruthy();
+  it('should create an ADD_USER action after a user creates an album', async () => {
+    const user = fixtures.getUser();
+
+    const response = fixtures.getUserResponse(user);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_USER,
+        payload: {
+          user,
+          id: user.id,
+        },
+      },
+    ];
+
+    const store = mockStore(INITIAL_STATE);
+
+    await store.dispatch(actions.fetchUser(user.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
   });
 });
