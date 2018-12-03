@@ -55,4 +55,36 @@ describe('all', () => {
       },
     });
   });
+
+  it('should handle REMOVE_ALBUM action', () => {
+    const album1 = fixtures.getAlbum();
+    const album2 = fixtures.getAlbum();
+
+    const newState = allReducer(
+      {
+        ...ALL_STATE,
+        entities: {
+          [album1.id]: album1,
+          [album2.id]: album2,
+        },
+        byId: [album1.id, album2.id],
+      },
+      actions.removeAlbum(album1.id),
+    );
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        [album2.id]: album2,
+      },
+      byId: [album2.id],
+    });
+
+    const nextState = allReducer(newState, actions.removeAlbum(album2.id));
+
+    expect(nextState).toEqual({
+      entities: {},
+      byId: [],
+    });
+  });
 });
