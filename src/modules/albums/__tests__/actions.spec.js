@@ -35,4 +35,15 @@ describe('action creators', () => {
 
     expect(actions.actualizeAlbum(response)).toEqual(expectedAction);
   });
+
+  it('should create an action to remove an album', () => {
+    const album = fixtures.getAlbum();
+
+    const expectedAction = {
+      type: actionTypes.REMOVE_ALBUM,
+      payload: { id: album.id },
+    };
+
+    expect(actions.removeAlbum(album.id)).toEqual(expectedAction);
+  });
 });

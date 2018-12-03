@@ -28,6 +28,10 @@ export const actualizeAlbum = createAction(
   }),
 );
 
+export const removeAlbum = createAction(actionTypes.REMOVE_ALBUM, id => ({
+  id,
+}));
+
 // async action creators
 export function createAlbum(details) {
   return async (dispatch, getState) => {
