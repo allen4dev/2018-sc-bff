@@ -70,3 +70,13 @@ export function publishAlbum(id) {
     dispatch(actualizeAlbum(response));
   };
 }
+
+export function deleteAlbum(id) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    await client.deleteAlbum(id, token);
+
+    dispatch(removeAlbum(id));
+  };
+}

@@ -149,4 +149,27 @@ describe('playlists module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create an REMOVE_ALBUM action after a user removes his album', async () => {
+    const album = fixtures.getAlbum();
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 204 });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.REMOVE_ALBUM, payload: { id: album.id } },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.deleteAlbum(album.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });
