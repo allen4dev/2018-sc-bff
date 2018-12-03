@@ -86,9 +86,9 @@ describe('playlists module async actions', () => {
 
   it('should create an ACTUALIZE_ALBUM action after a user updates his album', async () => {
     const album = fixtures.getAlbum();
-    const details = { title: 'A new album title' }
+    const details = { title: 'A new album title' };
 
-    const updated = { ...album, ...details}
+    const updated = { ...album, ...details };
 
     const response = fixtures.getAlbumResponse(updated);
 
@@ -110,10 +110,42 @@ describe('playlists module async actions', () => {
 
     const store = mockStore({
       ...INITIAL_STATE,
-      auth: { token: 'xxx.xxx.xxx'}
+      auth: { token: 'xxx.xxx.xxx' },
     });
 
     await store.dispatch(actions.updateAlbum(album.id, details));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create an ACTUALIZE_ALBUM action after a user publish his album', async () => {
+    const album = fixtures.getAlbum();
+    const updated = { ...album, published: true };
+
+    const response = fixtures.getAlbumResponse(updated);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ACTUALIZE_ALBUM,
+        payload: {
+          updated,
+          id: updated.id,
+        },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.updateAlbum(album.id));
 
     expect(store.getActions()).toEqual(expectedActions);
   });

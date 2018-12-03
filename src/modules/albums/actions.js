@@ -56,3 +56,13 @@ export function updateAlbum(id, details) {
     dispatch(actualizeAlbum(response));
   };
 }
+
+export function publishAlbum(id) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.updateAlbum(id, token);
+
+    dispatch(actualizeAlbum(response));
+  };
+}
