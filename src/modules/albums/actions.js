@@ -17,6 +17,17 @@ export const addAlbum = createAction(
   }),
 );
 
+export const actualizeAlbum = createAction(
+  actionTypes.ACTUALIZE_ALBUM,
+  ({ data: { id, attributes } }) => ({
+    id,
+    updated: {
+      ...attributes,
+      id,
+    },
+  }),
+);
+
 // async action creators
 export function createAlbum(details) {
   return async (dispatch, getState) => {

@@ -1,5 +1,3 @@
-import tracksFixtures from 'modules/tracks/__tests__/fixtures';
-
 import * as actionTypes from '../actionTypes';
 import * as actions from '../actions';
 
@@ -21,5 +19,20 @@ describe('action creators', () => {
     };
 
     expect(actions.addAlbum(response)).toEqual(expectedAction);
+  });
+
+  it('should create an action to actualize an album', () => {
+    const album = fixtures.getAlbum();
+
+    const updated = { ...album, title: 'New album title' };
+
+    const response = fixtures.getAlbumResponse(updated);
+
+    const expectedAction = {
+      type: actionTypes.ACTUALIZE_ALBUM,
+      payload: { id: updated.id, updated },
+    };
+
+    expect(actions.actualizeAlbum(response)).toEqual(expectedAction);
   });
 });
