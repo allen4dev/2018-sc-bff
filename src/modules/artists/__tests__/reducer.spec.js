@@ -10,13 +10,46 @@ import albumsFixtures from 'modules/albums/__tests__/fixtures';
 
 import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
+import * as actions from '../actions';
 
+import allReducer from '../reducer/all';
 import tracksReducer from '../reducer/tracks';
 import playlistsReducer from '../reducer/playlists';
 import albumsReducer from '../reducer/albums';
+import fixtures from './fixtures';
 
 test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
+});
+
+describe('all', () => {
+  const ALL_STATE = INITIAL_STATE.all;
+
+  it('should handle ADD_USER action', () => {
+    const user1 = fixtures.getUser();
+
+    const response = fixtures.getUserResponse(user1);
+
+    const newState = allReducer(ALL_STATE, actions.addUser(response));
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: { [user1.id]: user1 },
+      byId: [user1.id],
+    });
+
+    const user2 = fixtures.getUser();
+
+    const nextResponse = fixtures.getUserResponse(user2);
+
+    const nextState = allReducer(newState, actions.addUser(nextResponse));
+
+    expect(nextState).toEqual({
+      ...newState,
+      entities: { [user1.id]: user1, [user2.id]: user2 },
+      byId: [user1.id, user2.id],
+    });
+  });
 });
 
 describe('tracks', () => {

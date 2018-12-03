@@ -1,3 +1,11 @@
-export const INITIAL_STATE = { tracks: [], playlists: [], albums: [] };
+export const INITIAL_STATE = {
+  all: {
+    entities: {},
+    byId: [],
+  },
+  tracks: [],
+  playlists: [],
+  albums: [],
+};
 
 export const dummie = 'dummie';

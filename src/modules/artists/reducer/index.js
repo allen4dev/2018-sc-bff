@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 
+import all from './all';
+import albums from './albums';
 import playlists from './playlists';
 import tracks from './tracks';
-import albums from './albums';
 
 const reducer = combineReducers({
+  all,
+  albums,
   playlists,
   tracks,
-  albums,
 });
 
 export default reducer;
