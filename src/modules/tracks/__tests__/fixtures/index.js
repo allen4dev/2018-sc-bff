@@ -22,4 +22,24 @@ export default {
       },
     };
   },
+
+  getTracksResponse() {
+    const track1 = this.getTrack();
+    const track2 = this.getTrack();
+
+    return {
+      data: [
+        {
+          type: 'tracks',
+          id: track1.id,
+          attributes: { title: track1.title, published: false },
+        },
+        {
+          type: 'tracks',
+          id: track2.id,
+          attributes: { title: track2.title, published: false },
+        },
+      ],
+    };
+  },
 };
