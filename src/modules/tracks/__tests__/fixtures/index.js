@@ -42,4 +42,11 @@ export default {
       ],
     };
   },
+
+  getTracksFromResponse(response) {
+    return response.data.map(track => ({
+      ...track.attributes,
+      id: track.id,
+    }));
+  },
 };

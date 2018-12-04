@@ -42,6 +42,11 @@ const allReducer = handleActions(
         byId: ids,
       };
     },
+
+    [actionTypes.ADD_TRACKS]: (state, { payload }) => ({
+      entities: { ...state.entities, ...payload.tracks },
+      byId: [...state.byId, ...payload.ids],
+    }),
   },
   INITIAL_STATE.all,
 );

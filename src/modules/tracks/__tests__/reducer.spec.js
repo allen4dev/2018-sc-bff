@@ -106,6 +106,38 @@ describe('all', () => {
       },
     });
   });
+
+  it('should handle ADD_TRACKS action', () => {
+    const response = fixtures.getTracksResponse();
+    const tracks = fixtures.getTracksFromResponse(response);
+
+    const newState = allReducer(ALL_STATE, actions.addTracks(response));
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      byId: [tracks[0].id, tracks[1].id],
+      entities: {
+        [tracks[0].id]: tracks[0],
+        [tracks[1].id]: tracks[1],
+      },
+    });
+
+    const nextResponse = fixtures.getTracksResponse();
+
+    const moreTracks = fixtures.getTracksFromResponse(nextResponse);
+
+    const nextState = allReducer(newState, actions.addTracks(nextResponse));
+
+    expect(nextState).toEqual({
+      ...newState,
+      byId: [...newState.byId, moreTracks[0].id, moreTracks[1].id],
+      entities: {
+        ...newState.entities,
+        [moreTracks[0].id]: moreTracks[0],
+        [moreTracks[1].id]: moreTracks[1],
+      },
+    });
+  });
 });
 
 describe('replies', () => {
