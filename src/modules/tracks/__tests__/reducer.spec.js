@@ -1,14 +1,14 @@
 import repliesFixtures from 'modules/replies/__tests__/fixtures';
 import repliesModule from 'modules/replies';
 
+import usersModule from 'modules/artists';
+
 import * as actions from '../actions';
 import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
 
 import allReducer from '../reducer/all';
 
-// import entitiesReducer from '../reducer/entities';
-// import byIdReducer from '../reducer/byId';
 import repliesReducer from '../reducer/replies';
 
 import fixtures from './fixtures';

@@ -1,5 +1,7 @@
 import { handleActions } from 'redux-actions';
 
+import usersModule from 'modules/artists';
+
 import * as actionTypes from '../actionTypes';
 
 import { INITIAL_STATE } from '../model';

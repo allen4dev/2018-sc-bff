@@ -114,6 +114,25 @@ describe('tracks', () => {
 
     expect(nextState).toEqual([]);
   });
+
+  it('should handle ADD_USER_TRACKS action', () => {
+    const uid1 = '1';
+
+    const response = tracksFixtures.getTracksResponse();
+
+    const newState = tracksReducer(
+      TRACKS_STATE,
+      actions.addUserTracks(response, uid1),
+    );
+
+    const tracks = response.data;
+
+    expect(newState).toEqual([
+      ...TRACKS_STATE,
+      { id: uid1, trackId: tracks[0].id },
+      { id: uid1, trackId: tracks[1].id },
+    ]);
+  });
 });
 
 describe('playlists', () => {
