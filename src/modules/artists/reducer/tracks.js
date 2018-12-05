@@ -4,6 +4,8 @@ import tracksModule from 'modules/tracks';
 
 import { INITIAL_STATE } from '../model';
 
+import * as actionTypes from '../actionTypes';
+
 const tracksReducer = handleActions(
   {
     [tracksModule.actionTypes.ADD_TRACK]: (state, { payload }) => [
@@ -13,6 +15,14 @@ const tracksReducer = handleActions(
 
     [tracksModule.actionTypes.REMOVE_TRACK]: (state, { payload }) =>
       state.filter(record => record.trackId !== payload.id),
+
+    [actionTypes.ADD_USER_TRACKS]: (state, { payload }) => [
+      ...state,
+      ...payload.tracks.map(track => ({
+        id: payload.id,
+        trackId: track.id,
+      })),
+    ],
   },
   INITIAL_STATE.tracks,
 );

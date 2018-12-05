@@ -1,7 +1,7 @@
+import tracksFixtures from 'modules/tracks/__tests__/fixtures';
+
 import * as actions from '../actions';
 import * as actionTypes from '../actionTypes';
-
-import tracksFixtures from 'modules/tracks/__tests__/fixtures';
 
 import fixtures from './fixtures';
 
