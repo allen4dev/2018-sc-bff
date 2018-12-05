@@ -30,7 +30,7 @@ describe('users - action creators', () => {
     const expectedAction = {
       type: actionTypes.ADD_USER_TRACKS,
       payload: {
-        response,
+        tracks: response.data,
         id: userId,
       },
     };

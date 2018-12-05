@@ -33,20 +33,9 @@ export const removeTrack = createAction(
   (_, { id }) => ({ id }),
 );
 
-export const addTracks = createAction(actionTypes.ADD_TRACKS, ({ data }) => {
-  const tracks = data.reduce(
-    (initial, current) => ({
-      ...initial,
-      [current.id]: { ...current.attributes, id: current.id },
-    }),
-    {},
-  );
-
-  return {
-    tracks,
-    ids: Object.keys(tracks),
-  };
-});
+export const addTracks = createAction(actionTypes.ADD_TRACKS, ({ data }) => ({
+  tracks: data,
+}));
 
 // async action creators
 export function createTrack(details) {

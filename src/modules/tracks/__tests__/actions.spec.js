@@ -74,20 +74,10 @@ describe('tracks action creators', () => {
     it('should create an action to add a list of tracks', () => {
       const response = fixtures.getTracksResponse();
 
-      const track1 = {
-        ...response.data[0].attributes,
-        id: response.data[0].id,
-      };
-      const track2 = {
-        ...response.data[1].attributes,
-        id: response.data[1].id,
-      };
-
       const expectedAction = {
         type: actionTypes.ADD_TRACKS,
         payload: {
-          tracks: { [track1.id]: track1, [track2.id]: track2 },
-          ids: [track1.id, track2.id],
+          tracks: response.data,
         },
       };
 

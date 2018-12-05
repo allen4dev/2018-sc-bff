@@ -109,9 +109,10 @@ describe('all', () => {
 
   it('should handle ADD_TRACKS action', () => {
     const response = fixtures.getTracksResponse();
-    const tracks = fixtures.getTracksFromResponse(response);
 
     const newState = allReducer(ALL_STATE, actions.addTracks(response));
+
+    const tracks = response.data;
 
     expect(newState).toEqual({
       ...ALL_STATE,
@@ -124,17 +125,17 @@ describe('all', () => {
 
     const nextResponse = fixtures.getTracksResponse();
 
-    const moreTracks = fixtures.getTracksFromResponse(nextResponse);
-
     const nextState = allReducer(newState, actions.addTracks(nextResponse));
+
+    const nextTracks = nextResponse.data;
 
     expect(nextState).toEqual({
       ...newState,
-      byId: [...newState.byId, moreTracks[0].id, moreTracks[1].id],
+      byId: [...newState.byId, nextTracks[0].id, nextTracks[1].id],
       entities: {
         ...newState.entities,
-        [moreTracks[0].id]: moreTracks[0],
-        [moreTracks[1].id]: moreTracks[1],
+        [nextTracks[0].id]: nextTracks[0],
+        [nextTracks[1].id]: nextTracks[1],
       },
     });
   });

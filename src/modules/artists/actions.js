@@ -15,7 +15,7 @@ export const addUser = createAction(
 
 export const addUserTracks = createAction(
   actionTypes.ADD_USER_TRACKS,
-  (response, id) => ({ response, id }),
+  ({ data }, id) => ({ tracks: data, id }),
 );
 
 // async actions

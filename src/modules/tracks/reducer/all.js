@@ -43,10 +43,24 @@ const allReducer = handleActions(
       };
     },
 
-    [actionTypes.ADD_TRACKS]: (state, { payload }) => ({
-      entities: { ...state.entities, ...payload.tracks },
-      byId: [...state.byId, ...payload.ids],
-    }),
+    [actionTypes.ADD_TRACKS]: (state, { payload }) => {
+      const entities = payload.tracks.reduce(
+        (initial, current) => ({
+          ...initial,
+          [current.id]: current,
+        }),
+        {},
+      );
+
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          ...entities,
+        },
+        byId: [...state.byId, ...Object.keys(entities)],
+      };
+    },
   },
   INITIAL_STATE.all,
 );
