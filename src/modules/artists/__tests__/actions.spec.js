@@ -1,6 +1,8 @@
 import * as actions from '../actions';
 import * as actionTypes from '../actionTypes';
 
+import tracksFixtures from 'modules/tracks/__tests__/fixtures';
+
 import fixtures from './fixtures';
 
 describe('users - action creators', () => {
@@ -18,5 +20,21 @@ describe('users - action creators', () => {
     };
 
     expect(actions.addUser(response)).toEqual(expectedAction);
+  });
+
+  it('should create an action to add a user tracks', () => {
+    const userId = '1';
+
+    const response = tracksFixtures.getTracksResponse();
+
+    const expectedAction = {
+      type: actionTypes.ADD_USER_TRACKS,
+      payload: {
+        response,
+        id: userId,
+      },
+    };
+
+    expect(actions.addUserTracks(response, userId)).toEqual(expectedAction);
   });
 });
