@@ -26,3 +26,11 @@ export function fetchUser(id) {
     dispatch(addUser(response));
   };
 }
+
+export function fetchUserTracks(id) {
+  return async dispatch => {
+    const response = await client.getUserTracks(id);
+
+    dispatch(addUserTracks(response, id));
+  };
+}
