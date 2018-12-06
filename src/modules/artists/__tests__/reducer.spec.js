@@ -283,7 +283,7 @@ describe('albums', () => {
 describe('followers', () => {
   const FOLLOWERS_STATE = INITIAL_STATE.followers;
 
-  it('should handle FOLLOW_USER action', () => {
+  it('should handle ADD_FOLLOWED_USER action', () => {
     const uid1 = '1';
     const followed = '2';
 
@@ -308,5 +308,33 @@ describe('followers', () => {
       ...newState,
       { follower: uid1, following: nextFollowed },
     ]);
+  });
+
+  it('should handle REMOVE_FOLLOWED_USER action', () => {
+    const uid1 = '1';
+
+    const unfollowed1 = '1';
+    const unfollowed2 = '2';
+
+    const newState = followersReducer(
+      [
+        ...FOLLOWERS_STATE,
+        { follower: uid1, following: unfollowed1 },
+        { follower: uid1, following: unfollowed2 },
+      ],
+      actions.removeFollowedUser(uid1, unfollowed1),
+    );
+
+    expect(newState).toEqual([
+      ...FOLLOWERS_STATE,
+      { follower: uid1, following: unfollowed2 },
+    ]);
+
+    const nextState = followersReducer(
+      newState,
+      actions.removeFollowedUser(uid1, unfollowed2),
+    );
+
+    expect(nextState).toEqual([]);
   });
 });
