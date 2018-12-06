@@ -15,6 +15,8 @@ import allReducer from '../reducer/all';
 import tracksReducer from '../reducer/tracks';
 import playlistsReducer from '../reducer/playlists';
 import albumsReducer from '../reducer/albums';
+import followersReducer from '../reducer/followers';
+
 import fixtures from './fixtures';
 
 test('@INIT', () => {
@@ -274,6 +276,37 @@ describe('albums', () => {
       ...newState,
       { id: uid2, albumId: albums2[0].id },
       { id: uid2, albumId: albums2[1].id },
+    ]);
+  });
+});
+
+describe('followers', () => {
+  const FOLLOWERS_STATE = INITIAL_STATE.followers;
+
+  it('should handle FOLLOW_USER action', () => {
+    const uid1 = '1';
+    const followed = '2';
+
+    const newState = followersReducer(
+      FOLLOWERS_STATE,
+      actions.followUser(uid1, followed),
+    );
+
+    expect(newState).toEqual([
+      ...FOLLOWERS_STATE,
+      { follower: uid1, following: followed },
+    ]);
+
+    const nextFollowed = '2';
+
+    const nextState = followersReducer(
+      newState,
+      actions.followUser(uid1, nextFollowed),
+    );
+
+    expect(nextState).toEqual([
+      ...newState,
+      { follower: uid1, following: nextFollowed },
     ]);
   });
 });

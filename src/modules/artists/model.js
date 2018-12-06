@@ -3,9 +3,10 @@ export const INITIAL_STATE = {
     entities: {},
     byId: [],
   },
-  tracks: [],
-  playlists: [],
   albums: [],
+  followers: [],
+  playlists: [],
+  tracks: [],
 };
 
 export const dummie = 'dummie';
