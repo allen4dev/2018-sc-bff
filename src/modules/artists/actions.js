@@ -83,6 +83,16 @@ export function followUser(id, followed) {
 
     await client.followUser(followed, token);
 
-    dispatch(addUserFollowed(id, followed));
+    dispatch(addFollowedUser(id, followed));
+  };
+}
+
+export function unfollowUser(id, unfollowed) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    await client.unfollowUser(unfollowed, token);
+
+    dispatch(removeFollowedUser(id, unfollowed));
   };
 }

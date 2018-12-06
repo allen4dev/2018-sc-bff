@@ -165,4 +165,33 @@ describe('playlists module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create an REMOVE_FOLLOWED_USER action after a user unfollow other user', async () => {
+    const user = fixtures.getUser();
+    const unfollowed = fixtures.getUser();
+
+    const response = fixtures.getUserResponse(unfollowed);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.REMOVE_FOLLOWED_USER,
+        payload: { id: user.id, unfollowed: unfollowed.id },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.unfollowUser(user.id, unfollowed.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });
