@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+
 import { INITIAL_STATE } from '../model';
 
 import * as actionTypes from '../actionTypes';
@@ -35,6 +36,26 @@ const allReducer = handleActions(
           {},
         ),
         byId: ids,
+      };
+    },
+
+    'users/ADD_USER_PLAYLISTS': (state, { payload }) => {
+      const entities = payload.playlists.reduce(
+        (initial, current) => ({
+          ...initial,
+          [current.id]: current,
+        }),
+        {},
+      );
+
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          ...entities,
+        },
+
+        byId: [...state.byId, ...Object.keys(entities)],
       };
     },
   },

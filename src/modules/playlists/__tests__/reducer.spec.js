@@ -1,3 +1,5 @@
+import usersModule from 'modules/artists';
+
 import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
 
@@ -102,6 +104,26 @@ describe('all', () => {
       ...newState,
       entities: {},
       byId: [],
+    });
+  });
+
+  it('should handle users/ADD_USER_PLAYLISTS action', () => {
+    const response = fixtures.getPlaylistsResponse();
+
+    const newState = allReducer(
+      ALL_STATE,
+      usersModule.actions.addUserPlaylists(response, '1'),
+    );
+
+    const playlists1 = response.data;
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        [playlists1[0].id]: playlists1[0],
+        [playlists1[1].id]: playlists1[1],
+      },
+      byId: [playlists1[0].id, playlists1[1].id],
     });
   });
 });
