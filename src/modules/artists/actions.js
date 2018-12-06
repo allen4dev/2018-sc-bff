@@ -52,3 +52,11 @@ export function fetchUserPlaylists(id) {
     dispatch(addUserPlaylists(response, id));
   };
 }
+
+export function fetchUserAlbums(id) {
+  return async dispatch => {
+    const response = await client.getUserAlbums(id);
+
+    dispatch(addUserAlbums(response, id));
+  };
+}

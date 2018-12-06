@@ -2,8 +2,9 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 
-import tracksFixtures from 'modules/tracks/__tests__/fixtures';
+import albumsFixtures from 'modules/albums/__tests__/fixtures';
 import playlistsFixtures from 'modules/playlists/__tests__/fixtures';
+import tracksFixtures from 'modules/tracks/__tests__/fixtures';
 
 import * as actionTypes from '../actionTypes';
 import * as actions from '../actions';
@@ -80,7 +81,7 @@ describe('playlists module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should create an ADD_USER_PLAYLISTS action after a user fetchs the tracks from a user', async () => {
+  it('should create an ADD_USER_PLAYLISTS action after a user fetchs the playlists from a user', async () => {
     const user = fixtures.getUser();
 
     const response = playlistsFixtures.getPlaylistsResponse();
@@ -104,6 +105,34 @@ describe('playlists module async actions', () => {
     const store = mockStore(INITIAL_STATE);
 
     await store.dispatch(actions.fetchUserPlaylists(user.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create an ADD_USER_ALBUMS action after a user fetchs the albums from a user', async () => {
+    const user = fixtures.getUser();
+
+    const response = albumsFixtures.getAlbumsResponse();
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_USER_ALBUMS,
+        payload: {
+          albums: response.data,
+          id: user.id,
+        },
+      },
+    ];
+
+    const store = mockStore(INITIAL_STATE);
+
+    await store.dispatch(actions.fetchUserAlbums(user.id));
 
     expect(store.getActions()).toEqual(expectedActions);
   });
