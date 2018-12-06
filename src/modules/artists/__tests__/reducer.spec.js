@@ -289,7 +289,7 @@ describe('followers', () => {
 
     const newState = followersReducer(
       FOLLOWERS_STATE,
-      actions.followUser(uid1, followed),
+      actions.addFollowedUser(uid1, followed),
     );
 
     expect(newState).toEqual([
@@ -301,7 +301,7 @@ describe('followers', () => {
 
     const nextState = followersReducer(
       newState,
-      actions.followUser(uid1, nextFollowed),
+      actions.addFollowedUser(uid1, nextFollowed),
     );
 
     expect(nextState).toEqual([

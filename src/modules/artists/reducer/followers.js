@@ -6,7 +6,7 @@ import { INITIAL_STATE } from '../model';
 
 const followersReducer = handleActions(
   {
-    [actionTypes.FOLLOW_USER]: (state, { payload }) => [
+    [actionTypes.ADD_FOLLOWED_USER]: (state, { payload }) => [
       ...state,
       { follower: payload.id, following: payload.followed },
     ],

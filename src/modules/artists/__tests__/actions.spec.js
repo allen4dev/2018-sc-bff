@@ -77,13 +77,13 @@ describe('users - action creators', () => {
     const followedId = '2';
 
     const expectedAction = {
-      type: actionTypes.FOLLOW_USER,
+      type: actionTypes.ADD_FOLLOWED_USER,
       payload: {
         id: uid,
         followed: followedId,
       },
     };
 
-    expect(actions.followUser(uid, followedId)).toEqual(expectedAction);
+    expect(actions.addFollowedUser(uid, followedId)).toEqual(expectedAction);
   });
 });

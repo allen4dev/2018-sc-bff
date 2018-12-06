@@ -13,8 +13,8 @@ export const addUser = createAction(
   }),
 );
 
-export const followUser = createAction(
-  actionTypes.FOLLOW_USER,
+export const addFollowedUser = createAction(
+  actionTypes.ADD_FOLLOWED_USER,
   (id, followed) => ({
     id,
     followed,
@@ -66,5 +66,15 @@ export function fetchUserAlbums(id) {
     const response = await client.getUserAlbums(id);
 
     dispatch(addUserAlbums(response, id));
+  };
+}
+
+export function followUser(id, followed) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    await client.followUser(followed, token);
+
+    dispatch(addUserFollowed(id, followed));
   };
 }
