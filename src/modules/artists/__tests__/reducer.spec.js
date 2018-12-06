@@ -1,5 +1,4 @@
 import tracksModule from 'modules/tracks';
-
 import tracksFixtures from 'modules/tracks/__tests__/fixtures';
 
 import playlistsModule from 'modules/playlists';
@@ -239,6 +238,42 @@ describe('albums', () => {
     expect(nextState).toEqual([
       ...newState,
       { id: user.data.id, albumId: album2.id },
+    ]);
+  });
+
+  it('should handle ADD_USER_ALBUMS action', () => {
+    const uid1 = '1';
+
+    const response = albumsFixtures.getAlbumsResponse();
+
+    const albums1 = response.data;
+
+    const newState = albumsReducer(
+      ALBUMS_STATE,
+      actions.addUserAlbums(response, uid1),
+    );
+
+    expect(newState).toEqual([
+      ...ALBUMS_STATE,
+      { id: uid1, albumId: albums1[0].id },
+      { id: uid1, albumId: albums1[1].id },
+    ]);
+
+    const uid2 = '2';
+
+    const nextResponse = albumsFixtures.getAlbumsResponse();
+
+    const albums2 = nextResponse.data;
+
+    const nextState = albumsReducer(
+      newState,
+      actions.addUserAlbums(nextResponse, uid2),
+    );
+
+    expect(nextState).toEqual([
+      ...newState,
+      { id: uid2, albumId: albums2[0].id },
+      { id: uid2, albumId: albums2[1].id },
     ]);
   });
 });
