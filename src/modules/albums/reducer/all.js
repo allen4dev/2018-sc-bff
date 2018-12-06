@@ -38,6 +38,26 @@ const allReducer = handleActions(
         byId: ids,
       };
     },
+
+    'users/ADD_USER_ALBUMS': (state, { payload }) => {
+      const entities = payload.albums.reduce(
+        (initial, current) => ({
+          ...initial,
+          [current.id]: current,
+        }),
+        {},
+      );
+
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          ...entities,
+        },
+
+        byId: [...state.byId, ...Object.keys(entities)],
+      };
+    },
   },
   INITIAL_STATE.all,
 );
