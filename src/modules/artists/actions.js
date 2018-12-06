@@ -18,6 +18,11 @@ export const addUserTracks = createAction(
   ({ data }, id) => ({ tracks: data, id }),
 );
 
+export const addUserPlaylists = createAction(
+  actionTypes.ADD_USER_PLAYLISTS,
+  ({ data }, id) => ({ playlists: data, id }),
+);
+
 // async actions
 export function fetchUser(id) {
   return async dispatch => {

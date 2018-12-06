@@ -22,4 +22,24 @@ export default {
       },
     };
   },
+
+  getPlaylistsResponse() {
+    const playlist1 = this.getPlaylist();
+    const playlist2 = this.getPlaylist();
+
+    return {
+      data: [
+        {
+          type: 'playlists',
+          id: playlist1.id,
+          attributes: { title: playlist1.title },
+        },
+        {
+          type: 'playlists',
+          id: playlist2.id,
+          attributes: { title: playlist2.title },
+        },
+      ],
+    };
+  },
 };

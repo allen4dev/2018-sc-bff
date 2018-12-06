@@ -1,3 +1,4 @@
+import playlistsFixtures from 'modules/playlists/__tests__/fixtures';
 import tracksFixtures from 'modules/tracks/__tests__/fixtures';
 
 import * as actions from '../actions';
@@ -36,5 +37,21 @@ describe('users - action creators', () => {
     };
 
     expect(actions.addUserTracks(response, userId)).toEqual(expectedAction);
+  });
+
+  it('should create an action to add a user playlists', () => {
+    const userId = '1';
+
+    const response = playlistsFixtures.getPlaylistsResponse();
+
+    const expectedAction = {
+      type: actionTypes.ADD_USER_PLAYLISTS,
+      payload: {
+        playlists: response.data,
+        id: userId,
+      },
+    };
+
+    expect(actions.addUserPlaylists(response, userId)).toEqual(expectedAction);
   });
 });
