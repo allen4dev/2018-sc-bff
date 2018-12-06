@@ -86,4 +86,18 @@ describe('users - action creators', () => {
 
     expect(actions.addFollowedUser(uid, followedId)).toEqual(expectedAction);
   });
+
+  it('should create an action to unfollow a user', () => {
+    const uid = '1';
+    const unfollowedId = '2';
+
+    const expectedAction = {
+      type: actionTypes.REMOVE_FOLLOWED_USER,
+      payload: { id: uid, unfollowed: unfollowedId },
+    };
+
+    expect(actions.removeFollowedUser(uid, unfollowedId)).toEqual(
+      expectedAction,
+    );
+  });
 });

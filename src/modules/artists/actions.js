@@ -21,6 +21,14 @@ export const addFollowedUser = createAction(
   }),
 );
 
+export const removeFollowedUser = createAction(
+  actionTypes.REMOVE_FOLLOWED_USER,
+  (id, unfollowed) => ({
+    id,
+    unfollowed,
+  }),
+);
+
 export const addUserTracks = createAction(
   actionTypes.ADD_USER_TRACKS,
   ({ data }, id) => ({ tracks: data, id }),
