@@ -13,6 +13,14 @@ export const addUser = createAction(
   }),
 );
 
+export const followUser = createAction(
+  actionTypes.FOLLOW_USER,
+  (id, followed) => ({
+    id,
+    followed,
+  }),
+);
+
 export const addUserTracks = createAction(
   actionTypes.ADD_USER_TRACKS,
   ({ data }, id) => ({ tracks: data, id }),

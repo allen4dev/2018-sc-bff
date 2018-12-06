@@ -5,3 +5,5 @@ export const ADD_USER = `${NAME}/ADD_USER`;
 export const ADD_USER_TRACKS = `${NAME}/ADD_USER_TRACKS`;
 export const ADD_USER_PLAYLISTS = `${NAME}/ADD_USER_PLAYLISTS`;
 export const ADD_USER_ALBUMS = `${NAME}/ADD_USER_ALBUMS`;
+
+export const FOLLOW_USER = `${NAME}/FOLLOW_USER`;

@@ -71,4 +71,19 @@ describe('users - action creators', () => {
 
     expect(actions.addUserAlbums(response, userId)).toEqual(expectedAction);
   });
+
+  it('should create an action to follow a user', () => {
+    const uid = '1';
+    const followedId = '2';
+
+    const expectedAction = {
+      type: actionTypes.FOLLOW_USER,
+      payload: {
+        id: uid,
+        followed: followedId,
+      },
+    };
+
+    expect(actions.followUser(uid, followedId)).toEqual(expectedAction);
+  });
 });
