@@ -18,4 +18,24 @@ export default {
       },
     };
   },
+
+  getUsersResponse() {
+    const user1 = this.getUser();
+    const user2 = this.getUser();
+
+    return {
+      data: [
+        {
+          type: 'users',
+          id: user1.id,
+          attributes: { username: user1.username, emtila: user1.email },
+        },
+        {
+          type: 'users',
+          id: user2.id,
+          attributes: { username: user2.username, emtila: user2.email },
+        },
+      ],
+    };
+  },
 };

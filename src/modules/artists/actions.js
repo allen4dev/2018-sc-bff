@@ -44,6 +44,11 @@ export const addUserAlbums = createAction(
   ({ data }, id) => ({ albums: data, id }),
 );
 
+export const addUserFollowers = createAction(
+  actionTypes.ADD_USER_FOLLOWERS,
+  ({ data }, id) => ({ users: data, id }),
+);
+
 // async actions
 export function fetchUser(id) {
   return async dispatch => {
