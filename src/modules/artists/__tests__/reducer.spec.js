@@ -138,7 +138,7 @@ describe('tracks', () => {
 describe('playlists', () => {
   const PLAYLISTS_STATE = INITIAL_STATE.playlists;
 
-  it('should handle playlists/ADD_PLAYLIST', () => {
+  it('should handle playlists/ADD_PLAYLIST action', () => {
     const playlist = playlistsFixtures.getPlaylist();
 
     const response = playlistsFixtures.getPlaylistResponse(playlist);
@@ -167,6 +167,42 @@ describe('playlists', () => {
     expect(nextState).toEqual([
       ...newState,
       { id: user.data.id, playlistId: playlist2.id },
+    ]);
+  });
+
+  it('should handle ADD_USER_PLAYLISTS action', () => {
+    const uid1 = '1';
+
+    const response = playlistsFixtures.getPlaylistsResponse();
+
+    const playlists1 = response.data;
+
+    const newState = playlistsReducer(
+      PLAYLISTS_STATE,
+      actions.addUserPlaylists(response, uid1),
+    );
+
+    expect(newState).toEqual([
+      ...PLAYLISTS_STATE,
+      { id: uid1, playlistId: playlists1[0].id },
+      { id: uid1, playlistId: playlists1[1].id },
+    ]);
+
+    const uid2 = '2';
+
+    const nextResponse = playlistsFixtures.getPlaylistsResponse();
+
+    const playlists2 = nextResponse.data;
+
+    const nextState = playlistsReducer(
+      newState,
+      actions.addUserPlaylists(nextResponse, uid2),
+    );
+
+    expect(nextState).toEqual([
+      ...newState,
+      { id: uid2, playlistId: playlists2[0].id },
+      { id: uid2, playlistId: playlists2[1].id },
     ]);
   });
 });
