@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import moxios from 'moxios';
 
 import tracksFixtures from 'modules/tracks/__tests__/fixtures';
+import playlistsFixtures from 'modules/playlists/__tests__/fixtures';
 
 import * as actionTypes from '../actionTypes';
 import * as actions from '../actions';
@@ -75,6 +76,34 @@ describe('playlists module async actions', () => {
     const store = mockStore(INITIAL_STATE);
 
     await store.dispatch(actions.fetchUserTracks(user.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create an ADD_USER_PLAYLISTS action after a user fetchs the tracks from a user', async () => {
+    const user = fixtures.getUser();
+
+    const response = playlistsFixtures.getPlaylistsResponse();
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_USER_PLAYLISTS,
+        payload: {
+          playlists: response.data,
+          id: user.id,
+        },
+      },
+    ];
+
+    const store = mockStore(INITIAL_STATE);
+
+    await store.dispatch(actions.fetchUserPlaylists(user.id));
 
     expect(store.getActions()).toEqual(expectedActions);
   });

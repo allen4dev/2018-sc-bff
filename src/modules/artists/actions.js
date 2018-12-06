@@ -39,3 +39,11 @@ export function fetchUserTracks(id) {
     dispatch(addUserTracks(response, id));
   };
 }
+
+export function fetchUserPlaylists(id) {
+  return async dispatch => {
+    const response = await client.getUserPlaylists(id);
+
+    dispatch(addUserPlaylists(response, id));
+  };
+}
