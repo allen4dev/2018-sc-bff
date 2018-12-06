@@ -1,8 +1,16 @@
-import { handleActions } from 'redux-actions';
+import { handleActions, combineActions } from 'redux-actions';
+
+// import usersModule from 'modules/artists';
 
 import * as actionTypes from '../actionTypes';
 
 import { INITIAL_STATE } from '../model';
+
+// console.log('MODULE', usersModule);
+// console.log('ADD_TRACKS', actionTypes.ADD_TRACKS);
+
+// CHECK WHY IS UNDEFINED
+// console.log('ADD_USER_TRACKS', usersModule.actionTypes.ADD_USER_TRACKS);
 
 const allReducer = handleActions(
   {
@@ -43,7 +51,10 @@ const allReducer = handleActions(
       };
     },
 
-    [actionTypes.ADD_TRACKS]: (state, { payload }) => {
+    [combineActions(actionTypes.ADD_TRACKS, 'users/ADD_USER_TRACKS')]: (
+      state,
+      { payload },
+    ) => {
       const entities = payload.tracks.reduce(
         (initial, current) => ({
           ...initial,

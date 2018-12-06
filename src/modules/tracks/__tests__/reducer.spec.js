@@ -1,14 +1,14 @@
 import repliesFixtures from 'modules/replies/__tests__/fixtures';
 import repliesModule from 'modules/replies';
 
+import usersModule from 'modules/artists';
+
 import * as actions from '../actions';
 import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
 
 import allReducer from '../reducer/all';
 
-// import entitiesReducer from '../reducer/entities';
-// import byIdReducer from '../reducer/byId';
 import repliesReducer from '../reducer/replies';
 
 import fixtures from './fixtures';
@@ -136,6 +136,26 @@ describe('all', () => {
         ...newState.entities,
         [nextTracks[0].id]: nextTracks[0],
         [nextTracks[1].id]: nextTracks[1],
+      },
+    });
+  });
+
+  it('should handle users/ADD_USER_TRACKS', () => {
+    const response = fixtures.getTracksResponse();
+
+    const newState = allReducer(
+      ALL_STATE,
+      usersModule.actions.addUserTracks(response, '123'),
+    );
+
+    const tracks = response.data;
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      byId: [tracks[0].id, tracks[1].id],
+      entities: {
+        [tracks[0].id]: tracks[0],
+        [tracks[1].id]: tracks[1],
       },
     });
   });
