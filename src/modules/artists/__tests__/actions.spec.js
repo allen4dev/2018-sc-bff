@@ -1,3 +1,4 @@
+import albumsFixtures from 'modules/albums/__tests__/fixtures';
 import playlistsFixtures from 'modules/playlists/__tests__/fixtures';
 import tracksFixtures from 'modules/tracks/__tests__/fixtures';
 
@@ -53,5 +54,21 @@ describe('users - action creators', () => {
     };
 
     expect(actions.addUserPlaylists(response, userId)).toEqual(expectedAction);
+  });
+
+  it('should create an action to add a user albums', () => {
+    const userId = '1';
+
+    const response = albumsFixtures.getAlbumsResponse();
+
+    const expectedAction = {
+      type: actionTypes.ADD_USER_ALBUMS,
+      payload: {
+        albums: response.data,
+        id: userId,
+      },
+    };
+
+    expect(actions.addUserAlbums(response, userId)).toEqual(expectedAction);
   });
 });

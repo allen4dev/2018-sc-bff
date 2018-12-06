@@ -22,4 +22,24 @@ export default {
       },
     };
   },
+
+  getAlbumsResponse() {
+    const album1 = this.getAlbum();
+    const album2 = this.getAlbum();
+
+    return {
+      data: [
+        {
+          type: 'albums',
+          id: album1.id,
+          attributes: { title: album1.title, published: true },
+        },
+        {
+          type: 'albums',
+          id: album2.id,
+          attributes: { title: album2.title, published: true },
+        },
+      ],
+    };
+  },
 };

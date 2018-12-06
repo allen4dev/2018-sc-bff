@@ -23,6 +23,11 @@ export const addUserPlaylists = createAction(
   ({ data }, id) => ({ playlists: data, id }),
 );
 
+export const addUserAlbums = createAction(
+  actionTypes.ADD_USER_ALBUMS,
+  ({ data }, id) => ({ albums: data, id }),
+);
+
 // async actions
 export function fetchUser(id) {
   return async dispatch => {
