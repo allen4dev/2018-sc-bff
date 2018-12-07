@@ -380,4 +380,40 @@ describe('followers', () => {
 
     expect(nextState).toEqual([]);
   });
+
+  it('should handle ADD_USER_FOLLOWERS action', () => {
+    const user = fixtures.getUser();
+
+    const response = fixtures.getUsersResponse();
+
+    const newState = followersReducer(
+      FOLLOWERS_STATE,
+      actions.addUserFollowers(response, user.id),
+    );
+
+    const followers = response.data;
+
+    expect(newState).toEqual([
+      ...FOLLOWERS_STATE,
+      { follower: user.id, following: followers[0].id },
+      { follower: user.id, following: followers[1].id },
+    ]);
+
+    const user2 = fixtures.getUser();
+
+    const nextResponse = fixtures.getUsersResponse();
+
+    const nextState = followersReducer(
+      newState,
+      actions.addUserFollowers(nextResponse, user2.id),
+    );
+
+    const nextFollowers = nextResponse.data;
+
+    expect(nextState).toEqual([
+      ...newState,
+      { follower: user2.id, following: nextFollowers[0].id },
+      { follower: user2.id, following: nextFollowers[1].id },
+    ]);
+  });
 });
