@@ -51,6 +51,49 @@ describe('all', () => {
       byId: [user1.id, user2.id],
     });
   });
+
+  it('should handle ADD_USER_FOLLOWERS action', () => {
+    const user = fixtures.getUser();
+
+    const response = fixtures.getUsersResponse();
+
+    const newState = allReducer(
+      ALL_STATE,
+      actions.addUserFollowers(response, user.id),
+    );
+
+    const followers = response.data;
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        [followers[0].id]: followers[0],
+        [followers[1].id]: followers[1],
+      },
+      byId: [followers[0].id, followers[1].id],
+    });
+
+    const user2 = fixtures.getUser();
+
+    const nextResponse = fixtures.getUsersResponse();
+
+    const nextState = allReducer(
+      newState,
+      actions.addUserFollowers(nextResponse, user2.id),
+    );
+
+    const nextFollowers = nextResponse.data;
+
+    expect(nextState).toEqual({
+      ...nextState,
+      entities: {
+        ...newState.entities,
+        [nextFollowers[0].id]: nextFollowers[0],
+        [nextFollowers[1].id]: nextFollowers[1],
+      },
+      byId: [...newState.byId, nextFollowers[0].id, nextFollowers[1].id],
+    });
+  });
 });
 
 describe('tracks', () => {
