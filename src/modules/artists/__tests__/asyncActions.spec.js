@@ -195,7 +195,7 @@ describe('users module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it.only('should create an ADD_USER_FOLLOWERS action after fetch a user followers', async () => {
+  it.skip('should create an ADD_USER_FOLLOWERS action after fetch a user followers', async () => {
     const user = fixtures.getUser();
 
     const response = fixtures.getUsersResponse();

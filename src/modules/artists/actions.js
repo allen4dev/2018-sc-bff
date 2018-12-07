@@ -49,6 +49,11 @@ export const addUserFollowers = createAction(
   ({ data }, id) => ({ users: data, id }),
 );
 
+export const addUserFollowings = createAction(
+  actionTypes.ADD_USER_FOLLOWINGS,
+  ({ data }, id) => ({ users: data, id }),
+);
+
 // async actions
 export function fetchUser(id) {
   return async dispatch => {

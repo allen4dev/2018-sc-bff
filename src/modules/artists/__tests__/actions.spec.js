@@ -116,4 +116,19 @@ describe('users - action creators', () => {
 
     expect(actions.addUserFollowers(response, user.id)).toEqual(expectedAction);
   });
+
+  it('should create an action to add a user followings', () => {
+    const user = fixtures.getUser();
+
+    const response = fixtures.getUsersResponse();
+
+    const expectedAction = {
+      type: actionTypes.ADD_USER_FOLLOWINGS,
+      payload: { users: response.data, id: user.id },
+    };
+
+    expect(actions.addUserFollowings(response, user.id)).toEqual(
+      expectedAction,
+    );
+  });
 });
