@@ -28,12 +28,12 @@ export default {
         {
           type: 'users',
           id: user1.id,
-          attributes: { username: user1.username, emtila: user1.email },
+          attributes: { username: user1.username, email: user1.email },
         },
         {
           type: 'users',
           id: user2.id,
-          attributes: { username: user2.username, emtila: user2.email },
+          attributes: { username: user2.username, email: user2.email },
         },
       ],
     };

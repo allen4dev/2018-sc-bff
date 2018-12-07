@@ -16,7 +16,7 @@ import fixtures from './fixtures';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('playlists module async actions', () => {
+describe('users module async actions', () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -191,6 +191,31 @@ describe('playlists module async actions', () => {
     });
 
     await store.dispatch(actions.unfollowUser(user.id, unfollowed.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create an ADD_USER_FOLLOWERS action after fetchs the a user followers', async () => {
+    const uid = '1';
+
+    const response = fixtures.getUsersResponse();
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_USER_FOLLOWERS,
+        payload: { users: response.data, id: uid },
+      },
+    ];
+
+    const store = mockStore(INITIAL_STATE);
+
+    await store.dispatch(actions.fetchUserFollowers(uid));
 
     expect(store.getActions()).toEqual(expectedActions);
   });

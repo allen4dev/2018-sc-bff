@@ -101,3 +101,13 @@ export function unfollowUser(id, unfollowed) {
     dispatch(removeFollowedUser(id, unfollowed));
   };
 }
+
+export function fetchUserFollowers(id) {
+  return async dispatch => {
+    const response = await client.getUserFollowers(id);
+
+    console.log(response.data);
+
+    dispatch(addUserFollowers(response, id));
+  };
+}
