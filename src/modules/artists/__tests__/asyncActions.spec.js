@@ -195,8 +195,8 @@ describe('users module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should create an ADD_USER_FOLLOWERS action after fetchs the a user followers', async () => {
-    const uid = '1';
+  it.only('should create an ADD_USER_FOLLOWERS action after fetch a user followers', async () => {
+    const user = fixtures.getUser();
 
     const response = fixtures.getUsersResponse();
 
@@ -209,13 +209,16 @@ describe('users module async actions', () => {
     const expectedActions = [
       {
         type: actionTypes.ADD_USER_FOLLOWERS,
-        payload: { users: response.data, id: uid },
+        payload: {
+          users: response.data,
+          id: user.id,
+        },
       },
     ];
 
     const store = mockStore(INITIAL_STATE);
 
-    await store.dispatch(actions.fetchUserFollowers(uid));
+    await store.dispatch(actions.fetchUserFollowers(user.id));
 
     expect(store.getActions()).toEqual(expectedActions);
   });
