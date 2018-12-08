@@ -2,8 +2,6 @@ import { createAction } from 'redux-actions';
 
 import client from 'helpers/client';
 
-import { API_REQUEST } from 'middlewares/api/actionTypes';
-
 import * as actionTypes from './actionTypes';
 
 export const setAuthenticatedUser = createAction(

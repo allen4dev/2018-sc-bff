@@ -438,8 +438,8 @@ describe('followers', () => {
 
     expect(newState).toEqual([
       ...FOLLOWERS_STATE,
-      { follower: user.id, following: followers[0].id },
-      { follower: user.id, following: followers[1].id },
+      { follower: followers[0].id, following: user.id },
+      { follower: followers[1].id, following: user.id },
     ]);
 
     const user2 = fixtures.getUser();
@@ -455,8 +455,8 @@ describe('followers', () => {
 
     expect(nextState).toEqual([
       ...newState,
-      { follower: user2.id, following: nextFollowers[0].id },
-      { follower: user2.id, following: nextFollowers[1].id },
+      { follower: nextFollowers[0].id, following: user2.id },
+      { follower: nextFollowers[1].id, following: user2.id },
     ]);
   });
 });
