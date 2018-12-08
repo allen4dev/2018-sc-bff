@@ -131,4 +131,15 @@ describe('users - action creators', () => {
       expectedAction,
     );
   });
+
+  it('should create an action to remove a user', () => {
+    const id = '1';
+
+    const expectedAction = {
+      type: actionTypes.REMOVE_USER,
+      payload: { id },
+    };
+
+    expect(actions.removeUser(id)).toEqual(expectedAction);
+  });
 });

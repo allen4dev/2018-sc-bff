@@ -13,6 +13,10 @@ export const addUser = createAction(
   }),
 );
 
+export const removeUser = createAction(actionTypes.REMOVE_USER, id => ({
+  id,
+}));
+
 export const addFollowedUser = createAction(
   actionTypes.ADD_FOLLOWED_USER,
   (id, followed) => ({
