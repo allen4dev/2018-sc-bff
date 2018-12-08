@@ -137,6 +137,31 @@ describe('all', () => {
       byId: [...newState.byId, nextFollowings[0].id, nextFollowings[1].id],
     });
   });
+
+  it('shold handle REMOVE_USER action', () => {
+    const user1 = fixtures.getUser();
+    const user2 = fixtures.getUser();
+
+    const newState = allReducer(
+      {
+        ...ALL_STATE,
+        entities: {
+          [user1.id]: user1,
+          [user2.id]: user2,
+        },
+        byId: [user1.id, user2.id],
+      },
+      actions.removeUser(user1.id),
+    );
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        [user2.id]: user2,
+      },
+      byId: [user2.id],
+    });
+  });
 });
 
 describe('tracks', () => {

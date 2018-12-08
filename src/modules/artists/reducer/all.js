@@ -14,6 +14,23 @@ const allReducer = handleActions(
       byId: [...state.byId, payload.id],
     }),
 
+    [actionTypes.REMOVE_USER]: (state, { payload }) => {
+      const ids = state.byId.filter(id => id !== payload.id);
+
+      return {
+        ...state,
+        entities: ids.reduce(
+          (initial, current) => ({
+            ...initial,
+            [current]: state.entities[current],
+          }),
+          {},
+        ),
+
+        byId: ids,
+      };
+    },
+
     [actionTypes.ADD_USER_FOLLOWERS]: (state, { payload }) => {
       const entities = payload.users.reduce(
         (initial, current) => ({
