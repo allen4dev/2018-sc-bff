@@ -114,3 +114,11 @@ export function fetchUserFollowers(id) {
     dispatch(addUserFollowers(response, id));
   };
 }
+
+export function fetchUserFollowings(id) {
+  return async dispatch => {
+    const response = await client.getUsersFollowing(id);
+
+    dispatch(addUserFollowings(response, id));
+  };
+}

@@ -222,4 +222,29 @@ describe('users module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it.skip('should create an ADD_USER_FOLLOWINGS action after fetch a user followings', async () => {
+    const user = fixtures.getUser();
+
+    const response = fixtures.getUsersResponse();
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_USER_FOLLOWINGS,
+        payload: { users: response.data, id: user.id },
+      },
+    ];
+
+    const store = mockStore(INITIAL_STATE);
+
+    await store.dispatch(actions.fetchUserFollowings(user.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });
