@@ -30,6 +30,14 @@ const followersReducer = handleActions(
         following: user.id,
       })),
     ],
+
+    [actionTypes.ADD_USER_FOLLOWINGS]: (state, { payload }) => [
+      ...state,
+      ...payload.users.map(user => ({
+        follower: payload.id,
+        following: user.id,
+      })),
+    ],
   },
   INITIAL_STATE.followers,
 );

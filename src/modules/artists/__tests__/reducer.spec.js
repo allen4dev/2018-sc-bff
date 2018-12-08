@@ -94,6 +94,49 @@ describe('all', () => {
       byId: [...newState.byId, nextFollowers[0].id, nextFollowers[1].id],
     });
   });
+
+  it('should handle ADD_USER_FOLLOWINGS action', () => {
+    const user = fixtures.getUser();
+
+    const response = fixtures.getUsersResponse();
+
+    const newState = allReducer(
+      ALL_STATE,
+      actions.addUserFollowings(response, user.id),
+    );
+
+    const followings = response.data;
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        [followings[0].id]: followings[0],
+        [followings[1].id]: followings[1],
+      },
+      byId: [followings[0].id, followings[1].id],
+    });
+
+    const user2 = fixtures.getUser();
+
+    const nextResponse = fixtures.getUsersResponse();
+
+    const nextState = allReducer(
+      newState,
+      actions.addUserFollowings(nextResponse, user2.id),
+    );
+
+    const nextFollowings = nextResponse.data;
+
+    expect(nextState).toEqual({
+      ...nextState,
+      entities: {
+        ...newState.entities,
+        [nextFollowings[0].id]: nextFollowings[0],
+        [nextFollowings[1].id]: nextFollowings[1],
+      },
+      byId: [...newState.byId, nextFollowings[0].id, nextFollowings[1].id],
+    });
+  });
 });
 
 describe('tracks', () => {
@@ -414,6 +457,46 @@ describe('followers', () => {
       ...newState,
       { follower: user2.id, following: nextFollowers[0].id },
       { follower: user2.id, following: nextFollowers[1].id },
+    ]);
+  });
+});
+
+describe('followings', () => {
+  const FOLLOWERS_STATE = INITIAL_STATE.followers;
+
+  it('should handle ADD_USER_FOLLOWINGS action', () => {
+    const user = fixtures.getUser();
+
+    const response = fixtures.getUsersResponse();
+
+    const newState = followersReducer(
+      FOLLOWERS_STATE,
+      actions.addUserFollowings(response, user.id),
+    );
+
+    const following = response.data;
+
+    expect(newState).toEqual([
+      ...FOLLOWERS_STATE,
+      { follower: user.id, following: following[0].id },
+      { follower: user.id, following: following[1].id },
+    ]);
+
+    const user2 = fixtures.getUser();
+
+    const nextResponse = fixtures.getUsersResponse();
+
+    const nextState = followersReducer(
+      newState,
+      actions.addUserFollowings(nextResponse, user2.id),
+    );
+
+    const nextFollowings = nextResponse.data;
+
+    expect(nextState).toEqual([
+      ...newState,
+      { follower: user2.id, following: nextFollowings[0].id },
+      { follower: user2.id, following: nextFollowings[1].id },
     ]);
   });
 });

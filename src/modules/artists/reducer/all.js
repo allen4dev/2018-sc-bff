@@ -32,6 +32,25 @@ const allReducer = handleActions(
         byId: [...state.byId, ...Object.keys(entities)],
       };
     },
+
+    [actionTypes.ADD_USER_FOLLOWINGS]: (state, { payload }) => {
+      const entities = payload.users.reduce(
+        (initial, current) => ({
+          ...initial,
+          [current.id]: current,
+        }),
+        {},
+      );
+
+      return {
+        ...state,
+        entities: {
+          ...state.entities,
+          ...entities,
+        },
+        byId: [...state.byId, ...Object.keys(entities)],
+      };
+    },
   },
   INITIAL_STATE.all,
 );
