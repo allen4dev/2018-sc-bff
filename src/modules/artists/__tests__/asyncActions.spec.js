@@ -53,6 +53,29 @@ describe('users module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
+  it('should create a REMOVE_USER action after delete a user', async () => {
+    const user = fixtures.getUser();
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 204 });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.REMOVE_USER, payload: { id: user.id } },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.deleteUser(user.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
   it('should create an ADD_USER_TRACKS action after a user fetchs the tracks from a user', async () => {
     const user = fixtures.getUser();
 

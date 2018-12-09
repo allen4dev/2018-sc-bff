@@ -138,7 +138,7 @@ describe('all', () => {
     });
   });
 
-  it('shold handle REMOVE_USER action', () => {
+  it('should handle REMOVE_USER action', () => {
     const user1 = fixtures.getUser();
     const user2 = fixtures.getUser();
 

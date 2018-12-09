@@ -126,3 +126,13 @@ export function fetchUserFollowings(id) {
     dispatch(addUserFollowings(response, id));
   };
 }
+
+export function deleteUser(id) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    await client.deleteProfile(id, token);
+
+    dispatch(removeUser(id));
+  };
+}
