@@ -222,7 +222,7 @@ describe('auth module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should create an users/ADD_USER_TRACKS action after user updates his profile', async () => {
+  it('should create an users/ADD_USER_TRACKS action after an authenticated user fetchs his tracks', async () => {
     const user = {
       id: '123',
       username: 'allen',
@@ -257,6 +257,39 @@ describe('auth module async actions', () => {
     });
 
     await store.dispatch(actions.fetchProfileTracks());
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create an users/ADD_USER_ALBUMS action after an authenticated user fetchs his albums', async () => {
+    const user = { id: '123', username: 'allen' };
+
+    const response = {
+      data: [
+        { type: 'albums', id: '123', attributes: { title: 'Album 1' } },
+        { type: 'albums', id: '456', attributes: { title: 'Album 2' } },
+      ],
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: usersModule.actionTypes.ADD_USER_ALBUMS,
+        payload: { albums: response.data, id: user.id },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { current: user.id, token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.fetchProfileAlbums());
 
     expect(store.getActions()).toEqual(expectedActions);
   });

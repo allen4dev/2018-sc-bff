@@ -59,3 +59,13 @@ export function fetchProfileTracks() {
     dispatch(usersModule.actions.addUserTracks(response, current));
   };
 }
+
+export function fetchProfileAlbums() {
+  return async (dispatch, getState) => {
+    const { current, token } = getState().auth;
+
+    const response = await client.getProfileAlbums(token);
+
+    dispatch(usersModule.actions.addUserAlbums(response, current));
+  };
+}
