@@ -40,12 +40,12 @@ export function fetchProfile() {
   };
 }
 
-// export function updateProfile(details) {
-//   return async (dispatch, getState) => {
-//     const { current, token } = getState().auth;
+export function updateProfile(details) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
 
-//     const response = await client.updateProfile(details, token);
+    const response = await client.updateProfile(details, token);
 
-//     dispatch(usersModule.updateUser(response, current));
-//   };
-// }
+    dispatch(usersModule.actions.updateUser(response));
+  };
+}
