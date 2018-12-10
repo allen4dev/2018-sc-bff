@@ -125,7 +125,7 @@ describe('auth module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should create an ADD_USER action after user fetchs his profile', async () => {
+  it('should create an users/ADD_USER action after user fetchs his profile', async () => {
     const user = {
       id: '123',
       username: 'Allen',
@@ -168,4 +168,57 @@ describe('auth module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  //   it('should create an users/UPDATE_USER action after user updates his profile', async () => {
+  //     const user = {
+  //       id: '123',
+  //       username: 'allen',
+  //       email: 'allen@example.test',
+  //     };
+
+  //     const details = {
+  //       username: 'Updated username',
+  //     };
+
+  //     const updated = {
+  //       ...user,
+  //       ...details,
+  //     };
+
+  //     const response = {
+  //       data: {
+  //         type: 'users',
+  //         id: updated.id,
+  //         attributes: {
+  //           username: updated.username,
+  //           email: updated.email,
+  //         },
+  //       },
+  //     };
+
+  //     moxios.wait(() => {
+  //       const request = moxios.requests.mostRecent();
+
+  //       request.respondWith({ status: 200, response });
+  //     });
+
+  //     const expectedActions = [
+  //       {
+  //         type: usersModule.actionTypes.UPDATE_USER,
+  //         payload: {
+  //           updated: { ...updated },
+  //           id: updated.id,
+  //         },
+  //       },
+  //     ];
+
+  //     const store = mockStore({
+  //       ...INITIAL_STATE,
+  //       auth: { token: 'xxx.xxx.xxx' },
+  //     });
+
+  //     await store.dispatch(actions.updateProfile(details));
+
+  //     expect(store.getActions()).toEqual(expectedActions);
+  //   });
 });

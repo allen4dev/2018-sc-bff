@@ -39,3 +39,13 @@ export function fetchProfile() {
     dispatch(usersModule.actions.addUser(response));
   };
 }
+
+// export function updateProfile(details) {
+//   return async (dispatch, getState) => {
+//     const { current, token } = getState().auth;
+
+//     const response = await client.updateProfile(details, token);
+
+//     dispatch(usersModule.updateUser(response, current));
+//   };
+// }

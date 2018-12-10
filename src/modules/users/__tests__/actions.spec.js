@@ -142,4 +142,27 @@ describe('users - action creators', () => {
 
     expect(actions.removeUser(id)).toEqual(expectedAction);
   });
+
+  it('should create an action to update a user', () => {
+    const user = fixtures.getUser();
+
+    const details = { username: 'new username' };
+
+    const updated = {
+      ...user,
+      ...details,
+    };
+
+    const response = fixtures.getUserResponse(updated);
+
+    const expectedAction = {
+      type: actionTypes.UPDATE_USER,
+      payload: {
+        updated,
+        id: updated.id,
+      },
+    };
+
+    expect(actions.updateUser(response)).toEqual(expectedAction);
+  });
 });

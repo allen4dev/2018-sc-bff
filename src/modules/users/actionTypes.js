@@ -1,6 +1,7 @@
 import { NAME } from './constants';
 
 export const ADD_USER = `${NAME}/ADD_USER`;
+export const UPDATE_USER = `${NAME}/UPDATE_USER`;
 export const REMOVE_USER = `${NAME}/REMOVE_USER`;
 
 export const ADD_USER_TRACKS = `${NAME}/ADD_USER_TRACKS`;

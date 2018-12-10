@@ -13,6 +13,14 @@ export const addUser = createAction(
   }),
 );
 
+export const updateUser = createAction(
+  actionTypes.UPDATE_USER,
+  ({ data: { id, attributes } }) => ({
+    updated: { ...attributes, id },
+    id,
+  }),
+);
+
 export const removeUser = createAction(actionTypes.REMOVE_USER, id => ({
   id,
 }));
