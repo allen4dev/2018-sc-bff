@@ -138,6 +138,23 @@ describe('all', () => {
     });
   });
 
+  it('should handle UPDATE_USER action', () => {
+    const user = fixtures.getUser();
+
+    const details = { username: 'new username' };
+
+    const updated = { ...user, ...details };
+
+    const response = fixtures.getUserResponse(updated);
+
+    const newState = allReducer(ALL_STATE, actions.updateUser(response));
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: { [user.id]: { ...updated } },
+    });
+  });
+
   it('should handle REMOVE_USER action', () => {
     const user1 = fixtures.getUser();
     const user2 = fixtures.getUser();

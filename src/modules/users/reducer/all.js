@@ -14,6 +14,14 @@ const allReducer = handleActions(
       byId: [...state.byId, payload.id],
     }),
 
+    [actionTypes.UPDATE_USER]: (state, { payload }) => ({
+      ...state,
+      entities: {
+        ...state.entities,
+        [payload.id]: payload.updated,
+      },
+    }),
+
     [actionTypes.REMOVE_USER]: (state, { payload }) => {
       const ids = state.byId.filter(id => id !== payload.id);
 
