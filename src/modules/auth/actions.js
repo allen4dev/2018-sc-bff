@@ -49,3 +49,13 @@ export function updateProfile(details) {
     dispatch(usersModule.actions.updateUser(response));
   };
 }
+
+export function fetchProfileTracks() {
+  return async (dispatch, getState) => {
+    const { current, token } = getState().auth;
+
+    const response = await client.getProfileTracks(token);
+
+    dispatch(usersModule.actions.addUserTracks(response, current));
+  };
+}

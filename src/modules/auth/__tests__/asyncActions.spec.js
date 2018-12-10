@@ -221,4 +221,43 @@ describe('auth module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create an users/ADD_USER_TRACKS action after user updates his profile', async () => {
+    const user = {
+      id: '123',
+      username: 'allen',
+    };
+
+    const response = {
+      data: [
+        { type: 'tracks', id: '123', attributes: { title: 'Track 1' } },
+        { type: 'tracks', id: '456', attributes: { title: 'Track 2' } },
+      ],
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: usersModule.actionTypes.ADD_USER_TRACKS,
+        payload: {
+          tracks: response.data,
+          id: user.id,
+        },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { current: user.id, token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.fetchProfileTracks());
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });
