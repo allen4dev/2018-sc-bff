@@ -69,3 +69,13 @@ export function fetchProfileAlbums() {
     dispatch(usersModule.actions.addUserAlbums(response, current));
   };
 }
+
+export function fetchProfilePlaylists() {
+  return async (dispatch, getState) => {
+    const { current, token } = getState().auth;
+
+    const response = await client.getProfilePlaylists(token);
+
+    dispatch(usersModule.actions.addUserPlaylists(response, current));
+  };
+}

@@ -293,4 +293,37 @@ describe('auth module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create an users/ADD_USER_PLAYLISTS action after an authenticated user fetchs his playlists', async () => {
+    const user = { id: '123', username: 'allen' };
+
+    const response = {
+      data: [
+        { type: 'playlists', id: '123', attributes: { title: 'Playlist 1' } },
+        { type: 'playlists', id: '456', attributes: { title: 'Playlist 2' } },
+      ],
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: usersModule.actionTypes.ADD_USER_PLAYLISTS,
+        payload: { playlists: response.data, id: user.id },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { current: user.id, token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.fetchProfilePlaylists());
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });
