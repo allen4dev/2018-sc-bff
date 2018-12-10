@@ -1,6 +1,6 @@
 import { handleActions, combineActions } from 'redux-actions';
 
-// import usersModule from 'modules/artists';
+// import usersModule from 'modules/users';
 
 import * as actionTypes from '../actionTypes';
 

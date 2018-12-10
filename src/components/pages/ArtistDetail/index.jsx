@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ArtistInformation from 'modules/artists/components/ArtistInformation';
+import ArtistInformation from 'modules/users/components/ArtistInformation';
 
 import MainContent from './components/MainContent';
 import Heading from './components/Heading';

@@ -5,7 +5,7 @@ import ColumnList from 'components/shared/ColumnList';
 
 import SetCard from 'modules/playlists/components/SetCard';
 import TrackCard from 'modules/tracks/components/TrackCard';
-import ArtistCard from 'modules/artists/components/ArtistCard';
+import ArtistCard from 'modules/users/components/ArtistCard';
 
 const likeIds = new Array(6).fill('');
 const playlistIds = new Array(6).fill('');

@@ -1,4 +1,4 @@
-import usersModule from 'modules/artists';
+import usersModule from 'modules/users';
 
 import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ArtistList from 'modules/artists/components/ArtistList';
+import ArtistList from 'modules/users/components/ArtistList';
 import TrackRowList from 'modules/tracks/components/TrackRowList';
 import Sets from 'modules/playlists/components/Sets';
 

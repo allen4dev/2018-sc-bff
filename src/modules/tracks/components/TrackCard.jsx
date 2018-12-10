@@ -34,7 +34,7 @@ const TrackCard = () => (
       <StyledLink to="/tracks/1">
         <Title>Emiya</Title>
       </StyledLink>
-      <StyledLink to="/artists/1">
+      <StyledLink to="/users/1">
         <Artist>Fate UBW</Artist>
       </StyledLink>
     </Details>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import ColumnList from 'components/shared/ColumnList';
 
-import ArtistCard from 'modules/artists/components/ArtistCard';
+import ArtistCard from 'modules/users/components/ArtistCard';
 
 const Wrapper = styled.section``;
 

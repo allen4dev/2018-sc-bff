@@ -37,7 +37,7 @@ const Reply = () => (
     <Avatar src="/images/avatar.jpg" size="8%" />
     <Content>
       <Heading>
-        <StyledLink to="/artists/1">
+        <StyledLink to="/users/1">
           <Artist>Archer</Artist>
         </StyledLink>
       </Heading>

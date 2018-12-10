@@ -1,7 +1,7 @@
 import repliesFixtures from 'modules/replies/__tests__/fixtures';
 import repliesModule from 'modules/replies';
 
-import usersModule from 'modules/artists';
+import usersModule from 'modules/users';
 
 import * as actions from '../actions';
 import reducer from '../reducer';

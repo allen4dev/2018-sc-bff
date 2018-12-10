@@ -2,6 +2,8 @@ import { createAction } from 'redux-actions';
 
 import client from 'helpers/client';
 
+import usersModule from 'modules/users';
+
 import * as actionTypes from './actionTypes';
 
 export const setAuthenticatedUser = createAction(
@@ -25,5 +27,15 @@ export function login(credentials) {
     const response = await client.login(credentials);
 
     dispatch(setAuthenticatedUser(response));
+  };
+}
+
+export function fetchProfile() {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.getProfile(token);
+
+    dispatch(usersModule.actions.addUser(response));
   };
 }

@@ -47,7 +47,7 @@ const Pages = () => (
         <Route path="/search" component={Results} />
         <Route path="/upload" component={Upload} />
         <Route path="/me/collection" component={Collection} />
-        <Route path="/artists/:id" component={ArtistDetail} />
+        <Route path="/users/:id" component={ArtistDetail} />
         <Route path="/playlists/:id" component={PlaylistDetail} />
         <Route path="/tracks/:id" component={TrackDetail} />
         <Route component={Error404} />

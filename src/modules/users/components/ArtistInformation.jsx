@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaEnvelope, FaShare } from 'react-icons/fa';
 
-import ArtistItem from 'modules/artists/components/ArtistItem';
+import ArtistItem from 'modules/users/components/ArtistItem';
 
 import AvatarList from 'components/shared/AvatarList';
 import RowList from 'components/shared/RowList';

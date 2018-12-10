@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ProfileCard from 'modules/artists/components/ProfileCard';
+import ProfileCard from 'modules/users/components/ProfileCard';
 import TrackList from 'modules/tracks/components/TrackList';
 
 import ResourceActions from 'components/shared/ResourceActions';

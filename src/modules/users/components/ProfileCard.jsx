@@ -68,7 +68,7 @@ const ProfileCard = ({ flex }) => (
 
     <Details flex={flex}>
       <Heading>
-        <StyledLink to="/artists/1">
+        <StyledLink to="/users/1">
           <Name>Allen</Name>
         </StyledLink>
       </Heading>

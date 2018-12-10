@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaSearch, FaMusic, FaUser, FaListUl, FaImages } from 'react-icons/fa';
 
 import TrackRowList from 'modules/tracks/components/TrackRowList';
-import ArtistList from 'modules/artists/components/ArtistList';
+import ArtistList from 'modules/users/components/ArtistList';
 import Sets from 'modules/playlists/components/Sets';
 
 import Tabs from 'components/shared/Tabs';

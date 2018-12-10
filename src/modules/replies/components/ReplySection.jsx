@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ProfileCard from 'modules/artists/components/ProfileCard';
+import ProfileCard from 'modules/users/components/ProfileCard';
 import ReplyBar from './ReplyBar';
 import ReplyList from './ReplyList';
 
