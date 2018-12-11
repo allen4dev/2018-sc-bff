@@ -89,3 +89,13 @@ export function fetchProfileFollowers() {
     dispatch(usersModule.actions.addUserFollowers(response, current));
   };
 }
+
+export function fetchProfileFollowings() {
+  return async (dispatch, getState) => {
+    const { current, token } = getState().auth;
+
+    const response = await client.getProfileFollowings(token);
+
+    dispatch(usersModule.actions.addUserFollowings(response, current));
+  };
+}
