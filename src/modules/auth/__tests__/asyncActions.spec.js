@@ -326,4 +326,37 @@ describe('auth module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create an users/ADD_USER_FOLLOWERS action after an authenticated user fetchs his followers', async () => {
+    const user = { id: '123', username: 'allen' };
+
+    const response = {
+      data: [
+        { type: 'users', id: '123', attributes: { username: 'User1' } },
+        { type: 'users', id: '456', attributes: { username: 'User2' } },
+      ],
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: usersModule.actionTypes.ADD_USER_FOLLOWERS,
+        payload: { users: response.data, id: user.id },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { current: user.id, token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.fetchProfileFollowers());
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });

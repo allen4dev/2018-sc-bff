@@ -79,3 +79,13 @@ export function fetchProfilePlaylists() {
     dispatch(usersModule.actions.addUserPlaylists(response, current));
   };
 }
+
+export function fetchProfileFollowers() {
+  return async (dispatch, getState) => {
+    const { current, token } = getState().auth;
+
+    const response = await client.getProfileFollowers(token);
+
+    dispatch(usersModule.actions.addUserFollowers(response, current));
+  };
+}
