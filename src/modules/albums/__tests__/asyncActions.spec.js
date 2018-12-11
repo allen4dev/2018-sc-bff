@@ -32,10 +32,13 @@ describe('playlists module async actions', () => {
       request.respondWith({ status: 201, response });
     });
 
+    const details = { ...response.data.attributes, tracks: ['1', '2'] };
+
     const expectedActions = [
       {
         type: actionTypes.ADD_ALBUM,
         payload: {
+          tracks: details.tracks,
           id: album.id,
           album: { ...album },
           userId: response.data.relationships.user.data.id,
@@ -47,8 +50,6 @@ describe('playlists module async actions', () => {
       ...INITIAL_STATE,
       auth: { token: 'xxx.xxx.xxx' },
     });
-
-    const details = { ...response.data.attributes };
 
     await store.dispatch(actions.createAlbum(details));
 

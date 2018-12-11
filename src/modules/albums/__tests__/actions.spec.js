@@ -6,19 +6,21 @@ import fixtures from './fixtures';
 describe('action creators', () => {
   it('should create an action to add an album', () => {
     const album = fixtures.getAlbum();
+    const tracks = [ '1', '2' ];
 
     const response = fixtures.getAlbumResponse(album);
 
     const expectedAction = {
       type: actionTypes.ADD_ALBUM,
       payload: {
+        tracks,
         id: album.id,
         album: { ...album },
         userId: response.data.relationships.user.data.id,
       },
     };
 
-    expect(actions.addAlbum(response)).toEqual(expectedAction);
+    expect(actions.addAlbum(response, tracks)).toEqual(expectedAction);
   });
 
   it('should create an action to actualize an album', () => {

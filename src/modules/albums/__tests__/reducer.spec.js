@@ -6,6 +6,7 @@ import { INITIAL_STATE } from '../model';
 import * as actions from '../actions';
 
 import allReducer from '../reducer/all';
+import tracksReducer from '../reducer/tracks';
 
 import fixtures from './fixtures';
 
@@ -126,5 +127,28 @@ describe('all', () => {
       },
       byId: [albums2[0].id, albums2[1].id],
     });
+  });
+});
+
+describe('tracks', () => {
+  const TRACKS_STATE = INITIAL_STATE.tracks;
+
+  it('should handle ADD_ALBUM action', () => {
+    const album = fixtures.getAlbum();
+
+    const response = fixtures.getAlbumResponse(album);
+
+    const tracks = ['1', '2'];
+
+    const newState = tracksReducer(
+      TRACKS_STATE,
+      actions.addAlbum(response, tracks),
+    );
+
+    expect(newState).toEqual([
+      ...TRACKS_STATE,
+      { id: album.id, trackId: tracks[0] },
+      { id: album.id, trackId: tracks[1] },
+    ]);
   });
 });

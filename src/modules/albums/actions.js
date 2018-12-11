@@ -7,8 +7,9 @@ import * as actionTypes from './actionTypes';
 // action creators
 export const addAlbum = createAction(
   actionTypes.ADD_ALBUM,
-  ({ data: { id, attributes, relationships } }) => ({
+  ({ data: { id, attributes, relationships } }, tracks) => ({
     id,
+    tracks,
     album: {
       ...attributes,
       id,
@@ -39,7 +40,7 @@ export function createAlbum(details) {
 
     const response = await client.createAlbum(details, token);
 
-    dispatch(addAlbum(response));
+    dispatch(addAlbum(response, details.tracks));
   };
 }
 
