@@ -153,6 +153,26 @@ describe('tracks', () => {
     ]);
   });
 
+  it('should handle REMOVE_ALBUM action', () => {
+    const album = fixtures.getAlbum();
+
+    const track = {
+      id: '123',
+      title: 'Track title',
+    };
+
+    const newState = tracksReducer(
+      [
+        ...TRACKS_STATE,
+        { id: album.id, trackId: track.id },
+        { id: '888', trackId: '999' },
+      ],
+      actions.removeAlbum(album.id),
+    );
+
+    expect(newState).toEqual([...TRACKS_STATE, { id: '888', trackId: '999' }]);
+  });
+
   it('should handle tracks/REMOVE_TRACK action', () => {
     const album = fixtures.getAlbum();
 
