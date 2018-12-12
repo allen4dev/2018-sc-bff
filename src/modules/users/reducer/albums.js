@@ -20,6 +20,9 @@ const albumsReducer = handleActions(
         albumId: album.id,
       })),
     ],
+
+    [albumsModule.actionTypes.REMOVE_ALBUM]: (state, { payload }) =>
+      state.filter(record => record.albumId !== payload.id),
   },
   INITIAL_STATE.albums,
 );

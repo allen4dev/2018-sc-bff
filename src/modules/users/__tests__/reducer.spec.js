@@ -425,6 +425,22 @@ describe('albums', () => {
       { id: uid2, albumId: albums2[1].id },
     ]);
   });
+
+  it('should handle albums/REMOVE_ALBUM action', () => {
+    const user = fixtures.getUser();
+    const album = albumsFixtures.getAlbum();
+
+    const newState = albumsReducer(
+      [
+        ...ALBUMS_STATE,
+        { id: user.id, albumId: album.id },
+        { id: '888', albumId: '999' },
+      ],
+      albumsModule.actions.removeAlbum(album.id),
+    );
+
+    expect(newState).toEqual([...ALBUMS_STATE, { id: '888', albumId: '999' }]);
+  });
 });
 
 describe('followers', () => {
