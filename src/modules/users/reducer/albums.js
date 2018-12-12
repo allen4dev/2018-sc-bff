@@ -21,6 +21,9 @@ const albumsReducer = handleActions(
       })),
     ],
 
+    [actionTypes.REMOVE_USER]: (state, { payload }) =>
+      state.filter(record => record.id !== payload.id),
+
     [albumsModule.actionTypes.REMOVE_ALBUM]: (state, { payload }) =>
       state.filter(record => record.albumId !== payload.id),
   },

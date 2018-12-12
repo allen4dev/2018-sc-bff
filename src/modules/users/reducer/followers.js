@@ -38,6 +38,15 @@ const followersReducer = handleActions(
         following: user.id,
       })),
     ],
+
+    [actionTypes.REMOVE_USER]: (state, { payload }) =>
+      state.filter(record => {
+        if (record.follower === payload.id || record.following === payload.id) {
+          return false;
+        }
+
+        return true;
+      }),
   },
   INITIAL_STATE.followers,
 );

@@ -476,6 +476,22 @@ describe('albums', () => {
 
     expect(newState).toEqual([...ALBUMS_STATE, { id: '888', albumId: '999' }]);
   });
+
+  it('should handle REMOVE_USER action', () => {
+    const user = fixtures.getUser();
+    const album = albumsFixtures.getAlbum();
+
+    const newState = albumsReducer(
+      [
+        ...ALBUMS_STATE,
+        { id: user.id, albumId: album.id },
+        { id: '888', albumId: '999' },
+      ],
+      actions.removeUser(user.id),
+    );
+
+    expect(newState).toEqual([...ALBUMS_STATE, { id: '888', albumId: '999' }]);
+  });
 });
 
 describe('followers', () => {
@@ -571,6 +587,25 @@ describe('followers', () => {
       { follower: nextFollowers[1].id, following: user2.id },
     ]);
   });
+
+  it('should handle REMOVE_USER action', () => {
+    const user = fixtures.getUser();
+    const follower = fixtures.getUser();
+
+    const newState = followersReducer(
+      [
+        ...FOLLOWERS_STATE,
+        { follower: follower.id, following: user.id },
+        { follower: '888', following: '999' },
+      ],
+      actions.removeUser(user.id),
+    );
+
+    expect(newState).toEqual([
+      ...FOLLOWERS_STATE,
+      { follower: '888', following: '999' },
+    ]);
+  });
 });
 
 describe('followings', () => {
@@ -609,6 +644,25 @@ describe('followings', () => {
       ...newState,
       { follower: user2.id, following: nextFollowings[0].id },
       { follower: user2.id, following: nextFollowings[1].id },
+    ]);
+  });
+
+  it('should handle REMOVE_USER action', () => {
+    const follower = fixtures.getUser();
+    const user = fixtures.getUser();
+
+    const newState = followersReducer(
+      [
+        ...FOLLOWERS_STATE,
+        { follower: follower.id, following: user.id },
+        { follower: '888', following: '999' },
+      ],
+      actions.removeUser(follower.id),
+    );
+
+    expect(newState).toEqual([
+      ...FOLLOWERS_STATE,
+      { follower: '888', following: '999' },
     ]);
   });
 });
