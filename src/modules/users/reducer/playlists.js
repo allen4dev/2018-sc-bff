@@ -8,11 +8,6 @@ import { INITIAL_STATE } from '../model';
 
 const playlistsReducer = handleActions(
   {
-    [playlistsModule.actionTypes.ADD_PLAYLIST]: (state, { payload }) => [
-      ...state,
-      { id: payload.userId, playlistId: payload.id },
-    ],
-
     [actionTypes.ADD_USER_PLAYLISTS]: (state, { payload }) => [
       ...state,
       ...payload.playlists.map(playlist => ({
@@ -21,8 +16,16 @@ const playlistsReducer = handleActions(
       })),
     ],
 
+    [actionTypes.REMOVE_USER]: (state, { payload }) =>
+      state.filter(record => record.id !== payload.id),
+
     [playlistsModule.actionTypes.REMOVE_PLAYLIST]: (state, { payload }) =>
       state.filter(record => record.playlistId !== payload.id),
+
+    [playlistsModule.actionTypes.ADD_PLAYLIST]: (state, { payload }) => [
+      ...state,
+      { id: payload.userId, playlistId: payload.id },
+    ],
   },
   INITIAL_STATE.playlists,
 );
