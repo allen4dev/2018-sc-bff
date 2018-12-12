@@ -22,6 +22,9 @@ const tracksReducer = handleActions(
       });
     },
 
+    [actionTypes.REMOVE_PLAYLIST]: (state, { payload }) =>
+      state.filter(record => record.id !== payload.id),
+
     [tracksModule.actionTypes.REMOVE_TRACK]: (state, { payload }) =>
       state.filter(record => record.trackId !== payload.id),
   },

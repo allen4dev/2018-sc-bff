@@ -164,7 +164,7 @@ describe('tracks', () => {
     expect(newState).toEqual([{ id: playlist.id, trackId: '999' }]);
   });
 
-  it('should handle tracks/REMOVE_TRACK action', () => {
+  it('should handle REMOVE_PLAYLIST action', () => {
     const track = { id: '123', title: 'Track title' };
     const playlist = fixtures.getPlaylist();
 
@@ -175,6 +175,22 @@ describe('tracks', () => {
         { id: '888', trackId: '999' },
       ],
       tracksModule.actions.removeTrack(track.id),
+    );
+
+    expect(newState).toEqual([...TRACKS_STATE, { id: '888', trackId: '999' }]);
+  });
+
+  it('should handle tracks/REMOVE_TRACK action', () => {
+    const track = { id: '123', title: 'Track title' };
+    const playlist = fixtures.getPlaylist();
+
+    const newState = tracksReducer(
+      [
+        ...TRACKS_STATE,
+        { id: playlist.id, trackId: track.id },
+        { id: '888', trackId: '999' },
+      ],
+      actions.removePlaylist(playlist.id),
     );
 
     expect(newState).toEqual([...TRACKS_STATE, { id: '888', trackId: '999' }]);
