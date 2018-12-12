@@ -1,5 +1,7 @@
 import { handleActions } from 'redux-actions';
 
+import tracksModule from 'modules/tracks';
+
 import * as actionTypes from '../actionTypes';
 import { INITIAL_STATE } from '../model';
 
@@ -12,6 +14,8 @@ const tracksReducer = handleActions(
         trackId: id,
       })),
     ],
+    [tracksModule.actionTypes.REMOVE_TRACK]: (state, { payload }) =>
+      state.filter(record => record.trackId !== payload.id),
   },
   INITIAL_STATE.tracks,
 );
