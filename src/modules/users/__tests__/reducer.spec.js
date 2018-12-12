@@ -334,6 +334,25 @@ describe('playlists', () => {
       { id: uid2, playlistId: playlists2[1].id },
     ]);
   });
+
+  it('should handle playlists/REMOVE_PLAYLIST action', () => {
+    const user = fixtures.getUser();
+    const playlist = playlistsFixtures.getPlaylist();
+
+    const newState = playlistsReducer(
+      [
+        ...PLAYLISTS_STATE,
+        { id: user.id, playlistId: playlist.id },
+        { id: '888', playlistId: '999' },
+      ],
+      playlistsModule.actions.removePlaylist(playlist.id),
+    );
+
+    expect(newState).toEqual([
+      ...PLAYLISTS_STATE,
+      { id: '888', playlistId: '999' },
+    ]);
+  });
 });
 
 describe('albums', () => {

@@ -20,6 +20,9 @@ const playlistsReducer = handleActions(
         playlistId: playlist.id,
       })),
     ],
+
+    [playlistsModule.actionTypes.REMOVE_PLAYLIST]: (state, { payload }) =>
+      state.filter(record => record.playlistId !== payload.id),
   },
   INITIAL_STATE.playlists,
 );
