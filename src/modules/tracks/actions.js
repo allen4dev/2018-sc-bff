@@ -28,10 +28,9 @@ export const actualizeTrack = createAction(
   }),
 );
 
-export const removeTrack = createAction(
-  actionTypes.REMOVE_TRACK,
-  (_, { id }) => ({ id }),
-);
+export const removeTrack = createAction(actionTypes.REMOVE_TRACK, id => ({
+  id,
+}));
 
 export const addTracks = createAction(actionTypes.ADD_TRACKS, ({ data }) => ({
   tracks: data,
@@ -82,6 +81,6 @@ export function deleteTrack(id) {
 
     await client.deleteTrack(id, token);
 
-    dispatch(removeTrack(null, { id }));
+    dispatch(removeTrack(id));
   };
 }

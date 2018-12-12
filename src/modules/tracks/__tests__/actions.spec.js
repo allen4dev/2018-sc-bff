@@ -59,16 +59,12 @@ describe('tracks action creators', () => {
     it('should create an action to remove a track', () => {
       const track = fixtures.getTrack();
 
-      const details = {
-        id: track.id,
-      };
-
       const expectedAction = {
         type: actionTypes.REMOVE_TRACK,
-        payload: details,
+        payload: { id: track.id },
       };
 
-      expect(actions.removeTrack(undefined, details)).toEqual(expectedAction);
+      expect(actions.removeTrack(track.id)).toEqual(expectedAction);
     });
 
     it('should create an action to add a list of tracks', () => {

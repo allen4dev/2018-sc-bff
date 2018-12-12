@@ -231,14 +231,14 @@ describe('tracks', () => {
 
     const newState = tracksReducer(
       STATE,
-      tracksModule.actions.removeTrack(undefined, { id: track1.id }),
+      tracksModule.actions.removeTrack(track1.id),
     );
 
     expect(newState).toEqual([{ id: user2, trackId: track2.id }]);
 
     const nextState = tracksReducer(
       newState,
-      tracksModule.actions.removeTrack(undefined, { id: track2.id }),
+      tracksModule.actions.removeTrack(track2.id),
     );
 
     expect(nextState).toEqual([]);

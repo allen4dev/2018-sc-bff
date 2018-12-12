@@ -83,8 +83,6 @@ describe('all', () => {
     const track1 = fixtures.getTrack();
     const track2 = fixtures.getTrack();
 
-    const deletedTrack = { id: track1.id };
-
     const newState = allReducer(
       {
         ...ALL_STATE,
@@ -95,7 +93,7 @@ describe('all', () => {
         },
       },
 
-      actions.removeTrack(null, deletedTrack),
+      actions.removeTrack(track1.id),
     );
 
     expect(newState).toEqual({
@@ -227,5 +225,24 @@ describe('replies', () => {
       ...newState,
       ...nextResponse.data.map(reply => ({ id: track.id, replyId: reply.id })),
     ]);
+  });
+
+  it('should handle REMOVE_TRACK action', () => {
+    const track = fixtures.getTrack();
+
+    const reply1 = repliesFixtures.getReply();
+    const reply2 = repliesFixtures.getReply();
+
+    const newState = repliesReducer(
+      [
+        ...REPLIES_STATE,
+        { id: track.id, replyId: reply1.id },
+        { id: track.id, replyId: reply2.id },
+        { id: '888', replyId: '999' },
+      ],
+      actions.removeTrack(track.id),
+    );
+
+    expect(newState).toEqual([...REPLIES_STATE, { id: '888', replyId: '999' }]);
   });
 });
