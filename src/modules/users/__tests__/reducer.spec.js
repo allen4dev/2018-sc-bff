@@ -262,6 +262,22 @@ describe('tracks', () => {
       { id: uid1, trackId: tracks[1].id },
     ]);
   });
+
+  it('should handle REMOVE_USER action', () => {
+    const user = fixtures.getUser();
+    const track = tracksFixtures.getTrack();
+
+    const newState = tracksReducer(
+      [
+        ...TRACKS_STATE,
+        { id: user.id, trackId: track.id },
+        { id: '888', trackId: '999' },
+      ],
+      actions.removeUser(user.id),
+    );
+
+    expect(newState).toEqual([...TRACKS_STATE, { id: '888', trackId: '999' }]);
+  });
 });
 
 describe('playlists', () => {

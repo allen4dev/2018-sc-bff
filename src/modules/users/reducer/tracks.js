@@ -23,6 +23,9 @@ const tracksReducer = handleActions(
         trackId: track.id,
       })),
     ],
+
+    [actionTypes.REMOVE_USER]: (state, { payload }) =>
+      state.filter(record => record.id !== payload.id),
   },
   INITIAL_STATE.tracks,
 );
