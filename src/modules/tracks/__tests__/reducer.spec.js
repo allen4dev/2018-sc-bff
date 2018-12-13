@@ -267,4 +267,23 @@ describe('favorites', () => {
       { id: track.id, userId: user.id },
     ]);
   });
+
+  it('should handle REMOVE_TRACK action', () => {
+    const track = fixtures.getTrack();
+    const user = { id: '123' };
+
+    const newState = favoritesReducer(
+      [
+        ...FAVORITES_STATE,
+        { id: track.id, userId: user.id },
+        { id: '888', userId: '999' },
+      ],
+      actions.removeTrack(track.id),
+    );
+
+    expect(newState).toEqual([
+      ...FAVORITES_STATE,
+      { id: '888', userId: '999' },
+    ]);
+  });
 });
