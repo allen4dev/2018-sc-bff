@@ -5,4 +5,5 @@ export const INITIAL_STATE = {
     byId: [],
   },
   replies: [],
+  favorites: [],
 };

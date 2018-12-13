@@ -8,7 +8,7 @@ import reducer from '../reducer';
 import { INITIAL_STATE } from '../model';
 
 import allReducer from '../reducer/all';
-
+import favoritesReducer from '../reducer/favorites';
 import repliesReducer from '../reducer/replies';
 
 import fixtures from './fixtures';
@@ -244,5 +244,27 @@ describe('replies', () => {
     );
 
     expect(newState).toEqual([...REPLIES_STATE, { id: '888', replyId: '999' }]);
+  });
+});
+
+describe('favorites', () => {
+  const FAVORITES_STATE = INITIAL_STATE.favorites;
+
+  it('should handle FAVORITE_TRACK action', () => {
+    const track = fixtures.getTrack();
+    const user = {
+      id: '123',
+      username: 'allen',
+    };
+
+    const newState = favoritesReducer(
+      FAVORITES_STATE,
+      actions.favoriteTrack(track.id, user.id),
+    );
+
+    expect(newState).toEqual([
+      ...FAVORITES_STATE,
+      { id: track.id, userId: user.id },
+    ]);
   });
 });
