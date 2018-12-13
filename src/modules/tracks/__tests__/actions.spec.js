@@ -80,21 +80,23 @@ describe('tracks action creators', () => {
       expect(actions.addTracks(response)).toEqual(expectedAction);
     });
 
-    it('should create an action to favorite a track', () => {
+    it('should create an action to add a favorited a track', () => {
       const track = fixtures.getTrack();
       const user = {
         id: '123',
       };
 
       const expectedAction = {
-        type: actionTypes.FAVORITE_TRACK,
+        type: actionTypes.ADD_FAVORITED_TRACK,
         payload: {
           id: track.id,
           userId: user.id,
         },
       };
 
-      expect(actions.favoriteTrack(track.id, user.id)).toEqual(expectedAction);
+      expect(actions.addFavoritedTrack(track.id, user.id)).toEqual(
+        expectedAction,
+      );
     });
   });
 });

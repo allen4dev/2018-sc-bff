@@ -32,8 +32,8 @@ export const removeTrack = createAction(actionTypes.REMOVE_TRACK, id => ({
   id,
 }));
 
-export const favoriteTrack = createAction(
-  actionTypes.FAVORITE_TRACK,
+export const addFavoritedTrack = createAction(
+  actionTypes.ADD_FAVORITED_TRACK,
   (id, userId) => ({
     id,
     userId,
@@ -90,5 +90,15 @@ export function deleteTrack(id) {
     await client.deleteTrack(id, token);
 
     dispatch(removeTrack(id));
+  };
+}
+
+export function favoriteTrack(id) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.favoriteTrack(id, token);
+
+    dispatch(addFavoritedTrack(id, response.data.relationships.user.data.id));
   };
 }

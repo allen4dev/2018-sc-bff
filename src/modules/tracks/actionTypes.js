@@ -6,4 +6,4 @@ export const REMOVE_TRACK = `${NAME}/REMOVE_TRACK`;
 
 export const ADD_TRACKS = `${NAME}/ADD_TRACKS`;
 
-export const FAVORITE_TRACK = `${NAME}/FAVORITE_TRACK`;
+export const ADD_FAVORITED_TRACK = `${NAME}/ADD_FAVORITED_TRACK`;

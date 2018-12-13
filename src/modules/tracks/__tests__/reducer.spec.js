@@ -259,7 +259,7 @@ describe('favorites', () => {
 
     const newState = favoritesReducer(
       FAVORITES_STATE,
-      actions.favoriteTrack(track.id, user.id),
+      actions.addFavoritedTrack(track.id, user.id),
     );
 
     expect(newState).toEqual([

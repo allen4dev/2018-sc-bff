@@ -5,7 +5,7 @@ import { INITIAL_STATE } from '../model';
 
 const favoritesReducer = handleActions(
   {
-    [actionTypes.FAVORITE_TRACK]: (state, { payload }) => [
+    [actionTypes.ADD_FAVORITED_TRACK]: (state, { payload }) => [
       ...state,
       { id: payload.id, userId: payload.userId },
     ],

@@ -173,4 +173,40 @@ describe('tracks module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create an ADD_FAVORITED_TRACK action after a user favorites a track', async () => {
+    const track = fixtures.getTrack();
+
+    const response = fixtures.getTrackResponse(track);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        status: 200,
+        response,
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_FAVORITED_TRACK,
+        payload: {
+          id: track.id,
+          userId: response.data.relationships.user.data.id,
+        },
+      },
+    ];
+
+    const token = 'xxx.xxx.xxx';
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token },
+    });
+
+    await store.dispatch(actions.favoriteTrack(track.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });
