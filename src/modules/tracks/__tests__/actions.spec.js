@@ -79,5 +79,18 @@ describe('tracks action creators', () => {
 
       expect(actions.addTracks(response)).toEqual(expectedAction);
     });
+
+    it('should create an action to favorite a track', () => {
+      const track = fixtures.getTrack();
+
+      const expectedAction = {
+        type: actionTypes.FAVORITE_TRACK,
+        payload: {
+          id: track.id,
+        },
+      };
+
+      expect(actions.favoriteTrack(track.id)).toEqual(expectedAction);
+    });
   });
 });

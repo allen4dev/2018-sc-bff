@@ -32,6 +32,10 @@ export const removeTrack = createAction(actionTypes.REMOVE_TRACK, id => ({
   id,
 }));
 
+export const favoriteTrack = createAction(actionTypes.FAVORITE_TRACK, id => ({
+  id,
+}));
+
 export const addTracks = createAction(actionTypes.ADD_TRACKS, ({ data }) => ({
   tracks: data,
 }));

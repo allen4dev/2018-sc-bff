@@ -5,3 +5,5 @@ export const ACTUALIZE_TRACK = `${NAME}/ACTUALIZE_TRACK`;
 export const REMOVE_TRACK = `${NAME}/REMOVE_TRACK`;
 
 export const ADD_TRACKS = `${NAME}/ADD_TRACKS`;
+
+export const FAVORITE_TRACK = `${NAME}/FAVORITE_TRACK`;
