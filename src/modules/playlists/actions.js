@@ -33,6 +33,11 @@ export const addFavoritedPlaylist = createAction(
   (id, userId) => ({ id, userId }),
 );
 
+export const addSharedPlaylist = createAction(
+  actionTypes.ADD_SHARED_PLAYLIST,
+  (id, userId) => ({ id, userId }),
+);
+
 export const removePlaylist = createAction(actionTypes.REMOVE_PLAYLIST, id => ({
   id,
 }));

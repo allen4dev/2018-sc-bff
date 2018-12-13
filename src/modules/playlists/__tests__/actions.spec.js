@@ -106,4 +106,21 @@ describe('action creators', () => {
       expectedAction,
     );
   });
+
+  it('should create an action to add a shared playlist', () => {
+    const playlist = fixtures.getPlaylist();
+    const user = { id: '123' };
+
+    const expectedAction = {
+      type: actionTypes.ADD_SHARED_PLAYLIST,
+      payload: {
+        id: playlist.id,
+        userId: user.id,
+      },
+    };
+
+    expect(actions.addSharedPlaylist(playlist.id, user.id)).toEqual(
+      expectedAction,
+    );
+  });
 });
