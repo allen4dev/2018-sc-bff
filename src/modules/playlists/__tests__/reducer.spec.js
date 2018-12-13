@@ -7,8 +7,9 @@ import { INITIAL_STATE } from '../model';
 import * as actions from '../actions';
 
 import allReducer from '../reducer/all';
-import tracksReducer from '../reducer/tracks';
 import favoritesReducer from '../reducer/favorites';
+import sharedReducer from '../reducer/shared';
+import tracksReducer from '../reducer/tracks';
 
 import fixtures from './fixtures';
 
@@ -214,6 +215,27 @@ describe('favorites', () => {
 
     expect(newState).toEqual([
       ...FAVORITES_STATE,
+      { id: playlist.id, userId: user.id },
+    ]);
+  });
+});
+
+describe('shared', () => {
+  const SHARED_STATE = INITIAL_STATE.favorites;
+
+  it('should handle ADD_SHARED_PLAYLIST action', () => {
+    const playlist = fixtures.getPlaylist();
+    const user = {
+      id: '123',
+    };
+
+    const newState = sharedReducer(
+      SHARED_STATE,
+      actions.addSharedPlaylist(playlist.id, user.id),
+    );
+
+    expect(newState).toEqual([
+      ...SHARED_STATE,
       { id: playlist.id, userId: user.id },
     ]);
   });
