@@ -111,3 +111,15 @@ export function deletePlaylist(id) {
     dispatch(removePlaylist(id));
   };
 }
+
+export function favoritePlaylist(id) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.favoritePlaylist(id, token);
+
+    const { user } = response.data.relationships;
+
+    dispatch(addFavoritedPlaylist(id, user.data.id));
+  };
+}
