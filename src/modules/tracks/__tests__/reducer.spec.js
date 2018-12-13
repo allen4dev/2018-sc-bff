@@ -250,7 +250,7 @@ describe('replies', () => {
 describe('favorites', () => {
   const FAVORITES_STATE = INITIAL_STATE.favorites;
 
-  it('should handle FAVORITE_TRACK action', () => {
+  it('should handle ADD_FAVORITED_TRACK action', () => {
     const track = fixtures.getTrack();
     const user = {
       id: '123',
