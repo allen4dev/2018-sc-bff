@@ -128,3 +128,15 @@ export function favoritePlaylist(id) {
     dispatch(addFavoritedPlaylist(id, user.data.id));
   };
 }
+
+export function sharePlaylist(id) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.sharePlaylist(id, token);
+
+    const { user } = response.data.relationships;
+
+    dispatch(addSharedPlaylist(id, user.data.id));
+  };
+}

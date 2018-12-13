@@ -264,4 +264,40 @@ describe('playlists module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create an ADD_SHARED_PLAYLIST action after a user shares a playlist', async () => {
+    const playlist = fixtures.getPlaylist();
+
+    const response = fixtures.getPlaylistResponse(playlist);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({
+        status: 200,
+        response,
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_SHARED_PLAYLIST,
+        payload: {
+          id: playlist.id,
+          userId: response.data.relationships.user.data.id,
+        },
+      },
+    ];
+
+    const token = 'xxx.xxx.xxx';
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token },
+    });
+
+    await store.dispatch(actions.sharePlaylist(playlist.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });
