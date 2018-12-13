@@ -218,6 +218,25 @@ describe('favorites', () => {
       { id: playlist.id, userId: user.id },
     ]);
   });
+
+  it('should handle REMOVE_PLAYLIST action', () => {
+    const user = { id: '123' };
+    const playlist = fixtures.getPlaylist();
+
+    const newState = tracksReducer(
+      [
+        ...FAVORITES_STATE,
+        { id: playlist.id, userId: user.id },
+        { id: '888', userId: '999' },
+      ],
+      actions.removePlaylist(playlist.id),
+    );
+
+    expect(newState).toEqual([
+      ...FAVORITES_STATE,
+      { id: '888', userId: '999' },
+    ]);
+  });
 });
 
 describe('shared', () => {
