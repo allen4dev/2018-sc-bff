@@ -28,6 +28,11 @@ export const actualizePlaylist = createAction(
   }),
 );
 
+export const addFavoritedPlaylist = createAction(
+  actionTypes.ADD_FAVORITED_PLAYLIST,
+  (id, userId) => ({ id, userId }),
+);
+
 export const removePlaylist = createAction(actionTypes.REMOVE_PLAYLIST, id => ({
   id,
 }));

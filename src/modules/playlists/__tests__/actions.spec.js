@@ -89,4 +89,21 @@ describe('action creators', () => {
 
     expect(actions.removePlaylist(playlist.id)).toEqual(expectedAction);
   });
+
+  it('should create an action to add a favorited playlist', () => {
+    const playlist = fixtures.getPlaylist();
+    const user = { id: '123' };
+
+    const expectedAction = {
+      type: actionTypes.ADD_FAVORITED_PLAYLIST,
+      payload: {
+        id: playlist.id,
+        userId: user.id,
+      },
+    };
+
+    expect(actions.addFavoritedPlaylist(playlist.id, user.id)).toEqual(
+      expectedAction,
+    );
+  });
 });
