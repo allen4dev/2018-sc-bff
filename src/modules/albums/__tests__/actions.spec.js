@@ -6,7 +6,7 @@ import fixtures from './fixtures';
 describe('action creators', () => {
   it('should create an action to add an album', () => {
     const album = fixtures.getAlbum();
-    const tracks = [ '1', '2' ];
+    const tracks = ['1', '2'];
 
     const response = fixtures.getAlbumResponse(album);
 
@@ -47,5 +47,22 @@ describe('action creators', () => {
     };
 
     expect(actions.removeAlbum(album.id)).toEqual(expectedAction);
+  });
+
+  it('should create an action to add a favorited album', () => {
+    const album = fixtures.getAlbum();
+    const user = { id: '123' };
+
+    const expectedAction = {
+      type: actionTypes.ADD_FAVORITED_ALBUM,
+      payload: {
+        id: album.id,
+        userId: user.id,
+      },
+    };
+
+    expect(actions.addFavoritedAlbum(album.id, user.id)).toEqual(
+      expectedAction,
+    );
   });
 });

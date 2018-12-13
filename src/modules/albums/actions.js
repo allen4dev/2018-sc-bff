@@ -33,6 +33,11 @@ export const removeAlbum = createAction(actionTypes.REMOVE_ALBUM, id => ({
   id,
 }));
 
+export const addFavoritedAlbum = createAction(
+  actionTypes.ADD_FAVORITED_ALBUM,
+  (id, userId) => ({ id, userId }),
+);
+
 // async action creators
 export function createAlbum(details) {
   return async (dispatch, getState) => {
