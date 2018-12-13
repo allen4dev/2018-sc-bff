@@ -18,12 +18,10 @@ export const addReply = createAction(
 
 export const addReplies = createAction(
   actionTypes.ADD_REPLIES,
-  (response, details) => {
-    return {
-      trackId: details.id,
-      replies: response.data,
-    };
-  },
+  (response, details) => ({
+    trackId: details.id,
+    replies: response.data,
+  }),
 );
 
 export function replyTrack(id, body) {
