@@ -223,7 +223,7 @@ describe('favorites', () => {
     const user = { id: '123' };
     const playlist = fixtures.getPlaylist();
 
-    const newState = tracksReducer(
+    const newState = favoritesReducer(
       [
         ...FAVORITES_STATE,
         { id: playlist.id, userId: user.id },
@@ -257,5 +257,21 @@ describe('shared', () => {
       ...SHARED_STATE,
       { id: playlist.id, userId: user.id },
     ]);
+  });
+
+  it('should handle REMOVE_PLAYLIST action', () => {
+    const user = { id: '123' };
+    const playlist = fixtures.getPlaylist();
+
+    const newState = sharedReducer(
+      [
+        ...SHARED_STATE,
+        { id: playlist.id, userId: user.id },
+        { id: '888', userId: '999' },
+      ],
+      actions.removePlaylist(playlist.id),
+    );
+
+    expect(newState).toEqual([...SHARED_STATE, { id: '888', userId: '999' }]);
   });
 });

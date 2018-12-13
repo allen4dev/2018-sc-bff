@@ -9,6 +9,9 @@ const sharedReducer = handleActions(
       ...state,
       { id: payload.id, userId: payload.userId },
     ],
+
+    [actionTypes.REMOVE_PLAYLIST]: (state, { payload }) =>
+      state.filter(record => record.id !== payload.id),
   },
   INITIAL_STATE.shared,
 );
