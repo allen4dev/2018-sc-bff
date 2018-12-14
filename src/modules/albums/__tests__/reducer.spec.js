@@ -212,4 +212,23 @@ describe('favorites', () => {
       { id: album.id, userId: user.id },
     ]);
   });
+
+  it('should handle REMOVE_ALBUM action', () => {
+    const album = fixtures.getAlbum();
+    const user = { id: '123' };
+
+    const newState = favoritesReducer(
+      [
+        ...FAVORITES_STATE,
+        { id: album.id, userId: user.id },
+        { id: '888', userId: '999' },
+      ],
+      actions.removeAlbum(album.id),
+    );
+
+    expect(newState).toEqual([
+      ...FAVORITES_STATE,
+      { id: '888', userId: '999' },
+    ]);
+  });
 });
