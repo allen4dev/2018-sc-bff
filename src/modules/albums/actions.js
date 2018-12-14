@@ -86,3 +86,13 @@ export function deleteAlbum(id) {
     dispatch(removeAlbum(id));
   };
 }
+
+export function favoriteAlbum(id) {
+  return async (dispatch, getState) => {
+    const { current, token } = getState().auth;
+
+    await client.favoriteAlbum(id, token);
+
+    dispatch(addFavoritedAlbum(id, current));
+  };
+}

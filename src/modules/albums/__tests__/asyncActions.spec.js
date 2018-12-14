@@ -173,4 +173,36 @@ describe('playlists module async actions', () => {
 
     expect(store.getActions()).toEqual(expectedActions);
   });
+
+  it('should create an ADD_FAVORITED_ALBUM action after a user favorites an album', async () => {
+    const album = fixtures.getAlbum();
+    const user = { id: '123' };
+
+    const response = fixtures.getAlbumResponse(album);
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+
+      request.respondWith({ status: 200, response });
+    });
+
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_FAVORITED_ALBUM,
+        payload: {
+          id: album.id,
+          userId: user.id,
+        },
+      },
+    ];
+
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { current: user.id, token: 'xxx.xxx.xxx' },
+    });
+
+    await store.dispatch(actions.favoriteAlbum(album.id));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
 });
