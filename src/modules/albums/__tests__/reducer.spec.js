@@ -7,6 +7,7 @@ import { INITIAL_STATE } from '../model';
 import * as actions from '../actions';
 
 import allReducer from '../reducer/all';
+import favoritesReducer from '../reducer/favorites';
 import tracksReducer from '../reducer/tracks';
 
 import fixtures from './fixtures';
@@ -191,5 +192,24 @@ describe('tracks', () => {
     );
 
     expect(newState).toEqual([...TRACKS_STATE, { id: '888', trackId: '999' }]);
+  });
+});
+
+describe('favorites', () => {
+  const FAVORITES_STATE = INITIAL_STATE.favorites;
+
+  it('should handle ADD_FAVORITED_ALBUM action', () => {
+    const album = fixtures.getAlbum();
+    const user = { id: '123' };
+
+    const newState = favoritesReducer(
+      FAVORITES_STATE,
+      actions.addFavoritedAlbum(album.id, user.id),
+    );
+
+    expect(newState).toEqual([
+      ...FAVORITES_STATE,
+      { id: album.id, userId: user.id },
+    ]);
   });
 });
