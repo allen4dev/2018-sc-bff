@@ -13,6 +13,9 @@ const favoritesReducer = handleActions(
 
     [actionTypes.REMOVE_PLAYLIST]: (state, { payload }) =>
       state.filter(record => record.id !== payload.id),
+
+    'users/REMOVE_USER': (state, { payload }) =>
+      state.filter(record => record.userId !== payload.id),
   },
   INITIAL_STATE.favorites,
 );
