@@ -65,4 +65,20 @@ describe('action creators', () => {
       expectedAction,
     );
   });
+
+  it('should create an action to add shared album', () => {
+    const album = fixtures.getAlbum();
+
+    const user = { id: '123' };
+
+    const expectedAction = {
+      type: actionTypes.ADD_SHARED_ALBUM,
+      payload: {
+        id: album.id,
+        userId: user.id,
+      },
+    };
+
+    expect(actions.addSharedAlbum(album.id, user.id)).toEqual(expectedAction);
+  });
 });
