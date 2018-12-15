@@ -4,15 +4,15 @@ import client from 'helpers/client';
 
 import * as actionTypes from './actionTypes';
 
-export const addReply = createAction(
-  actionTypes.ADD_REPLY,
+export const addTrackReply = createAction(
+  actionTypes.ADD_TRACK_REPLY,
   ({ data: { id, attributes, relationships } }) => ({
     id,
     reply: {
       id,
       ...attributes,
     },
-    trackId: relationships.track.data.id,
+    repliedId: relationships.track.data.id,
   }),
 );
 

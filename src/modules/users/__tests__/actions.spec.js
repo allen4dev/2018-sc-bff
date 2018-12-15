@@ -72,7 +72,7 @@ describe('users - action creators', () => {
     expect(actions.addUserAlbums(response, userId)).toEqual(expectedAction);
   });
 
-  it('should create an action to follow a user', () => {
+  it('should create an action to add a followed user', () => {
     const uid = '1';
     const followedId = '2';
 
@@ -87,7 +87,7 @@ describe('users - action creators', () => {
     expect(actions.addFollowedUser(uid, followedId)).toEqual(expectedAction);
   });
 
-  it('should create an action to unfollow a user', () => {
+  it('should create an action to remove a followed user', () => {
     const uid = '1';
     const unfollowedId = '2';
 

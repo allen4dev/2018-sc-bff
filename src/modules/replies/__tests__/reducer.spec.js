@@ -12,7 +12,7 @@ test('@INIT', () => {
   expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
 });
 
-describe('replies - reducer - entities', () => {
+describe('entities', () => {
   const ENTITIES_STATE = INITIAL_STATE.entities;
 
   it('should handle ADD_REPLY action', () => {
