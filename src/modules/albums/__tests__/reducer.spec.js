@@ -231,4 +231,23 @@ describe('favorites', () => {
       { id: '888', userId: '999' },
     ]);
   });
+
+  it('should handle users/REMOVE_USER action', () => {
+    const album = fixtures.getAlbum();
+    const user = { id: '123' };
+
+    const newState = favoritesReducer(
+      [
+        ...FAVORITES_STATE,
+        { id: album.id, userId: user.id },
+        { id: '888', userId: '999' },
+      ],
+      usersModule.actions.removeUser(user.id),
+    );
+
+    expect(newState).toEqual([
+      ...FAVORITES_STATE,
+      { id: '888', userId: '999' },
+    ]);
+  });
 });
