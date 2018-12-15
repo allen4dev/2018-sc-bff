@@ -42,4 +42,25 @@ describe('action creators', () => {
 
     expect(actions.addTrackReplies(response, details)).toEqual(expectedAction);
   });
+
+  it('should create an action to add a reply comment', () => {
+    const reply = fixtures.getReply();
+
+    const comment = fixtures.getReply();
+    const response = fixtures.getReplyResponse(comment);
+
+    const expectedAction = {
+      type: actionTypes.ADD_REPLY_COMMENT,
+      payload: {
+        id: comment.id,
+        reply: {
+          ...comment,
+          id: comment.id,
+        },
+        repliedId: reply.id,
+      },
+    };
+
+    expect(actions.addReplyComment(response, reply.id)).toEqual(expectedAction);
+  });
 });

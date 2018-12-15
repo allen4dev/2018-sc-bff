@@ -24,6 +24,19 @@ export const addTrackReplies = createAction(
   }),
 );
 
+export const addReplyComment = createAction(
+  actionTypes.ADD_REPLY_COMMENT,
+  ({ data: { id, attributes } }, replied) => ({
+    id,
+    reply: {
+      ...attributes,
+      id,
+    },
+    repliedId: replied,
+  }),
+);
+
+// async actions
 export function replyTrack(id, body) {
   return async (dispatch, getState) => {
     const { token } = getState().auth;
