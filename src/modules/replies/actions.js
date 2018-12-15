@@ -46,3 +46,13 @@ export function replyTrack(id, body) {
     dispatch(addTrackReply(response));
   };
 }
+
+export function commentReply(id, body) {
+  return async (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    const response = await client.replyTrack(id, { body }, token);
+
+    dispatch(addReplyComment(response, id));
+  };
+}
