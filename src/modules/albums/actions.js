@@ -101,3 +101,13 @@ export function favoriteAlbum(id) {
     dispatch(addFavoritedAlbum(id, current));
   };
 }
+
+export function shareAlbum(id) {
+  return async (dispatch, getState) => {
+    const { current, token } = getState().auth;
+
+    await client.shareAlbum(id, token);
+
+    dispatch(addSharedAlbum(id, current));
+  };
+}
