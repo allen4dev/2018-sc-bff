@@ -5,6 +5,7 @@ export const INITIAL_STATE = {
   },
   tracks: [],
   favorites: [],
+  shared: [],
 };
 
 export const dummie = 'dummie';

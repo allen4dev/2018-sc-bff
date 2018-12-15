@@ -8,6 +8,7 @@ import * as actions from '../actions';
 
 import allReducer from '../reducer/all';
 import favoritesReducer from '../reducer/favorites';
+import sharedReducer from '../reducer/shared';
 import tracksReducer from '../reducer/tracks';
 
 import fixtures from './fixtures';
@@ -248,6 +249,38 @@ describe('favorites', () => {
     expect(newState).toEqual([
       ...FAVORITES_STATE,
       { id: '888', userId: '999' },
+    ]);
+  });
+});
+
+describe('shared', () => {
+  const SHARED_STATE = INITIAL_STATE.shared;
+
+  it('should handle ADD_SHARED_ALBUM action', () => {
+    const album = fixtures.getAlbum();
+
+    const user = { id: '123' };
+
+    const newState = sharedReducer(
+      SHARED_STATE,
+      actions.addSharedAlbum(album.id, user.id),
+    );
+
+    expect(newState).toEqual([
+      ...SHARED_STATE,
+      { id: album.id, userId: user.id },
+    ]);
+
+    const nextAlbum = fixtures.getAlbum();
+
+    const nextState = sharedReducer(
+      newState,
+      actions.addSharedAlbum(nextAlbum.id, user.id),
+    );
+
+    expect(nextState).toEqual([
+      ...newState,
+      { id: nextAlbum.id, userId: user.id },
     ]);
   });
 });

@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 
 import all from './all';
-import tracks from './tracks';
 import favorites from './favorites';
+import shared from './shared';
+import tracks from './tracks';
 
-const reducer = combineReducers({ all, favorites, tracks });
+const reducer = combineReducers({ all, favorites, shared, tracks });
 
 export default reducer;
