@@ -75,4 +75,36 @@ describe('entities', () => {
 
     expect(nextState).toEqual({ ...newState, ...nextResponse.data });
   });
+
+  it('should handle ADD_REPLY_COMMENT action', () => {
+    const reply = fixtures.getReply();
+
+    const comment = fixtures.getReply();
+
+    const response = fixtures.getReplyResponse(comment);
+
+    const newState = entitiesReducer(
+      ENTITIES_STATE,
+      actions.addReplyComment(response, reply.id),
+    );
+
+    expect(newState).toEqual({
+      ...ENTITIES_STATE,
+      [comment.id]: { ...comment },
+    });
+
+    const nextComment = fixtures.getReply();
+
+    const nextResponse = fixtures.getReplyResponse(nextComment);
+
+    const nextState = entitiesReducer(
+      newState,
+      actions.addReplyComment(nextResponse, reply.id),
+    );
+
+    expect(nextState).toEqual({
+      ...nextState,
+      [nextComment.id]: { ...nextComment },
+    });
+  });
 });

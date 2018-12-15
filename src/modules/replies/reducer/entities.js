@@ -1,11 +1,14 @@
-import { handleActions } from 'redux-actions';
+import { handleActions, combineActions } from 'redux-actions';
 
 import * as actionTypes from '../actionTypes';
 import { INITIAL_STATE } from '../model';
 
 const entitiesReducer = handleActions(
   {
-    [actionTypes.ADD_TRACK_REPLY]: (state, { payload }) => ({
+    [combineActions(
+      actionTypes.ADD_TRACK_REPLY,
+      actionTypes.ADD_REPLY_COMMENT,
+    )]: (state, { payload }) => ({
       ...state,
       [payload.id]: payload.reply,
     }),
