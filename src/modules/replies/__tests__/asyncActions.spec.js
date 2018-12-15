@@ -38,11 +38,11 @@ describe('replies module async actions', () => {
 
     const expectedActions = [
       {
-        type: actionTypes.ADD_REPLY,
+        type: actionTypes.ADD_TRACK_REPLY,
         payload: {
           id: reply.id,
           reply: { ...reply },
-          trackId: track.data.id,
+          repliedId: track.data.id,
         },
       },
     ];

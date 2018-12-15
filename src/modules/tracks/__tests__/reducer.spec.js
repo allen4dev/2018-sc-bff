@@ -206,7 +206,7 @@ describe('replies', () => {
 
     const newState = repliesReducer(
       REPLIES_STATE,
-      repliesModule.actions.addReplies(response, details),
+      repliesModule.actions.addTrackReplies(response, details),
     );
 
     expect(newState).toEqual([
@@ -218,7 +218,7 @@ describe('replies', () => {
 
     const nextState = repliesReducer(
       newState,
-      repliesModule.actions.addReplies(nextResponse, details),
+      repliesModule.actions.addTrackReplies(nextResponse, details),
     );
 
     expect(nextState).toEqual([

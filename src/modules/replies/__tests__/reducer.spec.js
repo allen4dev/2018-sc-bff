@@ -36,7 +36,10 @@ describe('entities', () => {
 
     const nextResponse = fixtures.getReplyResponse(newReply, user);
 
-    const nextState = entitiesReducer(newState, actions.addReply(nextResponse));
+    const nextState = entitiesReducer(
+      newState,
+      actions.addTrackReply(nextResponse),
+    );
 
     expect(nextState).toEqual({
       ...nextState,
@@ -44,17 +47,18 @@ describe('entities', () => {
     });
   });
 
-  it('should handle ADD_REPLIES action', () => {
+  it('should handle ADD_TRACK_REPLIES action', () => {
     const track = tracksFixtures.getTrack();
 
     const response = fixtures.getRepliesResponse();
+
     const details = {
       id: track.id,
     };
 
     const newState = entitiesReducer(
       ENTITIES_STATE,
-      actions.addReplies(response, details),
+      actions.addTrackReplies(response, details),
     );
 
     expect(newState).toEqual({
@@ -66,7 +70,7 @@ describe('entities', () => {
 
     const nextState = entitiesReducer(
       newState,
-      actions.addReplies(nextResponse, details),
+      actions.addTrackReplies(nextResponse, details),
     );
 
     expect(nextState).toEqual({ ...newState, ...nextResponse.data });

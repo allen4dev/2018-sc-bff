@@ -25,7 +25,7 @@ describe('action creators', () => {
     expect(actions.addTrackReply(response)).toEqual(expectedAction);
   });
 
-  it('should create an action to add a list of replies', () => {
+  it('should create an action to add a list of track replies', () => {
     const track = tracksFixtures.getTrack();
 
     const details = { id: track.id };
@@ -33,13 +33,13 @@ describe('action creators', () => {
     const response = fixtures.getRepliesResponse();
 
     const expectedAction = {
-      type: actionTypes.ADD_REPLIES,
+      type: actionTypes.ADD_TRACK_REPLIES,
       payload: {
-        trackId: track.id,
+        repliedId: track.id,
         replies: response.data,
       },
     };
 
-    expect(actions.addReplies(response, details)).toEqual(expectedAction);
+    expect(actions.addTrackReplies(response, details)).toEqual(expectedAction);
   });
 });

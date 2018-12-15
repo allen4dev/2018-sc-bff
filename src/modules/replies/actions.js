@@ -16,10 +16,10 @@ export const addTrackReply = createAction(
   }),
 );
 
-export const addReplies = createAction(
-  actionTypes.ADD_REPLIES,
+export const addTrackReplies = createAction(
+  actionTypes.ADD_TRACK_REPLIES,
   (response, details) => ({
-    trackId: details.id,
+    repliedId: details.id,
     replies: response.data,
   }),
 );
@@ -30,6 +30,6 @@ export function replyTrack(id, body) {
 
     const response = await client.replyTrack(id, { body }, token);
 
-    dispatch(addReply(response));
+    dispatch(addTrackReply(response));
   };
 }

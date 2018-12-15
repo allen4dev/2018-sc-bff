@@ -18,10 +18,10 @@ const repliesReducer = handleActions(
       { id: payload.repliedId, replyId: payload.id },
     ],
 
-    [repliesModule.actionTypes.ADD_REPLIES]: (state, { payload }) => [
+    [repliesModule.actionTypes.ADD_TRACK_REPLIES]: (state, { payload }) => [
       ...state,
       ...payload.replies.map(reply => ({
-        id: payload.trackId,
+        id: payload.repliedId,
         replyId: reply.id,
       })),
     ],

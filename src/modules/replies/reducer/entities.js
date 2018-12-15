@@ -10,7 +10,7 @@ const entitiesReducer = handleActions(
       [payload.id]: payload.reply,
     }),
 
-    [actionTypes.ADD_REPLIES]: (state, { payload }) => ({
+    [actionTypes.ADD_TRACK_REPLIES]: (state, { payload }) => ({
       ...state,
       ...payload.replies,
     }),
