@@ -10,6 +10,9 @@ const sharedReducer = handleActions(
       ...state,
       { id: payload.id, userId: payload.userId },
     ],
+
+    'users/REMOVE_USER': (state, { payload }) =>
+      state.filter(record => record.userId !== payload.id),
   },
   INITIAL_STATE.shared,
 );
