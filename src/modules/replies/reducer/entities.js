@@ -5,7 +5,7 @@ import { INITIAL_STATE } from '../model';
 
 const entitiesReducer = handleActions(
   {
-    [actionTypes.ADD_REPLY]: (state, { payload }) => ({
+    [actionTypes.ADD_TRACK_REPLY]: (state, { payload }) => ({
       ...state,
       [payload.id]: payload.reply,
     }),

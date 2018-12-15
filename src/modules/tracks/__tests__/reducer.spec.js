@@ -162,7 +162,7 @@ describe('all', () => {
 describe('replies', () => {
   const REPLIES_STATE = INITIAL_STATE.replies;
 
-  it('should handle replies/ADD_REPLY action', () => {
+  it('should handle replies/ADD_TRACK_REPLY action', () => {
     const reply = repliesFixtures.getReply();
 
     const response = repliesFixtures.getReplyResponse(reply);
@@ -171,7 +171,7 @@ describe('replies', () => {
 
     const newState = repliesReducer(
       REPLIES_STATE,
-      repliesModule.actions.addReply(response),
+      repliesModule.actions.addTrackReply(response),
     );
 
     expect(newState).toEqual([
@@ -189,7 +189,7 @@ describe('replies', () => {
 
     const nextState = repliesReducer(
       newState,
-      repliesModule.actions.addReply(nextResponse),
+      repliesModule.actions.addTrackReply(nextResponse),
     );
 
     expect(nextState).toEqual([

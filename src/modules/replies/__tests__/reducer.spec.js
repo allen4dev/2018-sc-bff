@@ -15,7 +15,7 @@ test('@INIT', () => {
 describe('entities', () => {
   const ENTITIES_STATE = INITIAL_STATE.entities;
 
-  it('should handle ADD_REPLY action', () => {
+  it('should handle ADD_TRACK_REPLY action', () => {
     const reply = fixtures.getReply();
 
     const response = fixtures.getReplyResponse(reply);
@@ -24,12 +24,12 @@ describe('entities', () => {
 
     const newState = entitiesReducer(
       ENTITIES_STATE,
-      actions.addReply(response),
+      actions.addTrackReply(response),
     );
 
     expect(newState).toEqual({
       ...ENTITIES_STATE,
-      [reply.id]: reply,
+      [reply.id]: { ...reply },
     });
 
     const newReply = fixtures.getReply();
@@ -40,7 +40,7 @@ describe('entities', () => {
 
     expect(nextState).toEqual({
       ...nextState,
-      [newReply.id]: newReply,
+      [newReply.id]: { ...newReply },
     });
   });
 

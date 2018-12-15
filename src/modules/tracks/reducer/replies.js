@@ -13,9 +13,9 @@ const repliesReducer = handleActions(
     [actionTypes.REMOVE_TRACK]: (state, { payload }) =>
       state.filter(record => record.id !== payload.id),
 
-    [repliesModule.actionTypes.ADD_REPLY]: (state, { payload }) => [
+    [repliesModule.actionTypes.ADD_TRACK_REPLY]: (state, { payload }) => [
       ...state,
-      { id: payload.trackId, replyId: payload.id },
+      { id: payload.repliedId, replyId: payload.id },
     ],
 
     [repliesModule.actionTypes.ADD_REPLIES]: (state, { payload }) => [
