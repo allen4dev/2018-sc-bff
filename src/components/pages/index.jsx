@@ -2,8 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Unauthorized from 'components/shared/header/Unauthorized';
-import Authorized from 'components/shared/header/Authorized';
+import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
 
 import Home from './Home';
@@ -17,29 +16,9 @@ import Upload from './Upload';
 
 const Error404 = () => <h1>404 page not found</h1>;
 
-const Wrapper = styled.section`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const Content = styled.section`
-  flex: 1;
-  margin-top: ${({ theme: { sizes } }) => sizes.header};
-`;
-
-const isAuth = false;
-
-function renderHeader() {
-  if (!isAuth) return <Unauthorized />;
-
-  return <Authorized />;
-}
-
 const Pages = () => (
   <Wrapper>
-    {renderHeader()}
+    <Header />
     <Content>
       <Switch>
         <Route exact path="/" component={Home} />
@@ -56,5 +35,17 @@ const Pages = () => (
     <Footer />
   </Wrapper>
 );
+
+const Wrapper = styled.section`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Content = styled.section`
+  flex: 1;
+  margin-top: ${({ theme: { sizes } }) => sizes.header};
+`;
 
 export default Pages;
