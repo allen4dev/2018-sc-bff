@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { arrayOf, object } from 'prop-types';
 
 import { Title, Text } from 'components/utils/Texts';
 import { Button } from 'components/utils/Buttons';
@@ -8,20 +9,25 @@ import { Button } from 'components/utils/Buttons';
 import tagsModule from 'modules/tags';
 import tracksModule from 'modules/tracks';
 
-const apiTags = [{ id: '1', name: 'JPop' }, { id: '2', name: 'Kpop' }];
-
 class Upload extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       title: '',
-      tags: [],
     };
 
     this.photo = React.createRef();
     this.src = React.createRef();
   }
+
+  componentDidMount = async () => {
+    const { tags, fetchTags } = this.props;
+
+    if (tags.length === 0) {
+      await fetchTags();
+    }
+  };
 
   handleChange = e => {
     const { name, value } = e.target;
@@ -30,7 +36,7 @@ class Upload extends Component {
   };
 
   handleTagChange = tag => {
-    const { tags } = this.state;
+    const { tags } = this.props;
 
     let newTags = [...tags];
 
@@ -68,6 +74,7 @@ class Upload extends Component {
 
   render() {
     const { title } = this.state;
+    const { tags } = this.props;
 
     return (
       <Wrapper>
@@ -96,7 +103,7 @@ class Upload extends Component {
               <Subtitle color="dark">Tags</Subtitle>
 
               <CheckboxGroup>
-                {apiTags.map(tag => (
+                {tags.map(tag => (
                   <FormGroup key={tag.id}>
                     <Input
                       type="checkbox"
@@ -223,6 +230,14 @@ const Sharing = styled.div`
 `;
 
 const Footer = styled.footer``;
+
+Upload.defaultProps = {
+  tags: [],
+};
+
+Upload.propTypes = {
+  tags: arrayOf(object),
+};
 
 function mapStateToProps(state) {
   return {
