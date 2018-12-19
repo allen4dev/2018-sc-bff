@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { shape, string } from 'prop-types';
 
 import Avatar from 'components/shared/Avatar';
 
@@ -13,11 +14,18 @@ const Artist = styled.span`
   margin-left: 0.5rem;
 `;
 
-const Menu = () => (
+const Menu = ({ user }) => (
   <Wrapper>
-    <Avatar src="/images/avatar.jpg" size="40px" />
-    <Artist>Archer</Artist>
+    <Avatar src={user.avatar} size="40px" />
+    <Artist>{user.username}</Artist>
   </Wrapper>
 );
+
+Menu.propTypes = {
+  user: shape({
+    username: string,
+    avatar: string,
+  }).isRequired,
+};
 
 export default Menu;

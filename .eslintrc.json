@@ -24,6 +24,7 @@
   },
   "rules": {
     "react/destructuring-assignment": 1,
-    "no-debugger": 1
+    "no-debugger": 1,
+    "react/forbid-prop-types": 1
   }
 }

@@ -24,9 +24,9 @@ function renderItems(isAuth) {
     return (
       <React.Fragment>
         <Item>
-          <Link to="/upload">
+          <Link to="/signup">
             <FlatButton flexible color="white">
-              Subir una pista
+              Iniciar sesion
             </FlatButton>
           </Link>
         </Item>
@@ -45,9 +45,9 @@ function renderItems(isAuth) {
   return (
     <React.Fragment>
       <Item>
-        <Link to="/upload">
+        <Link to="/">
           <FlatButton flexible color="white">
-            Subir una pista
+            Inicio
           </FlatButton>
         </Link>
       </Item>

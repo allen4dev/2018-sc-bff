@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-const Wrapper = styled(Link)`
+const Wrapper = styled.figure`
   text-align: center;
   text-decoration: none;
 `;
@@ -14,7 +13,7 @@ const Content = styled.h1`
 `;
 
 const Logo = () => (
-  <Wrapper to="/">
+  <Wrapper>
     <Content>Soundcloud</Content>
   </Wrapper>
 );
