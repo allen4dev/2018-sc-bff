@@ -5,5 +5,8 @@ import client from 'helpers/client';
 import * as actionTypes from './actionTypes';
 
 export const addTags = createAction(actionTypes.ADD_TAGS, ({ data }) => ({
-  tags: data,
+  tags: data.map(tag => ({
+    ...tag.attributes,
+    id: tag.id,
+  })),
 }));

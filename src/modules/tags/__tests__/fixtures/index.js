@@ -8,6 +8,13 @@ export default {
     };
   },
 
+  getRawTags(response) {
+    return response.data.map(tag => ({
+      ...tag.attributes,
+      id: tag.id,
+    }));
+  },
+
   getTagsResponse() {
     const tag1 = this.getTag();
     const tag2 = this.getTag();
