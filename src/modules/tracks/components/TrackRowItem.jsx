@@ -6,7 +6,7 @@ import ResourceActions from 'components/shared/ResourceActions';
 
 import TrackRowDetails from './TrackRowDetails';
 
-const Wrapper = styled.li`
+const Wrapper = styled.article`
   display: flex;
   align-items: center;
 `;

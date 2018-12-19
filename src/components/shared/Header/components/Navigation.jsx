@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { string } from 'prop-types';
+import { string, bool } from 'prop-types';
+
 import { Link } from 'react-router-dom';
 
 import { Button, FlatButton } from 'components/utils/Buttons';
@@ -18,9 +19,31 @@ const Item = styled.li`
   margin: 0.5rem;
 `;
 
-const Navigation = ({ className }) => (
-  <Wrapper className={className}>
-    <List>
+function renderItems(isAuth) {
+  if (!isAuth) {
+    return (
+      <React.Fragment>
+        <Item>
+          <Link to="/upload">
+            <FlatButton flexible color="white">
+              Subir una pista
+            </FlatButton>
+          </Link>
+        </Item>
+
+        <Item>
+          <Link to="/signup">
+            <Button flexible color="white" bgColor="orange">
+              Crea tu cuenta
+            </Button>
+          </Link>
+        </Item>
+      </React.Fragment>
+    );
+  }
+
+  return (
+    <React.Fragment>
       <Item>
         <Link to="/upload">
           <FlatButton flexible color="white">
@@ -30,22 +53,30 @@ const Navigation = ({ className }) => (
       </Item>
 
       <Item>
-        <Link to="/signup">
+        <Link to="/me/collection">
           <Button flexible color="white" bgColor="orange">
-            Crea tu cuenta
+            Coleccion
           </Button>
         </Link>
       </Item>
-    </List>
+    </React.Fragment>
+  );
+}
+
+const Navigation = ({ isAuth, className }) => (
+  <Wrapper className={className}>
+    <List>{renderItems(isAuth)}</List>
   </Wrapper>
 );
 
 Navigation.defaultProps = {
   className: '',
+  isAuth: false,
 };
 
 Navigation.propTypes = {
   className: string,
+  isAuth: bool,
 };
 
 export default Navigation;

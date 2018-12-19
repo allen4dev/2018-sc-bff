@@ -27,7 +27,7 @@ const Wrapper = styled.header`
 const Authorized = () => (
   <Wrapper>
     <Logo />
-    <Navigation />
+    <Navigation isAuth />
     <Searchbar />
     <Artist />
   </Wrapper>
