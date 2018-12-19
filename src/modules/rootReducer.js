@@ -5,6 +5,7 @@ import artists from './users';
 import auth from './auth';
 import playlists from './playlists';
 import replies from './replies';
+import tags from './tags';
 import tracks from './tracks';
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   [auth.constants.NAME]: auth.reducer,
   [playlists.constants.NAME]: playlists.reducer,
   [replies.constants.NAME]: replies.reducer,
+  [tags.constants.NAME]: tags.reducer,
   [tracks.constants.NAME]: tracks.reducer,
 });
 

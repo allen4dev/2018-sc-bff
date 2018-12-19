@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Title, Text } from 'components/utils/Texts';
 import { Button } from 'components/utils/Buttons';
 
+import tagsModule from 'modules/tags';
 import tracksModule from 'modules/tracks';
 
 const apiTags = [{ id: '1', name: 'JPop' }, { id: '2', name: 'Kpop' }];
@@ -223,9 +224,16 @@ const Sharing = styled.div`
 
 const Footer = styled.footer``;
 
+function mapStateToProps(state) {
+  return {
+    tags: state.tags,
+  };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   {
     createTrack: tracksModule.actions.createTrack,
+    fetchTags: tagsModule.actions.fetchTags,
   },
 )(Upload);
