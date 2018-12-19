@@ -20,23 +20,31 @@ describe('async actions', () => {
     moxios.uninstall();
   });
 
-  it('should create an SET_AUTHENTICATED_USER  action after a user registration', async () => {
+  it('should create an ADD_TAGS  action after fetch the tags', async () => {
+    const response = fixtures.getTagsResponse();
+
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
 
       request.respondWith({
-        status: 201,
-        // response,
+        status: 200,
+        response,
       });
     });
 
-    const expectedActions = [];
+    const expectedActions = [
+      {
+        type: actionTypes.ADD_TAGS,
+        payload: {
+          tags: fixtures.getRawTags(response),
+        },
+      },
+    ];
 
     const store = mockStore(INITIAL_STATE);
 
-    // await store.dispatch(actions.register(details));
+    await store.dispatch(actions.fetchTags());
 
-    // expect(store.getActions()).toEqual(expectedActions);
-    expect(true).toBeTruthy();
+    expect(store.getActions()).toEqual(expectedActions);
   });
 });
