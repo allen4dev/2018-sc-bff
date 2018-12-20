@@ -14,6 +14,8 @@ import Results from './Results';
 import TrackDetail from './TrackDetail';
 import Upload from './Upload';
 
+import PrivateRoute from './PrivateRoute';
+
 const Error404 = () => <h1>404 page not found</h1>;
 
 const Pages = () => (
@@ -25,7 +27,7 @@ const Pages = () => (
         <Route path="/signup" component={Register} />
         <Route path="/search" component={Results} />
         <Route path="/upload" component={Upload} />
-        <Route path="/me/collection" component={Collection} />
+        <PrivateRoute path="/me/collection" component={Collection} />
         <Route path="/users/:id" component={ArtistDetail} />
         <Route path="/playlists/:id" component={PlaylistDetail} />
         <Route path="/tracks/:id" component={TrackDetail} />
