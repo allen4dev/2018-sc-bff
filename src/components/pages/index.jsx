@@ -15,6 +15,7 @@ import TrackDetail from './TrackDetail';
 import Upload from './Upload';
 
 import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 const Error404 = () => <h1>404 page not found</h1>;
 
@@ -24,7 +25,7 @@ const Pages = () => (
     <Content>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/signup" component={Register} />
+        <PublicRoute path="/signup" component={Register} />
         <Route path="/search" component={Results} />
         <Route path="/upload" component={Upload} />
         <PrivateRoute path="/me/collection" component={Collection} />

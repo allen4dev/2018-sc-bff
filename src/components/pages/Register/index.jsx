@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { func, shape } from 'prop-types';
+import { func, shape, string } from 'prop-types';
 
 import { Button } from 'components/utils/Buttons';
 import { Text } from 'components/utils/Texts';
@@ -25,23 +25,27 @@ class Register extends Component {
 
   handleSignup = async e => {
     e.preventDefault();
-    const { register, history } = this.props;
+    const { register, history, location } = this.props;
     const { username, email, password } = this.state;
+
+    const { from } = location.state || { from: { pathname: '/' } };
 
     await register({ username, email, password });
 
-    history.push('/');
+    history.push(from);
   };
 
   handleSignin = async e => {
     e.preventDefault();
 
-    const { login, history } = this.props;
+    const { login, history, location } = this.props;
     const { email, password } = this.state;
+
+    const { from } = location.state || { from: { pathname: '/' } };
 
     await login({ email, password });
 
-    history.push('/');
+    history.push(from);
   };
 
   renderForm = () => {
@@ -237,10 +241,13 @@ const Conditions = styled.section`
 `;
 
 Register.propTypes = {
-  history: shape({
-    push: func.isRequired,
+  location: shape({
+    state: shape({
+      from: shape({
+        pathname: string,
+      }),
+    }),
   }).isRequired,
-
   register: func.isRequired,
   login: func.isRequired,
 };
