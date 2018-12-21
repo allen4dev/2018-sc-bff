@@ -6,6 +6,7 @@ export default {
   },
 
   getTrackResponse(track, user = null) {
+    console.log('USER', user);
     return {
       data: {
         type: 'tracks',
@@ -20,6 +21,7 @@ export default {
           },
         },
       },
+      included: user ? [{ ...user.data }] : null,
     };
   },
 

@@ -1,3 +1,5 @@
+import usersFixtures from 'modules/users/__tests__/fixtures';
+
 import * as actionTypes from '../actionTypes';
 import * as actions from '../actions';
 
@@ -7,11 +9,14 @@ describe('tracks action creators', () => {
   describe('action creators', () => {
     it('should create an action to add a track', () => {
       const track = fixtures.getTrack();
+      const rawUser = usersFixtures.getUser();
+      const user = usersFixtures.getUserResponse(rawUser);
 
-      const response = fixtures.getTrackResponse(track);
+      const response = fixtures.getTrackResponse(track, user);
 
       const {
         data: { id, attributes, relationships },
+        included,
       } = response;
 
       const expectedAction = {
@@ -23,6 +28,7 @@ describe('tracks action creators', () => {
             ...attributes,
           },
           userId: relationships.user.data.id,
+          user: { ...rawUser },
         },
       };
 

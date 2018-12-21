@@ -7,13 +7,20 @@ import * as actionTypes from './actionTypes';
 // action creators
 export const addTrack = createAction(
   actionTypes.ADD_TRACK,
-  ({ data: { id, attributes, relationships } }) => ({
+  ({ data: { id, attributes, relationships }, included }) => ({
     id,
     track: {
       ...attributes,
       id,
     },
     userId: relationships.user.data.id,
+    user: {
+      ...included.find(
+        record =>
+          record.type === 'users' && record.id === relationships.user.data.id,
+      ).attributes,
+      id: relationships.user.data.id,
+    },
   }),
 );
 
