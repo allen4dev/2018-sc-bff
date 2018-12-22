@@ -189,7 +189,7 @@ describe('tracks', () => {
 
     const response = tracksFixtures.getTrackResponse(track);
 
-    const { user } = response.data.relationships;
+    const user = response.included[0];
 
     const newState = tracksReducer(
       TRACKS_STATE,
@@ -198,7 +198,7 @@ describe('tracks', () => {
 
     expect(newState).toEqual([
       ...TRACKS_STATE,
-      { id: user.data.id, trackId: track.id },
+      { id: user.id, trackId: track.id },
     ]);
 
     const otherTrack = tracksFixtures.getTrack();
@@ -212,7 +212,7 @@ describe('tracks', () => {
 
     expect(nextState).toEqual([
       ...newState,
-      { id: user.data.id, trackId: otherTrack.id },
+      { id: user.id, trackId: otherTrack.id },
     ]);
   });
 

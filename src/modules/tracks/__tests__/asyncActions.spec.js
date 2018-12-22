@@ -40,6 +40,10 @@ describe('tracks module async actions', () => {
         payload: {
           id: track.id,
           track: { ...track },
+          user: {
+            ...response.included[0].attributes,
+            id: response.included[0].id,
+          },
           userId: response.data.relationships.user.data.id,
         },
       },
@@ -76,6 +80,10 @@ describe('tracks module async actions', () => {
         payload: {
           id: track.id,
           track: { ...track },
+          user: {
+            ...response.included[0].attributes,
+            id: response.included[0].id,
+          },
           userId: response.data.relationships.user.data.id,
         },
       },

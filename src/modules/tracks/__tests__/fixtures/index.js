@@ -6,22 +6,22 @@ export default {
   },
 
   getTrackResponse(track, user = null) {
-    console.log('USER', user);
+    const usr = user || {
+      type: 'users',
+      id: uuid(),
+      attributes: { username: 'allen' },
+    };
+
     return {
       data: {
         type: 'tracks',
         id: track.id,
         attributes: { title: track.title, published: track.published },
         relationships: {
-          user: {
-            data: {
-              type: 'users',
-              id: user ? user.data.id : uuid(),
-            },
-          },
+          user: { data: { type: 'users', id: usr.id } },
         },
       },
-      included: user ? [{ ...user.data }] : null,
+      included: [{ ...usr }],
     };
   },
 

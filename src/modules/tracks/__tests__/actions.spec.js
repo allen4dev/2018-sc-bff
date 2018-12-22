@@ -9,14 +9,13 @@ describe('tracks action creators', () => {
   describe('action creators', () => {
     it('should create an action to add a track', () => {
       const track = fixtures.getTrack();
-      const rawUser = usersFixtures.getUser();
-      const user = usersFixtures.getUserResponse(rawUser);
 
-      const response = fixtures.getTrackResponse(track, user);
+      const response = fixtures.getTrackResponse(track);
+
+      const user = response.included[0];
 
       const {
         data: { id, attributes, relationships },
-        included,
       } = response;
 
       const expectedAction = {
@@ -28,7 +27,7 @@ describe('tracks action creators', () => {
             ...attributes,
           },
           userId: relationships.user.data.id,
-          user: { ...rawUser },
+          user: { ...user.attributes, id: user.id },
         },
       };
 
