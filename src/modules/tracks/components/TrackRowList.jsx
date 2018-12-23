@@ -11,8 +11,8 @@ const Wrapper = styled.ul`
 
 const TrackRowList = ({ ids }) => (
   <Wrapper>
-    {ids.map((id, index) => (
-      <TrackRowItem key={index} /> // eslint-disable-line
+    {ids.map(id => (
+      <TrackRowItem key={id} />
     ))}
   </Wrapper>
 );

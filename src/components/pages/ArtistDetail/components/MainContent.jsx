@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import { string } from 'prop-types';
 
-import TrackRowList from 'modules/tracks/components/TrackRowList';
 import Sets from 'modules/playlists/components/Sets';
 
 import Tabs from 'components/shared/Tabs';
 
+import Tracks from './Tracks';
+
 const Wrapper = styled.section``;
 
-const trackIds = new Array(10).fill('');
 const playlistIds = new Array(10).fill('');
 
-const MainContent = () => (
+const MainContent = ({ userId }) => (
   <Wrapper>
     <Tabs type="column">
       <Tabs.Menu>
@@ -22,7 +23,7 @@ const MainContent = () => (
       </Tabs.Menu>
       <Tabs.Panels>
         <Tabs.Panel>
-          <TrackRowList ids={trackIds} />
+          <Tracks userId={userId} />
         </Tabs.Panel>
         <Tabs.Panel>
           <div>Artist Albums comes here</div>
@@ -37,4 +38,9 @@ const MainContent = () => (
     </Tabs>
   </Wrapper>
 );
+
+MainContent.propTypes = {
+  userId: string.isRequired,
+};
+
 export default MainContent;

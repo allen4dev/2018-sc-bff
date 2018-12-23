@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { shape, string } from 'prop-types';
 
 import ArtistInformation from 'modules/users/components/ArtistInformation';
 
@@ -18,14 +19,22 @@ const Main = styled(MainContent)``;
 
 const Information = styled(ArtistInformation)``;
 
-const ArtistDetail = () => (
+const ArtistDetail = ({ match }) => (
   <Wrapper>
     <Heading />
     <Content>
-      <Main />
+      <Main userId={match.params.id} />
       <Information />
     </Content>
   </Wrapper>
 );
+
+ArtistDetail.propTypes = {
+  match: shape({
+    params: shape({
+      id: string,
+    }),
+  }).isRequired,
+};
 
 export default ArtistDetail;
