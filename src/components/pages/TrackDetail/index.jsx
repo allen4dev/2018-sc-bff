@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { shape, string } from 'prop-types';
 
 import Track from 'modules/tracks/components/Track';
 import ReplySection from 'modules/replies/components/ReplySection';
@@ -14,14 +15,22 @@ const Content = styled.section`
   grid-template-columns: 8fr 4fr;
 `;
 
-const TrackDetail = () => (
+const TrackDetail = ({ match }) => (
   <Wrapper>
-    <Track />
+    <Track id={match.params.id} />
     <Content>
       <ReplySection />
       <Recommendations recommend />
     </Content>
   </Wrapper>
 );
+
+TrackDetail.propTypes = {
+  match: shape({
+    params: shape({
+      id: string,
+    }),
+  }).isRequired,
+};
 
 export default TrackDetail;

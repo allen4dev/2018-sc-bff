@@ -59,7 +59,7 @@ class Client {
 
   getTrack(id) {
     return axios
-      .get(`${this.options.endpoints.tracks}/${id}`)
+      .get(`${this.options.endpoints.tracks}/${id}?include=user`)
       .then(response => response.data);
   }
 

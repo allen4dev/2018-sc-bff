@@ -7,23 +7,21 @@ import * as actionTypes from './actionTypes';
 // action creators
 export const addTrack = createAction(
   actionTypes.ADD_TRACK,
-  ({ data: { id, attributes, relationships }, included }) => {
-    return {
+  ({ data: { id, attributes, relationships }, included }) => ({
+    id,
+    track: {
+      ...attributes,
       id,
-      track: {
-        ...attributes,
-        id,
-      },
-      userId: relationships.user.data.id,
-      user: {
-        ...included.find(
-          record =>
-            record.type === 'users' && record.id === relationships.user.data.id,
-        ).attributes,
-        id: relationships.user.data.id,
-      },
-    };
-  },
+    },
+    userId: relationships.user.data.id,
+    user: {
+      ...included.find(
+        record =>
+          record.type === 'users' && record.id === relationships.user.data.id,
+      ).attributes,
+      id: relationships.user.data.id,
+    },
+  }),
 );
 
 export const actualizeTrack = createAction(
@@ -59,6 +57,7 @@ export function createTrack(details) {
     const { token } = getState().auth;
 
     const response = await client.createTrack(details, token);
+    debugger;
 
     dispatch(addTrack(response));
   };
@@ -67,7 +66,6 @@ export function createTrack(details) {
 export function fetchTrack(id) {
   return async dispatch => {
     const response = await client.getTrack(id);
-
     dispatch(addTrack(response));
   };
 }

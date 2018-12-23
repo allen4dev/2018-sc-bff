@@ -27,7 +27,7 @@ const Pages = () => (
         <Route exact path="/" component={Home} />
         <PublicRoute path="/signup" component={Register} />
         <Route path="/search" component={Results} />
-        <Route path="/upload" component={Upload} />
+        <PrivateRoute path="/upload" component={Upload} />
         <PrivateRoute path="/me/collection" component={Collection} />
         <Route path="/users/:id" component={ArtistDetail} />
         <Route path="/playlists/:id" component={PlaylistDetail} />
