@@ -11,8 +11,8 @@ export default {
     return {
       data: {
         type: 'auth',
+        id,
         attributes: {
-          id,
           token,
         },
       },

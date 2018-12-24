@@ -17,7 +17,7 @@ describe('current', () => {
   it('should handle SET_AUTHENTICATED_USER action', () => {
     const id = '1';
 
-    const response = { data: { attributes: { id, token: 'xxx.xxx.xxx' } } };
+    const response = { data: { id, attributes: { token: 'xxx.xxx.xxx' } } };
 
     const nextState = currentReducer(
       CURRENT_STATE,

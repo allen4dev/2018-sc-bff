@@ -8,8 +8,8 @@ import * as actionTypes from './actionTypes';
 
 export const setAuthenticatedUser = createAction(
   actionTypes.SET_AUTHENTICATED_USER,
-  ({ data: { attributes } }) => ({
-    id: attributes.id,
+  ({ data: { id, attributes } }) => ({
+    id,
     token: attributes.token,
   }),
 );

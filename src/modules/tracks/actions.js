@@ -57,7 +57,6 @@ export function createTrack(details) {
     const { token } = getState().auth;
 
     const response = await client.createTrack(details, token);
-    debugger;
 
     dispatch(addTrack(response));
   };

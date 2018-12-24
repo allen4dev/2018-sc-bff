@@ -5,8 +5,8 @@ describe('auth action creators', () => {
   it('should create an action to set the current authenticated user', () => {
     const response = {
       data: {
+        id: '1',
         attributes: {
-          id: '1',
           token: 'xxx.xxx.xxx',
         },
       },
@@ -15,7 +15,7 @@ describe('auth action creators', () => {
     const expectedAction = {
       type: actionTypes.SET_AUTHENTICATED_USER,
       payload: {
-        id: response.data.attributes.id,
+        id: response.data.id,
         token: response.data.attributes.token,
       },
     };

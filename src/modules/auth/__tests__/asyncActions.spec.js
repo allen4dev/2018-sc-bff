@@ -40,7 +40,7 @@ describe('auth module async actions', () => {
       {
         type: actionTypes.SET_AUTHENTICATED_USER,
         payload: {
-          id: response.data.attributes.id,
+          id: response.data.id,
           token: response.data.attributes.token,
         },
       },
@@ -77,7 +77,7 @@ describe('auth module async actions', () => {
       {
         type: actionTypes.SET_AUTHENTICATED_USER,
         payload: {
-          id: response.data.attributes.id,
+          id: response.data.id,
           token: response.data.attributes.token,
         },
       },
@@ -110,7 +110,7 @@ describe('auth module async actions', () => {
       {
         type: actionTypes.SET_AUTHENTICATED_USER,
         payload: {
-          id: response.data.attributes.id,
+          id: response.data.id,
           token: response.data.attributes.token,
         },
       },
