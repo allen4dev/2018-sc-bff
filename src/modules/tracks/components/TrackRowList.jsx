@@ -12,7 +12,7 @@ const Wrapper = styled.ul`
 const TrackRowList = ({ ids }) => (
   <Wrapper>
     {ids.map(id => (
-      <TrackRowItem key={id} />
+      <TrackRowItem key={id} id={id} />
     ))}
   </Wrapper>
 );

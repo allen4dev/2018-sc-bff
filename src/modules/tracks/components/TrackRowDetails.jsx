@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
+import { string } from 'prop-types';
 import { FaPlay } from 'react-icons/fa';
 
 import { Button } from 'components/utils/Buttons';
@@ -22,19 +23,24 @@ const Progress = styled.div`
   width: 100%;
 `;
 
-const TrackRowDetails = () => (
+const TrackRowDetails = ({ username, title }) => (
   <Fragment>
     <Heading>
       <Button bgColor="orange" color="white" radius="50%">
         <FaPlay />
       </Button>
       <Details>
-        <Artist>Fate UBW</Artist>
-        <Name>Emiya (Archer theme)</Name>
+        <Artist>{username}</Artist>
+        <Name>{title}</Name>
       </Details>
     </Heading>
     <Progress />
   </Fragment>
 );
+
+TrackRowDetails.propTypes = {
+  username: string.isRequired,
+  title: string.isRequired,
+};
 
 export default TrackRowDetails;

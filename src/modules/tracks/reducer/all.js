@@ -58,7 +58,7 @@ const allReducer = handleActions(
       const entities = payload.tracks.reduce(
         (initial, current) => ({
           ...initial,
-          [current.id]: current,
+          [current.id]: { ...current.attributes },
         }),
         {},
       );

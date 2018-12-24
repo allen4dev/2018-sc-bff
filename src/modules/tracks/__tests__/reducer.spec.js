@@ -116,8 +116,8 @@ describe('all', () => {
       ...ALL_STATE,
       byId: [tracks[0].id, tracks[1].id],
       entities: {
-        [tracks[0].id]: tracks[0],
-        [tracks[1].id]: tracks[1],
+        [tracks[0].id]: { ...tracks[0].attributes },
+        [tracks[1].id]: { ...tracks[1].attributes },
       },
     });
 
@@ -132,8 +132,8 @@ describe('all', () => {
       byId: [...newState.byId, nextTracks[0].id, nextTracks[1].id],
       entities: {
         ...newState.entities,
-        [nextTracks[0].id]: nextTracks[0],
-        [nextTracks[1].id]: nextTracks[1],
+        [nextTracks[0].id]: { ...nextTracks[0].attributes },
+        [nextTracks[1].id]: { ...nextTracks[1].attributes },
       },
     });
   });
@@ -152,8 +152,8 @@ describe('all', () => {
       ...ALL_STATE,
       byId: [tracks[0].id, tracks[1].id],
       entities: {
-        [tracks[0].id]: tracks[0],
-        [tracks[1].id]: tracks[1],
+        [tracks[0].id]: { ...tracks[0].attributes },
+        [tracks[1].id]: { ...tracks[1].attributes },
       },
     });
   });

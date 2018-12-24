@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { shape, string } from 'prop-types';
+
+import tracksModule from 'modules/tracks';
 
 import Avatar from 'components/shared/Avatar';
 import ResourceActions from 'components/shared/ResourceActions';
@@ -21,16 +25,69 @@ const StyledAvatar = styled(Avatar)`
 
 const Footer = styled.footer``;
 
-const TrackRowItem = () => (
-  <Wrapper>
-    <StyledAvatar src="/images/avatar.jpg" size="25%" square />
-    <Content>
-      <TrackRowDetails />
-      <Footer>
-        <ResourceActions />
-      </Footer>
-    </Content>
-  </Wrapper>
-);
+class TrackRowItem extends Component {
+  componentDidMount = async () => {
+    const { track, user } = this.props;
 
-export default TrackRowItem;
+    if (!track || !user) {
+      await this.getTrack();
+    }
+  };
+
+  getTrack = async () => {
+    const { id, fetchTrack } = this.props;
+
+    return fetchTrack(id);
+  };
+
+  render() {
+    const { track, user } = this.props;
+    return (
+      <Wrapper>
+        <StyledAvatar src={track.avatar} size="25%" square />
+        <Content>
+          <TrackRowDetails username={user.username} title={track.title} />
+          <Footer>
+            <ResourceActions />
+          </Footer>
+        </Content>
+      </Wrapper>
+    );
+  }
+}
+
+TrackRowItem.defaultProps = {
+  track: {
+    avatar: 'https://sc-api/avatars/default.png',
+    title: 'track title',
+  },
+  user: {
+    username: 'Username',
+  },
+};
+
+TrackRowItem.propTypes = {
+  track: shape({
+    avatar: string,
+    title: string,
+  }),
+  user: shape({
+    username: string,
+  }),
+};
+
+function mapStateToProps(state, { id }) {
+  const uid = state.users.tracks.find(record => record.trackId === id);
+
+  return {
+    track: state.tracks.all.entities[id],
+    user: state.users.all.entities[uid],
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  {
+    fetchTrack: tracksModule.fetchTrack,
+  },
+)(TrackRowItem);
