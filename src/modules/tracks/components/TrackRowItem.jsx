@@ -42,9 +42,10 @@ class TrackRowItem extends Component {
 
   render() {
     const { track, user } = this.props;
+
     return (
       <Wrapper>
-        <StyledAvatar src={track.avatar} size="25%" square />
+        <StyledAvatar src={track.photo} size="25%" square />
         <Content>
           <TrackRowDetails username={user.username} title={track.title} />
           <Footer>
@@ -59,7 +60,7 @@ class TrackRowItem extends Component {
 TrackRowItem.defaultProps = {
   track: {
     avatar: 'https://sc-api/avatars/default.png',
-    title: 'track title',
+    title: 'Track title',
   },
   user: {
     username: 'Username',
@@ -81,13 +82,13 @@ function mapStateToProps(state, { id }) {
 
   return {
     track: state.tracks.all.entities[id],
-    user: state.users.all.entities[uid],
+    user: state.users.all.entities[uid.id],
   };
 }
 
 export default connect(
   mapStateToProps,
   {
-    fetchTrack: tracksModule.fetchTrack,
+    fetchTrack: tracksModule.actions.fetchTrack,
   },
 )(TrackRowItem);

@@ -53,7 +53,17 @@ describe('tracks module async actions', () => {
 
     const store = mockStore({
       ...INITIAL_STATE,
-      auth: { token },
+      auth: { current: response.data.relationships.user.data.id, token },
+      users: {
+        all: {
+          entities: {
+            [response.data.relationships.user.data.id]: {
+              id: response.data.relationships.user.data.id,
+              username: 'allen',
+            },
+          },
+        },
+      },
     });
 
     const details = { ...response.data.attributes };
