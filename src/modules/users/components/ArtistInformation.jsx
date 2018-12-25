@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { number } from 'prop-types';
 import { FaEnvelope, FaShare } from 'react-icons/fa';
 
 import ArtistItem from 'modules/users/components/ArtistItem';
@@ -67,7 +68,11 @@ const Count = styled.span`
 const Followers = styled.section``;
 const Following = styled.section``;
 
-const ArtistInformation = () => (
+const ArtistInformation = ({
+  followersCount,
+  followingsCount,
+  tracksCount,
+}) => (
   <Wrapper>
     <Heading>
       <Actions>
@@ -93,15 +98,15 @@ const ArtistInformation = () => (
       <Details>
         <Detail>
           <Value>Seguidores</Value>
-          <Count>328</Count>
+          <Count>{followersCount}</Count>
         </Detail>
         <Detail>
           <Value>Siguiendo</Value>
-          <Count>741</Count>
+          <Count>{followingsCount}</Count>
         </Detail>
         <Detail>
           <Value>Tracks</Value>
-          <Count>90</Count>
+          <Count>{tracksCount}</Count>
         </Detail>
       </Details>
 
@@ -117,5 +122,17 @@ const ArtistInformation = () => (
     </Content>
   </Wrapper>
 );
+
+ArtistInformation.defaultProps = {
+  followersCount: 0,
+  followingsCount: 0,
+  tracksCount: 0,
+};
+
+ArtistInformation.propTypes = {
+  followersCount: number,
+  followingsCount: number,
+  tracksCount: number,
+};
 
 export default ArtistInformation;

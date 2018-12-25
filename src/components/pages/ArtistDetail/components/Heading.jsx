@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { string } from 'prop-types';
 
 import Avatar from 'components/shared/Avatar';
 import { Tag } from 'components/utils/Texts';
@@ -31,20 +32,31 @@ const Information = styled.div`
   }
 `;
 
-const Heading = () => (
+const Heading = ({ username, fullname, avatar }) => (
   <Wrapper>
     <Content>
-      <Avatar src="/images/avatar.jpg" />
+      <Avatar src={avatar} />
       <Information>
         <Tag bgColor="dark" size="1.3rem">
-          Emiya Shirou
+          {fullname}
         </Tag>
         <Tag bgColor="dark" color="gray">
-          Archer
+          {username}
         </Tag>
       </Information>
     </Content>
   </Wrapper>
 );
+
+Heading.defaultProps = {
+  fullname: 'fullname',
+  avatar: 'https://sc-api/example.test',
+};
+
+Heading.propTypes = {
+  username: string.isRequired,
+  fullname: string,
+  avatar: string,
+};
 
 export default Heading;
