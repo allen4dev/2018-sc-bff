@@ -7,11 +7,18 @@ import * as actionTypes from './actionTypes';
 // action creators
 export const addPlaylist = createAction(
   actionTypes.ADD_PLAYLIST,
-  ({ data: { id, attributes, relationships } }) => ({
+  ({ data: { id, attributes, relationships }, included }) => ({
     id,
     playlist: {
       id,
       ...attributes,
+    },
+    user: {
+      ...included.find(
+        record =>
+          record.type === 'users' && record.id === relationships.user.data.id,
+      ).attributes,
+      id: relationships.user.data.id,
     },
     userId: relationships.user.data.id,
   }),

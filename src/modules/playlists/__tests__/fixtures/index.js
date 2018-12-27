@@ -6,6 +6,12 @@ export default {
   },
 
   getPlaylistResponse(playlist, user = null) {
+    const usr = user || {
+      type: 'users',
+      id: uuid(),
+      attributes: { username: 'allen' },
+    };
+
     return {
       data: {
         type: 'playlists',
@@ -15,11 +21,12 @@ export default {
           user: {
             data: {
               type: 'users',
-              id: user ? user.data.id : uuid(),
+              id: usr ? usr.id : uuid(),
             },
           },
         },
       },
+      included: [{ ...usr }],
     };
   },
 

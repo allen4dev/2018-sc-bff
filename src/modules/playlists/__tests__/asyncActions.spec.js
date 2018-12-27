@@ -37,12 +37,15 @@ describe('playlists module async actions', () => {
       });
     });
 
+    const user = response.included[0];
+
     const expectedActions = [
       {
         type: actionTypes.ADD_PLAYLIST,
         payload: {
           id: playlist.id,
           playlist: { ...playlist },
+          user: { ...user.attributes, id: user.id },
           userId: response.data.relationships.user.data.id,
         },
       },
@@ -76,12 +79,18 @@ describe('playlists module async actions', () => {
       });
     });
 
+    const user = response.included[0];
+
     const expectedActions = [
       {
         type: actionTypes.ADD_PLAYLIST,
         payload: {
           id: playlist.id,
           playlist: { ...playlist },
+          user: {
+            ...user.attributes,
+            id: user.id,
+          },
           userId: response.data.relationships.user.data.id,
         },
       },

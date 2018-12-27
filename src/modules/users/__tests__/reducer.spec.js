@@ -288,7 +288,7 @@ describe('playlists', () => {
 
     const response = playlistsFixtures.getPlaylistResponse(playlist);
 
-    const { user } = response.data.relationships;
+    const user = response.included[0];
 
     const newState = playlistsReducer(
       PLAYLISTS_STATE,
@@ -297,7 +297,7 @@ describe('playlists', () => {
 
     expect(newState).toEqual([
       ...PLAYLISTS_STATE,
-      { id: user.data.id, playlistId: playlist.id },
+      { id: user.id, playlistId: playlist.id },
     ]);
 
     const playlist2 = playlistsFixtures.getPlaylist();
@@ -311,7 +311,7 @@ describe('playlists', () => {
 
     expect(nextState).toEqual([
       ...newState,
-      { id: user.data.id, playlistId: playlist2.id },
+      { id: user.id, playlistId: playlist2.id },
     ]);
   });
 

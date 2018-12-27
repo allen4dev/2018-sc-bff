@@ -11,7 +11,7 @@ describe('action creators', () => {
 
     const response = fixtures.getPlaylistResponse(playlist);
 
-    const { user } = response.data.relationships;
+    const user = response.included[0];
 
     const expectedAction = {
       type: actionTypes.ADD_PLAYLIST,
@@ -21,7 +21,8 @@ describe('action creators', () => {
           id: playlist.id,
           ...response.data.attributes,
         },
-        userId: user.data.id,
+        user: { ...user.attributes, id: user.id },
+        userId: user.id,
       },
     };
 
