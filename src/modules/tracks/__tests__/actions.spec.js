@@ -31,6 +31,26 @@ describe('tracks action creators', () => {
     expect(actions.addTrack(response)).toEqual(expectedAction);
   });
 
+  it('should create an action to add a created track', () => {
+    const track = fixtures.getTrack();
+
+    const response = fixtures.getTrackResponse(track);
+
+    const expectedAction = {
+      type: actionTypes.ADD_CREATED_TRACK,
+      payload: {
+        id: track.id,
+        track: {
+          ...response.data.attributes,
+          id: track.id,
+        },
+        userId: response.data.relationships.user.data.id,
+      },
+    };
+
+    expect(actions.addCreatedTrack(response)).toEqual(expectedAction);
+  });
+
   it('should create an action to actualize a track', () => {
     const track = fixtures.getTrack();
 

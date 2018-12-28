@@ -24,6 +24,18 @@ export const addTrack = createAction(
   }),
 );
 
+export const addCreatedTrack = createAction(
+  actionTypes.ADD_CREATED_TRACK,
+  ({ data: { id, attributes, relationships } }) => ({
+    id,
+    track: {
+      ...attributes,
+      id,
+    },
+    userId: relationships.user.data.id,
+  }),
+);
+
 export const actualizeTrack = createAction(
   actionTypes.ACTUALIZE_TRACK,
   ({ data: { id, attributes } }) => ({
