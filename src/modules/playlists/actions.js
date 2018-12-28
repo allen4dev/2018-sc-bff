@@ -24,6 +24,18 @@ export const addPlaylist = createAction(
   }),
 );
 
+export const addCreatedPlaylist = createAction(
+  actionTypes.ADD_CREATED_PLAYLIST,
+  ({ data: { id, attributes, relationships } }) => ({
+    id,
+    playlist: {
+      id,
+      ...attributes,
+    },
+    userId: relationships.user.data.id,
+  }),
+);
+
 export const actualizePlaylist = createAction(
   actionTypes.ACTUALIZE_PLAYLIST,
   ({ data: { id, attributes } }) => ({

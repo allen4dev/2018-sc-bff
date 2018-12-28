@@ -29,6 +29,26 @@ describe('action creators', () => {
     expect(actions.addPlaylist(response)).toEqual(expectedAction);
   });
 
+  it('should create an action to add a created playlist', () => {
+    const playlist = fixtures.getPlaylist();
+
+    const response = fixtures.getPlaylistResponse(playlist);
+
+    const expectedAction = {
+      type: actionTypes.ADD_CREATED_PLAYLIST,
+      payload: {
+        id: playlist.id,
+        playlist: {
+          id: playlist.id,
+          ...response.data.attributes,
+        },
+        userId: response.data.relationships.user.data.id,
+      },
+    };
+
+    expect(actions.addCreatedPlaylist(response)).toEqual(expectedAction);
+  });
+
   it('should create an action to actualize a playlist', () => {
     const playlist = fixtures.getPlaylist();
     const response = fixtures.getPlaylistResponse(playlist);
