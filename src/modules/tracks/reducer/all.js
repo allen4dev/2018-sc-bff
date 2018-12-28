@@ -6,15 +6,12 @@ import * as actionTypes from '../actionTypes';
 
 import { INITIAL_STATE } from '../model';
 
-// console.log('MODULE', usersModule);
-// console.log('ADD_TRACKS', actionTypes.ADD_TRACKS);
-
-// CHECK WHY IS UNDEFINED
-// console.log('ADD_USER_TRACKS', usersModule.actionTypes.ADD_USER_TRACKS);
-
 const allReducer = handleActions(
   {
-    [actionTypes.ADD_TRACK]: (state, { payload }) => ({
+    [combineActions(actionTypes.ADD_TRACK, actionTypes.ADD_CREATED_TRACK)]: (
+      state,
+      { payload },
+    ) => ({
       ...state,
 
       entities: {

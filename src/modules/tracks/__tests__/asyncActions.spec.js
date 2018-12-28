@@ -20,7 +20,7 @@ describe('tracks module async actions', () => {
     moxios.uninstall();
   });
 
-  it('should create an ADD_TRACK action after a user creates a track', async () => {
+  it('should create an ADD_CREATED_TRACK action after a user creates a track', async () => {
     const track = fixtures.getTrack();
 
     const response = fixtures.getTrackResponse(track);
@@ -36,34 +36,18 @@ describe('tracks module async actions', () => {
 
     const expectedActions = [
       {
-        type: actionTypes.ADD_TRACK,
+        type: actionTypes.ADD_CREATED_TRACK,
         payload: {
           id: track.id,
           track: { ...track },
-          user: {
-            ...response.included[0].attributes,
-            id: response.included[0].id,
-          },
           userId: response.data.relationships.user.data.id,
         },
       },
     ];
 
-    const token = 'xxx.xxx.xxx';
-
     const store = mockStore({
       ...INITIAL_STATE,
-      auth: { current: response.data.relationships.user.data.id, token },
-      users: {
-        all: {
-          entities: {
-            [response.data.relationships.user.data.id]: {
-              id: response.data.relationships.user.data.id,
-              username: 'allen',
-            },
-          },
-        },
-      },
+      auth: { token: 'xxx.xxx.xxx' },
     });
 
     const details = { ...response.data.attributes };

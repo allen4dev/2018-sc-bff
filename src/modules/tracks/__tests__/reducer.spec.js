@@ -51,6 +51,40 @@ describe('all', () => {
     });
   });
 
+  it('should handle ADD_CREATED_TRACK action', () => {
+    const track = fixtures.getTrack();
+
+    const response = fixtures.getTrackResponse(track);
+
+    const newState = allReducer(ALL_STATE, actions.addCreatedTrack(response));
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      byId: [track.id],
+      entities: {
+        [track.id]: { ...track },
+      },
+    });
+
+    const track2 = fixtures.getTrack();
+
+    const nextResponse = fixtures.getTrackResponse(track2);
+
+    const nextState = allReducer(
+      newState,
+      actions.addCreatedTrack(nextResponse),
+    );
+
+    expect(nextState).toEqual({
+      ...newState,
+      byId: [track.id, track2.id],
+      entities: {
+        [track.id]: { ...track },
+        [track2.id]: { ...track2 },
+      },
+    });
+  });
+
   it('should handle an ACTUALIZE_TRACK action', () => {
     const track = fixtures.getTrack();
 

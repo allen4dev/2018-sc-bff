@@ -66,26 +66,11 @@ export const addTracks = createAction(actionTypes.ADD_TRACKS, ({ data }) => ({
 // async action creators
 export function createTrack(details) {
   return async (dispatch, getState) => {
-    const { current, token } = getState().auth;
+    const { token } = getState().auth;
 
     const response = await client.createTrack(details, token);
 
-    const user = getState().users.all.entities[current];
-
-    const responseWithIncluded = {
-      ...response,
-      included: [
-        {
-          type: 'users',
-          id: current,
-          attributes: {
-            ...user,
-          },
-        },
-      ],
-    };
-
-    dispatch(addTrack(responseWithIncluded));
+    dispatch(addCreatedTrack(response));
   };
 }
 
