@@ -23,7 +23,7 @@ describe('playlists module async actions', () => {
     moxios.uninstall();
   });
 
-  it('should create an ADD_PLAYLIST action after a user creates a playlist', async () => {
+  it('should create an ADD_CREATED_PLAYLIST action after a user creates a playlist', async () => {
     const playlist = fixtures.getPlaylist();
 
     const response = fixtures.getPlaylistResponse(playlist);
@@ -37,25 +37,20 @@ describe('playlists module async actions', () => {
       });
     });
 
-    const user = response.included[0];
-
     const expectedActions = [
       {
-        type: actionTypes.ADD_PLAYLIST,
+        type: actionTypes.ADD_CREATED_PLAYLIST,
         payload: {
           id: playlist.id,
           playlist: { ...playlist },
-          user: { ...user.attributes, id: user.id },
           userId: response.data.relationships.user.data.id,
         },
       },
     ];
 
-    const token = 'xxx.xxx.xxx';
-
     const store = mockStore({
       ...INITIAL_STATE,
-      auth: { token },
+      auth: { token: 'xxx.xxx.xxx' },
     });
 
     const details = { ...response.data.attributes };

@@ -51,6 +51,43 @@ describe('all', () => {
     });
   });
 
+  it('should handle ADD_CREATED_PLAYLIST action', () => {
+    const playlist1 = fixtures.getPlaylist();
+
+    const response = fixtures.getPlaylistResponse(playlist1);
+
+    const newState = allReducer(
+      ALL_STATE,
+      actions.addCreatedPlaylist(response),
+    );
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        [playlist1.id]: { ...playlist1 },
+      },
+      byId: [playlist1.id],
+    });
+
+    const playlist2 = fixtures.getPlaylist();
+
+    const nextResponse = fixtures.getPlaylistResponse(playlist2);
+
+    const nextState = allReducer(
+      newState,
+      actions.addCreatedPlaylist(nextResponse),
+    );
+
+    expect(nextState).toEqual({
+      ...newState,
+      entities: {
+        [playlist1.id]: { ...playlist1 },
+        [playlist2.id]: { ...playlist2 },
+      },
+      byId: [playlist1.id, playlist2.id],
+    });
+  });
+
   it('should handle ACTUALIZE_PLAYLIST action', () => {
     const playlist = fixtures.getPlaylist();
 

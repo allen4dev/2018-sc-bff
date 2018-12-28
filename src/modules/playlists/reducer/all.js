@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import { handleActions, combineActions } from 'redux-actions';
 
 import { INITIAL_STATE } from '../model';
 
@@ -6,7 +6,10 @@ import * as actionTypes from '../actionTypes';
 
 const allReducer = handleActions(
   {
-    [actionTypes.ADD_PLAYLIST]: (state, { payload }) => ({
+    [combineActions(
+      actionTypes.ADD_PLAYLIST,
+      actionTypes.ADD_CREATED_PLAYLIST,
+    )]: (state, { payload }) => ({
       ...state,
       entities: {
         ...state.entities,

@@ -84,7 +84,7 @@ export function createPlaylist(details) {
 
     const response = await client.createPlaylist(details, token);
 
-    await dispatch(addPlaylist(response));
+    await dispatch(addCreatedPlaylist(response));
   };
 }
 
