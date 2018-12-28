@@ -398,7 +398,7 @@ describe('albums', () => {
 
     const response = albumsFixtures.getAlbumResponse(album);
 
-    const { user } = response.data.relationships;
+    const user = response.included[0];
 
     const newState = albumsReducer(
       ALBUMS_STATE,
@@ -407,7 +407,7 @@ describe('albums', () => {
 
     expect(newState).toEqual([
       ...ALBUMS_STATE,
-      { id: user.data.id, albumId: album.id },
+      { id: user.id, albumId: album.id },
     ]);
 
     const album2 = albumsFixtures.getAlbum();
@@ -421,7 +421,7 @@ describe('albums', () => {
 
     expect(nextState).toEqual([
       ...newState,
-      { id: user.data.id, albumId: album2.id },
+      { id: user.id, albumId: album2.id },
     ]);
   });
 

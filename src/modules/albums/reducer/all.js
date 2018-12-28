@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import { handleActions, combineActions } from 'redux-actions';
 
 import * as actionTypes from '../actionTypes';
 
@@ -6,7 +6,10 @@ import { INITIAL_STATE } from '../model';
 
 const allReducer = handleActions(
   {
-    [actionTypes.ADD_ALBUM]: (state, { payload }) => ({
+    [combineActions(actionTypes.ADD_ALBUM, actionTypes.ADD_CREATED_ALBUM)]: (
+      state,
+      { payload },
+    ) => ({
       ...state,
       entities: {
         ...state.entities,

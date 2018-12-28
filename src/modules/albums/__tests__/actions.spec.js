@@ -10,8 +10,33 @@ describe('action creators', () => {
 
     const response = fixtures.getAlbumResponse(album);
 
+    const user = response.included[0];
+
     const expectedAction = {
       type: actionTypes.ADD_ALBUM,
+      payload: {
+        tracks,
+        id: album.id,
+        album: { ...album },
+        user: {
+          ...user.attributes,
+          id: user.id,
+        },
+        userId: response.data.relationships.user.data.id,
+      },
+    };
+
+    expect(actions.addAlbum(response, tracks)).toEqual(expectedAction);
+  });
+
+  it('should create an action to add a created album', () => {
+    const album = fixtures.getAlbum();
+    const tracks = ['1', '2'];
+
+    const response = fixtures.getAlbumResponse(album);
+
+    const expectedAction = {
+      type: actionTypes.ADD_CREATED_ALBUM,
       payload: {
         tracks,
         id: album.id,
@@ -20,7 +45,7 @@ describe('action creators', () => {
       },
     };
 
-    expect(actions.addAlbum(response, tracks)).toEqual(expectedAction);
+    expect(actions.addCreatedAlbum(response, tracks)).toEqual(expectedAction);
   });
 
   it('should create an action to actualize an album', () => {

@@ -6,6 +6,12 @@ export default {
   },
 
   getAlbumResponse(album, user = null) {
+    const usr = user || {
+      type: 'users',
+      id: uuid(),
+      attributes: { username: 'allen' },
+    };
+
     return {
       data: {
         type: 'albums',
@@ -15,11 +21,12 @@ export default {
           user: {
             data: {
               type: 'users',
-              id: user ? user.data.id : uuid(),
+              id: usr.id,
             },
           },
         },
       },
+      included: [{ ...usr }],
     };
   },
 

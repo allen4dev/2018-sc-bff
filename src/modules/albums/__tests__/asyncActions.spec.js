@@ -12,7 +12,7 @@ import fixtures from './fixtures';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('playlists module async actions', () => {
+describe('albums module async actions', () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -21,7 +21,7 @@ describe('playlists module async actions', () => {
     moxios.uninstall();
   });
 
-  it('should create an ADD_ALBUM action after a user creates an album', async () => {
+  it('should create an ADD_CREATED_ALBUM action after a user creates an album', async () => {
     const album = fixtures.getAlbum();
 
     const response = fixtures.getAlbumResponse(album);
@@ -36,7 +36,7 @@ describe('playlists module async actions', () => {
 
     const expectedActions = [
       {
-        type: actionTypes.ADD_ALBUM,
+        type: actionTypes.ADD_CREATED_ALBUM,
         payload: {
           tracks: details.tracks,
           id: album.id,
@@ -56,7 +56,7 @@ describe('playlists module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should create an ADD_ALBUM action after a user fetchs an album', async () => {
+  it('should create an ADD_ALBUM action after a user creates an album', async () => {
     const album = fixtures.getAlbum();
 
     const response = fixtures.getAlbumResponse(album);
@@ -67,18 +67,27 @@ describe('playlists module async actions', () => {
       request.respondWith({ status: 200, response });
     });
 
+    const user = response.included[0];
+
     const expectedActions = [
       {
         type: actionTypes.ADD_ALBUM,
         payload: {
           id: album.id,
           album: { ...album },
+          user: {
+            ...user.attributes,
+            id: user.id,
+          },
           userId: response.data.relationships.user.data.id,
         },
       },
     ];
 
-    const store = mockStore(INITIAL_STATE);
+    const store = mockStore({
+      ...INITIAL_STATE,
+      auth: { token: 'xxx.xxx.xxx' },
+    });
 
     await store.dispatch(actions.fetchAlbum(album.id));
 

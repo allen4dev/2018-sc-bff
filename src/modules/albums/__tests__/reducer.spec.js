@@ -36,6 +36,22 @@ describe('all', () => {
     });
   });
 
+  it('should handle ADD_CREATED_ALBUM action', () => {
+    const album = fixtures.getAlbum();
+
+    const response = fixtures.getAlbumResponse(album);
+
+    const newState = allReducer(ALL_STATE, actions.addAlbum(response));
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        [album.id]: album,
+      },
+      byId: [album.id],
+    });
+  });
+
   it('should handle ACTUALIZE_ALBUM action', () => {
     const album = fixtures.getAlbum();
     const details = { title: 'A new album title' };

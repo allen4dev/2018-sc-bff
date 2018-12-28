@@ -7,6 +7,26 @@ import * as actionTypes from './actionTypes';
 // action creators
 export const addAlbum = createAction(
   actionTypes.ADD_ALBUM,
+  ({ data: { id, attributes, relationships }, included }, tracks) => ({
+    id,
+    tracks,
+    album: {
+      ...attributes,
+      id,
+    },
+    userId: relationships.user.data.id,
+    user: {
+      ...included.find(
+        record =>
+          record.type === 'users' && record.id === relationships.user.data.id,
+      ).attributes,
+      id: relationships.user.data.id,
+    },
+  }),
+);
+
+export const addCreatedAlbum = createAction(
+  actionTypes.ADD_CREATED_ALBUM,
   ({ data: { id, attributes, relationships } }, tracks) => ({
     id,
     tracks,
@@ -50,7 +70,7 @@ export function createAlbum(details) {
 
     const response = await client.createAlbum(details, token);
 
-    dispatch(addAlbum(response, details.tracks));
+    dispatch(addCreatedAlbum(response, details.tracks));
   };
 }
 
