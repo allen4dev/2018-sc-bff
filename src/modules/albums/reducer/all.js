@@ -46,10 +46,12 @@ const allReducer = handleActions(
       const entities = payload.albums.reduce(
         (initial, current) => ({
           ...initial,
-          [current.id]: current,
+          [current.id]: { ...current.attributes, id: current.id },
         }),
         {},
       );
+
+      console.log(entities);
 
       return {
         ...state,

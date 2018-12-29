@@ -123,8 +123,8 @@ describe('all', () => {
     expect(newState).toEqual({
       ...ALL_STATE,
       entities: {
-        [albums1[0].id]: albums1[0],
-        [albums1[1].id]: albums1[1],
+        [albums1[0].id]: { ...albums1[0].attributes, id: albums1[0].id },
+        [albums1[1].id]: { ...albums1[1].attributes, id: albums1[1].id },
       },
       byId: [albums1[0].id, albums1[1].id],
     });
@@ -136,15 +136,16 @@ describe('all', () => {
       usersModule.actions.addUserAlbums(nextResponse, '2'),
     );
 
-    const albums2 = response.data;
+    const albums2 = nextResponse.data;
 
-    expect(newState).toEqual({
+    expect(nextState).toEqual({
       ...newState,
       entities: {
-        [albums2[0].id]: albums2[0],
-        [albums2[1].id]: albums2[1],
+        ...newState.entities,
+        [albums2[0].id]: { ...albums2[0].attributes, id: albums2[0].id },
+        [albums2[1].id]: { ...albums2[1].attributes, id: albums2[1].id },
       },
-      byId: [albums2[0].id, albums2[1].id],
+      byId: [...newState.byId, albums2[0].id, albums2[1].id],
     });
   });
 });
