@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { shape, string } from 'prop-types';
+import { shape, string, bool } from 'prop-types';
 
 import tracksModule from 'modules/tracks';
 
@@ -11,6 +11,8 @@ import ResourceActions from 'components/shared/ResourceActions';
 import TrackRowDetails from './TrackRowDetails';
 
 const Wrapper = styled.article`
+  background-color: ${({ published, theme: { colors } }) =>
+    published ? 'transparent' : colors.lightgray};
   display: flex;
   align-items: center;
 `;
@@ -40,14 +42,25 @@ class TrackRowItem extends Component {
     return fetchTrack(id);
   };
 
+  publish = async () => {
+    const { id, publishTrack } = this.props;
+
+    return publishTrack(id);
+  };
+
   render() {
     const { track, user } = this.props;
 
     return (
-      <Wrapper>
+      <Wrapper published={track.published}>
         <StyledAvatar src={track.photo} size="25%" square />
         <Content>
-          <TrackRowDetails username={user.username} title={track.title} />
+          <TrackRowDetails
+            username={user.username}
+            title={track.title}
+            published={track.published}
+            publish={this.publish}
+          />
           <Footer>
             <ResourceActions />
           </Footer>
@@ -61,6 +74,7 @@ TrackRowItem.defaultProps = {
   track: {
     avatar: 'https://sc-api/avatars/default.png',
     title: 'Track title',
+    published: false,
   },
   user: {
     username: 'Username',
@@ -71,6 +85,7 @@ TrackRowItem.propTypes = {
   track: shape({
     avatar: string,
     title: string,
+    published: bool,
   }),
   user: shape({
     username: string,
@@ -90,5 +105,6 @@ export default connect(
   mapStateToProps,
   {
     fetchTrack: tracksModule.actions.fetchTrack,
+    publishTrack: tracksModule.actions.publishTrack,
   },
 )(TrackRowItem);

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { string } from 'prop-types';
+import { string, bool, func } from 'prop-types';
 import { FaPlay } from 'react-icons/fa';
 
 import { Button } from 'components/utils/Buttons';
@@ -23,13 +23,25 @@ const Progress = styled.div`
   width: 100%;
 `;
 
-const TrackRowDetails = ({ username, title }) => (
+function renderPublishButton(published, publish) {
+  if (published) return null;
+
+  return (
+    <Button noHeight bgColor="green" color="white" onClick={publish}>
+      Publish
+    </Button>
+  );
+}
+
+const TrackRowDetails = ({ username, title, published, publish }) => (
   <Fragment>
     <Heading>
       <Button bgColor="orange" color="white" radius="50%">
         <FaPlay />
       </Button>
       <Details>
+        {renderPublishButton(published, publish)}
+
         <Artist>{username}</Artist>
         <Name>{title}</Name>
       </Details>
@@ -38,9 +50,15 @@ const TrackRowDetails = ({ username, title }) => (
   </Fragment>
 );
 
+TrackRowDetails.defaultProps = {
+  publish: () => {},
+};
+
 TrackRowDetails.propTypes = {
   username: string.isRequired,
   title: string.isRequired,
+  published: bool.isRequired,
+  publish: func,
 };
 
 export default TrackRowDetails;

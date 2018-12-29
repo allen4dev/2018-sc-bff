@@ -2,15 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { string } from 'prop-types';
 
-import Sets from 'modules/playlists/components/Sets';
-
 import Tabs from 'components/shared/Tabs';
 
 import Tracks from './Tracks';
+import Playlists from './Playlists';
 
 const Wrapper = styled.section``;
-
-const playlistIds = new Array(10).fill('');
 
 const MainContent = ({ userId }) => (
   <Wrapper>
@@ -29,7 +26,7 @@ const MainContent = ({ userId }) => (
           <div>Artist Albums comes here</div>
         </Tabs.Panel>
         <Tabs.Panel>
-          <Sets ids={playlistIds} />
+          <Playlists userId={userId} />
         </Tabs.Panel>
         <Tabs.Panel>
           <div>Artist Shared actions comes here</div>

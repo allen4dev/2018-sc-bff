@@ -94,7 +94,6 @@ export function updateTrack(id, newFields) {
 export function publishTrack(id) {
   return async (dispatch, getState) => {
     const { token } = getState().auth;
-
     const response = await client.publishTrack(id, token);
 
     dispatch(actualizeTrack(response));
