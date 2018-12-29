@@ -215,6 +215,42 @@ describe('all', () => {
       byId: ['123', user.id],
     });
   });
+
+  it('should handle playlists/ADD_PLAYLIST action', () => {
+    const playlist = playlistsFixtures.getPlaylist();
+
+    const response = playlistsFixtures.getPlaylistResponse(playlist);
+
+    const newState = allReducer(
+      {
+        ...ALL_STATE,
+        entities: {
+          '123': {
+            id: '123',
+            username: 'existing username',
+            email: 'existing@example.test',
+          },
+        },
+        byId: ['123'],
+      },
+      playlistsModule.actions.addPlaylist(response),
+    );
+
+    const user = response.included[0];
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        '123': {
+          id: '123',
+          username: 'existing username',
+          email: 'existing@example.test',
+        },
+        [user.id]: { ...response.included[0].attributes, id: user.id },
+      },
+      byId: ['123', user.id],
+    });
+  });
 });
 
 describe('tracks', () => {
@@ -343,6 +379,38 @@ describe('playlists', () => {
     const nextState = playlistsReducer(
       newState,
       playlistsModule.actions.addPlaylist(nextResponse),
+    );
+
+    expect(nextState).toEqual([
+      ...newState,
+      { id: user.id, playlistId: playlist2.id },
+    ]);
+  });
+
+  it('should handle playlists/ADD_CREATED_PLAYLIST action', () => {
+    const playlist = playlistsFixtures.getPlaylist();
+
+    const response = playlistsFixtures.getPlaylistResponse(playlist);
+
+    const user = response.included[0];
+
+    const newState = playlistsReducer(
+      PLAYLISTS_STATE,
+      playlistsModule.actions.addCreatedPlaylist(response),
+    );
+
+    expect(newState).toEqual([
+      ...PLAYLISTS_STATE,
+      { id: user.id, playlistId: playlist.id },
+    ]);
+
+    const playlist2 = playlistsFixtures.getPlaylist();
+
+    const nextResponse = playlistsFixtures.getPlaylistResponse(playlist2, user);
+
+    const nextState = playlistsReducer(
+      newState,
+      playlistsModule.actions.addCreatedPlaylist(nextResponse),
     );
 
     expect(nextState).toEqual([

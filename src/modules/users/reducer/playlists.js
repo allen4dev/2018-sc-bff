@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import { handleActions, combineActions } from 'redux-actions';
 
 import playlistsModule from 'modules/playlists';
 
@@ -22,7 +22,10 @@ const playlistsReducer = handleActions(
     [playlistsModule.actionTypes.REMOVE_PLAYLIST]: (state, { payload }) =>
       state.filter(record => record.playlistId !== payload.id),
 
-    [playlistsModule.actionTypes.ADD_PLAYLIST]: (state, { payload }) => [
+    [combineActions(
+      playlistsModule.actionTypes.ADD_PLAYLIST,
+      playlistsModule.actionTypes.ADD_CREATED_PLAYLIST,
+    )]: (state, { payload }) => [
       ...state,
       { id: payload.userId, playlistId: payload.id },
     ],
