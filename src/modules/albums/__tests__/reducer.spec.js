@@ -171,6 +171,25 @@ describe('tracks', () => {
     ]);
   });
 
+  it('should handle ADD_CREATED_ALBUM action', () => {
+    const album = fixtures.getAlbum();
+
+    const response = fixtures.getAlbumResponse(album);
+
+    const tracks = ['1', '2'];
+
+    const newState = tracksReducer(
+      TRACKS_STATE,
+      actions.addCreatedAlbum(response, tracks),
+    );
+
+    expect(newState).toEqual([
+      ...TRACKS_STATE,
+      { id: album.id, trackId: tracks[0] },
+      { id: album.id, trackId: tracks[1] },
+    ]);
+  });
+
   it('should handle REMOVE_ALBUM action', () => {
     const album = fixtures.getAlbum();
 

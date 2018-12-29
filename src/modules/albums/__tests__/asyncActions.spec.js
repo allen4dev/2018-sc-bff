@@ -56,7 +56,7 @@ describe('albums module async actions', () => {
     expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it('should create an ADD_ALBUM action after a user creates an album', async () => {
+  it('should create an ADD_ALBUM action after a user fetchs an album', async () => {
     const album = fixtures.getAlbum();
 
     const response = fixtures.getAlbumResponse(album);

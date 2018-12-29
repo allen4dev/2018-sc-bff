@@ -1,4 +1,7 @@
 import { handleActions } from 'redux-actions';
+
+import albumsModule from 'modules/albums';
+
 import { INITIAL_STATE } from '../model';
 
 import * as actionTypes from '../actionTypes';
@@ -76,6 +79,15 @@ const allReducer = handleActions(
         byId: [...state.byId, ...Object.keys(entities)],
       };
     },
+
+    [albumsModule.actionTypes.ADD_ALBUM]: (state, { payload }) => ({
+      ...state,
+      entities: {
+        ...state.entities,
+        [payload.userId]: payload.user,
+      },
+      byId: [...state.byId, payload.userId],
+    }),
   },
   INITIAL_STATE.all,
 );

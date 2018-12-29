@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import { handleActions, combineActions } from 'redux-actions';
 
 import tracksModule from 'modules/tracks';
 
@@ -7,7 +7,10 @@ import { INITIAL_STATE } from '../model';
 
 const tracksReducer = handleActions(
   {
-    [actionTypes.ADD_ALBUM]: (state, { payload }) => [
+    [combineActions(actionTypes.ADD_ALBUM, actionTypes.ADD_CREATED_ALBUM)]: (
+      state,
+      { payload },
+    ) => [
       ...state,
       ...payload.tracks.map(id => ({
         id: payload.id,

@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import { handleActions, combineActions } from 'redux-actions';
 
 import albumsModule from 'modules/albums';
 
@@ -8,7 +8,10 @@ import * as actionTypes from '../actionTypes';
 
 const albumsReducer = handleActions(
   {
-    [albumsModule.actionTypes.ADD_ALBUM]: (state, { payload }) => [
+    [combineActions(
+      albumsModule.actionTypes.ADD_ALBUM,
+      albumsModule.actionTypes.ADD_CREATED_ALBUM,
+    )]: (state, { payload }) => [
       ...state,
       { id: payload.userId, albumId: payload.id },
     ],

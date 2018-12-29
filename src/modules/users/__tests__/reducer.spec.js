@@ -179,6 +179,42 @@ describe('all', () => {
       byId: [user2.id],
     });
   });
+
+  it('should handle albums/ADD_ALBUM action', () => {
+    const album = albumsFixtures.getAlbum();
+
+    const response = albumsFixtures.getAlbumResponse(album);
+
+    const newState = allReducer(
+      {
+        ...ALL_STATE,
+        entities: {
+          '123': {
+            id: '123',
+            username: 'existing username',
+            email: 'existing@example.test',
+          },
+        },
+        byId: ['123'],
+      },
+      albumsModule.actions.addAlbum(response),
+    );
+
+    const user = response.included[0];
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        '123': {
+          id: '123',
+          username: 'existing username',
+          email: 'existing@example.test',
+        },
+        [user.id]: { ...response.included[0].attributes, id: user.id },
+      },
+      byId: ['123', user.id],
+    });
+  });
 });
 
 describe('tracks', () => {
@@ -417,6 +453,38 @@ describe('albums', () => {
     const nextState = albumsReducer(
       newState,
       albumsModule.actions.addAlbum(nextResponse),
+    );
+
+    expect(nextState).toEqual([
+      ...newState,
+      { id: user.id, albumId: album2.id },
+    ]);
+  });
+
+  it('should handle albums/ADD_CREATED_ALBUM', () => {
+    const album = albumsFixtures.getAlbum();
+
+    const response = albumsFixtures.getAlbumResponse(album);
+
+    const user = response.included[0];
+
+    const newState = albumsReducer(
+      ALBUMS_STATE,
+      albumsModule.actions.addCreatedAlbum(response),
+    );
+
+    expect(newState).toEqual([
+      ...ALBUMS_STATE,
+      { id: user.id, albumId: album.id },
+    ]);
+
+    const album2 = albumsFixtures.getAlbum();
+
+    const nextResponse = albumsFixtures.getAlbumResponse(album2, user);
+
+    const nextState = albumsReducer(
+      newState,
+      albumsModule.actions.addCreatedAlbum(nextResponse),
     );
 
     expect(nextState).toEqual([
