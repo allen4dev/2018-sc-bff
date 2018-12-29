@@ -2,6 +2,7 @@ import { handleActions, combineActions } from 'redux-actions';
 
 import albumsModule from 'modules/albums';
 import playlistsModule from 'modules/playlists';
+import tracksModule from 'modules/tracks';
 
 import { INITIAL_STATE } from '../model';
 
@@ -84,6 +85,7 @@ const allReducer = handleActions(
     [combineActions(
       albumsModule.actionTypes.ADD_ALBUM,
       playlistsModule.actionTypes.ADD_PLAYLIST,
+      tracksModule.actionTypes.ADD_TRACK,
     )]: (state, { payload }) => ({
       ...state,
       entities: {

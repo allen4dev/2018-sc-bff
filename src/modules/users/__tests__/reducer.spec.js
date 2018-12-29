@@ -251,6 +251,42 @@ describe('all', () => {
       byId: ['123', user.id],
     });
   });
+
+  it('should handle tracks/ADD_TRACK action', () => {
+    const track = tracksFixtures.getTrack();
+
+    const response = tracksFixtures.getTrackResponse(track);
+
+    const newState = allReducer(
+      {
+        ...ALL_STATE,
+        entities: {
+          '123': {
+            id: '123',
+            username: 'existing username',
+            email: 'existing@example.test',
+          },
+        },
+        byId: ['123'],
+      },
+      tracksModule.actions.addTrack(response),
+    );
+
+    const user = response.included[0];
+
+    expect(newState).toEqual({
+      ...ALL_STATE,
+      entities: {
+        '123': {
+          id: '123',
+          username: 'existing username',
+          email: 'existing@example.test',
+        },
+        [user.id]: { ...response.included[0].attributes, id: user.id },
+      },
+      byId: ['123', user.id],
+    });
+  });
 });
 
 describe('tracks', () => {
@@ -280,6 +316,38 @@ describe('tracks', () => {
     const nextState = tracksReducer(
       newState,
       tracksModule.actions.addTrack(newResponse),
+    );
+
+    expect(nextState).toEqual([
+      ...newState,
+      { id: user.id, trackId: otherTrack.id },
+    ]);
+  });
+
+  it('should handle tracks/ADD_CREATED_TRACK action', () => {
+    const track = tracksFixtures.getTrack();
+
+    const response = tracksFixtures.getTrackResponse(track);
+
+    const user = response.included[0];
+
+    const newState = tracksReducer(
+      TRACKS_STATE,
+      tracksModule.actions.addCreatedTrack(response),
+    );
+
+    expect(newState).toEqual([
+      ...TRACKS_STATE,
+      { id: user.id, trackId: track.id },
+    ]);
+
+    const otherTrack = tracksFixtures.getTrack();
+
+    const newResponse = tracksFixtures.getTrackResponse(otherTrack, user);
+
+    const nextState = tracksReducer(
+      newState,
+      tracksModule.actions.addCreatedTrack(newResponse),
     );
 
     expect(nextState).toEqual([

@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import { handleActions, combineActions } from 'redux-actions';
 
 import tracksModule from 'modules/tracks';
 
@@ -8,7 +8,10 @@ import * as actionTypes from '../actionTypes';
 
 const tracksReducer = handleActions(
   {
-    [tracksModule.actionTypes.ADD_TRACK]: (state, { payload }) => [
+    [combineActions(
+      tracksModule.actionTypes.ADD_TRACK,
+      tracksModule.actionTypes.ADD_CREATED_TRACK,
+    )]: (state, { payload }) => [
       ...state,
       { id: payload.userId, trackId: payload.id },
     ],
