@@ -8,12 +8,16 @@ import authModule from 'modules/auth';
 import usersModule from 'modules/users';
 
 class Tracks extends Component {
-  componentDidMount = async () => {
-    const { tracks } = this.props;
+  state = {
+    loading: true,
+  };
 
-    if (tracks.length === 0) {
+  componentDidMount = async () => {
+    if (this.state.loading) {
       await this.getUserTracks();
     }
+
+    this.setState({ loading: false });
   };
 
   getUserTracks = async () => {

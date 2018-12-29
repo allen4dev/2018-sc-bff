@@ -49,11 +49,15 @@ class Client {
 
   publishTrack(id, token) {
     return axios
-      .patch(`${this.options.endpoints.tracks}/${id}/publish`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .patch(
+        `${this.options.endpoints.tracks}/${id}/publish`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       .then(response => response.data);
   }
 
