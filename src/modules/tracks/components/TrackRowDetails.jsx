@@ -52,12 +52,13 @@ const TrackRowDetails = ({ username, title, published, publish }) => (
 
 TrackRowDetails.defaultProps = {
   publish: () => {},
+  published: false,
 };
 
 TrackRowDetails.propTypes = {
   username: string.isRequired,
   title: string.isRequired,
-  published: bool.isRequired,
+  published: bool,
   publish: func,
 };
 
