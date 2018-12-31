@@ -147,7 +147,7 @@ describe('all', () => {
     });
   });
 
-  it('should handle users/ADD_USER_PLAYLISTS action', () => {
+  it('should handle users/', () => {
     const response = fixtures.getPlaylistsResponse();
 
     const newState = allReducer(
@@ -160,8 +160,14 @@ describe('all', () => {
     expect(newState).toEqual({
       ...ALL_STATE,
       entities: {
-        [playlists1[0].id]: playlists1[0],
-        [playlists1[1].id]: playlists1[1],
+        [playlists1[0].id]: {
+          ...playlists1[0].attributes,
+          id: playlists1[0].id,
+        },
+        [playlists1[1].id]: {
+          ...playlists1[1].attributes,
+          id: playlists1[1].id,
+        },
       },
       byId: [playlists1[0].id, playlists1[1].id],
     });

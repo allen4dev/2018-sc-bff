@@ -51,8 +51,6 @@ const allReducer = handleActions(
         {},
       );
 
-      console.log(entities);
-
       return {
         ...state,
         entities: {

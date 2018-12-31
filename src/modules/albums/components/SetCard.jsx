@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { bool } from 'prop-types';
+import { bool, string, number } from 'prop-types';
 
 import Avatar from 'components/shared/Avatar';
 
@@ -43,27 +43,27 @@ const Artist = styled.span`
   color: ${({ theme: { colors } }) => colors.darkgray};
 `;
 
-function renderFooter(details) {
+function renderFooter(details, attributes) {
   if (!details) return null;
 
   return (
     <Details>
-      <Name>Fate collection</Name>
-      <Artist>Fate</Artist>
+      <Name>{attributes.title}</Name>
+      <Artist>{attributes.username}</Artist>
     </Details>
   );
 }
 
-const SetCard = ({ details }) => (
+const SetCard = ({ details, photo, trackCount, title, username }) => (
   <Wrapper>
     <Photo>
-      <Avatar src="/images/avatar.jpg" square />
+      <Avatar src={photo} square />
       <TrackCount>
-        <Total>35</Total>
+        <Total>{trackCount}</Total>
         <Text>Pistas</Text>
       </TrackCount>
     </Photo>
-    {renderFooter(details)}
+    {renderFooter(details, { title, username })}
   </Wrapper>
 );
 
@@ -73,6 +73,10 @@ SetCard.defaultProps = {
 
 SetCard.propTypes = {
   details: bool,
+  photo: string.isRequired,
+  trackCount: number.isRequired,
+  title: string.isRequired,
+  username: string.isRequired,
 };
 
 export default SetCard;

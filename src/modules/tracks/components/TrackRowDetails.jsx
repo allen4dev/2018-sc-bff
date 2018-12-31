@@ -1,9 +1,12 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { string, bool, func } from 'prop-types';
-import { FaPlay } from 'react-icons/fa';
+import { FaPlay, FaPlus, FaMinus } from 'react-icons/fa';
 
 import { Button } from 'components/utils/Buttons';
+
+import playlistsModule from 'modules/playlists';
 
 const Heading = styled.header`
   display: flex;
@@ -23,43 +26,103 @@ const Progress = styled.div`
   width: 100%;
 `;
 
-function renderPublishButton(published, publish) {
-  if (published) return null;
+class TrackRowDetails extends Component {
+  addToPlaylist = async () => {
+    const { addTrack } = this.props;
 
-  return (
-    <Button noHeight bgColor="green" color="white" onClick={publish}>
-      Publish
-    </Button>
-  );
-}
+    await addTrack();
+  };
 
-const TrackRowDetails = ({ username, title, published, publish }) => (
-  <Fragment>
-    <Heading>
-      <Button bgColor="orange" color="white" radius="50%">
-        <FaPlay />
+  removeFromPlaylist = async () => {
+    console.log('remove');
+  };
+
+  renderPublishButton() {
+    const { published, publish } = this.props;
+
+    if (published) return null;
+
+    return (
+      <Button noHeight bgColor="green" color="white" onClick={publish}>
+        Publish
       </Button>
-      <Details>
-        {renderPublishButton(published, publish)}
+    );
+  }
 
-        <Artist>{username}</Artist>
-        <Name>{title}</Name>
-      </Details>
-    </Heading>
-    <Progress />
-  </Fragment>
-);
+  renderAddRemovePlaylistButton() {
+    const { isAuth, onPlaylist } = this.props;
+
+    if (!isAuth) return null;
+
+    if (!onPlaylist)
+      return (
+        <Button
+          bgColor="green"
+          color="white"
+          radius="50%"
+          onClick={this.addToPlaylist}>
+          <FaPlus />
+        </Button>
+      );
+
+    return (
+      <Button
+        bgColor="darkred"
+        color="white"
+        radius="50%"
+        onClick={this.removeFromPlaylist}>
+        <FaMinus />
+      </Button>
+    );
+  }
+
+  render() {
+    const { username } = this.props;
+
+    return (
+      <Fragment>
+        <Heading>
+          <Button bgColor="orange" color="white" radius="50%">
+            <FaPlay />
+          </Button>
+          <Details>
+            {this.renderPublishButton()}
+            {this.renderAddRemovePlaylistButton()}
+
+            <Artist>{username}</Artist>
+            <Name>Title</Name>
+          </Details>
+        </Heading>
+        <Progress />
+      </Fragment>
+    );
+  }
+}
 
 TrackRowDetails.defaultProps = {
   publish: () => {},
   published: false,
+  onPlaylist: false,
 };
 
 TrackRowDetails.propTypes = {
   username: string.isRequired,
-  title: string.isRequired,
+  isAuth: bool.isRequired,
   published: bool,
   publish: func,
+  onPlaylist: bool,
 };
 
-export default TrackRowDetails;
+function mapStateToProps(state) {
+  const isAuth = !!state.auth.current;
+
+  return { isAuth };
+}
+
+export default connect(
+  mapStateToProps,
+  {
+    addTrack: playlistsModule.actions.addTrack,
+    removeTrack: playlistsModule.actions.removeTrack,
+  },
+)(TrackRowDetails);

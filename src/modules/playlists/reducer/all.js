@@ -46,7 +46,7 @@ const allReducer = handleActions(
       const entities = payload.playlists.reduce(
         (initial, current) => ({
           ...initial,
-          [current.id]: current,
+          [current.id]: { ...current.attributes, id: current.id },
         }),
         {},
       );

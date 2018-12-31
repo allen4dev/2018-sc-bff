@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { arrayOf, string } from 'prop-types';
 
 import usersModule from 'modules/users';
-import authModule from 'modules/auth';
 
 import Sets from 'modules/playlists/components/Sets';
-
-const playlistIds = new Array(10).fill('');
 
 class Playlists extends Component {
   componentDidMount = async () => {
@@ -18,32 +16,28 @@ class Playlists extends Component {
   };
 
   fetchPlaylists = async () => {
-    const {
-      isAuth,
-      fetchUserPlaylists,
-      fetchProfilePlaylists,
-      userId,
-    } = this.props;
-
-    if (isAuth) return fetchProfilePlaylists();
+    const { fetchUserPlaylists, userId } = this.props;
 
     return fetchUserPlaylists(userId);
   };
 
   render() {
-    return <Sets ids={playlistIds} />;
+    const { ids } = this.props;
+
+    return <Sets ids={ids} />;
   }
 }
 
-function mapStateToProps(state, { userId }) {
-  const isAuth = !!state.auth.current;
+Playlists.propTypes = {
+  ids: arrayOf(string).isRequired,
+};
 
+function mapStateToProps(state, { userId }) {
   const ids = state.users.playlists
     .filter(record => record.id === userId)
     .map(record => record.trackId);
 
   return {
-    isAuth,
     ids,
   };
 }
@@ -52,6 +46,5 @@ export default connect(
   mapStateToProps,
   {
     fetchUserPlaylists: usersModule.actions.fetchUserPlaylists,
-    fetchProfilePlaylists: authModule.actions.fetchProfilePlaylists,
   },
 )(Playlists);

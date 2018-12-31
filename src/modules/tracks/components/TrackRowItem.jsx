@@ -83,7 +83,7 @@ TrackRowItem.defaultProps = {
 
 TrackRowItem.propTypes = {
   track: shape({
-    avatar: string,
+    photo: string,
     title: string,
     published: bool,
   }),

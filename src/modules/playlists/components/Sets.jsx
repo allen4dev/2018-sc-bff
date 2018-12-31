@@ -11,9 +11,8 @@ const Wrapper = styled.section`
 
 const Sets = ({ ids }) => (
   <Wrapper>
-    {ids.map((id, index) => (
-      // eslint-disable-next-line
-      <Set key={index} />
+    {ids.map(id => (
+      <Set key={id} id={id} />
     ))}
   </Wrapper>
 );
